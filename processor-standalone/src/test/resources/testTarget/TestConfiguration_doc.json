@@ -1,0 +1,21 @@
+{
+  "namespaces": [
+    {
+      "name": "de.sandstorm.testSource.TestConfiguration",
+      "documentationText": " This is a POJO configuration class. Used in unit tests...\n The class documentation should be used as source for\n the configuration namespace.\n"
+    }
+  ],
+  "properties": [
+    {
+      "namespace": "de.sandstorm.testSource.TestConfiguration",
+      "name": "getFooConfig",
+      "qualifiedName": "de.sandstorm.testSource.TestConfiguration.getFooConfig",
+      "documentationText": " Foo configuration documentation ...\n\n @return returns a hardcoded string\n",
+      "accessibility": "API",
+      "valueType": {
+        "typeName": "()java.lang.String",
+        "required": false
+      }
+    }
+  ]
+}

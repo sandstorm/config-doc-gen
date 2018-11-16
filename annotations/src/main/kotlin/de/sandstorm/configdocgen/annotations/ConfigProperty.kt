@@ -1,6 +1,10 @@
 package de.sandstorm.configdocgen.annotations
 
-@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION,
-        AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.EXPRESSION)
+@Target(
+        AnnotationTarget.FUNCTION,
+        AnnotationTarget.FIELD,
+        AnnotationTarget.PROPERTY,
+        AnnotationTarget.PROPERTY_GETTER
+)
 @Retention(AnnotationRetention.SOURCE)
 annotation class ConfigProperty
