@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test
 import java.io.IOException
 import javax.tools.StandardLocation
 
-
 class StandaloneProcessorTest {
     @Test
     fun testConfiguration() {
@@ -27,7 +26,7 @@ class StandaloneProcessorTest {
                 .withContents(readTestTarget("TestConfiguration_doc.json"))
     }
 
-    fun readTestTarget(resource: String): ByteSource {
+    private fun readTestTarget(resource: String): ByteSource {
         val url = StandaloneProcessorTest::class.java.getResource("/testTarget/$resource")
         try {
             return ByteSource.wrap(jacksonObjectMapper().writeValueAsBytes(jacksonObjectMapper().readTree(Resources.asByteSource(url).read())))
