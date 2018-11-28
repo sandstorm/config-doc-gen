@@ -16,7 +16,8 @@ import javax.tools.Diagnostic
 
 @SupportedAnnotationTypes(
         "de.sandstorm.configdocgen.annotations.ConfigNamespace",
-        "de.sandstorm.configdocgen.annotations.ConfigProperty"
+        "de.sandstorm.configdocgen.annotations.ConfigProperty",
+        "de.sandstorm.configdocgen.annotations.ConfigApi"
 )
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 @AutoService(Processor::class)
@@ -37,14 +38,14 @@ class StandaloneProcessor(
         }
 
 
-        val properties = propertiesElements.map(::createProperty)
+        val properties: List<ConfigurationProperty> = propertiesElements.map(::createProperty)
         val namespaces = namespaceClasses.map(::createNamespace)
 
         if (properties.isEmpty() && properties.isEmpty()) {
             return false
         }
 
-        val model = ConfigurationDoc(namespaces = namespaces, properties = properties)
+        val model = ConfigurationDoc(namespaces, properties)
 
         try {
             writer.write(
@@ -56,29 +57,11 @@ class StandaloneProcessor(
             e.printStackTrace()
         }
 
-        return false
+        return true
     }
 
-    private fun createProperty(element: Element) = when (element.kind) {
-        ElementKind.FIELD -> propertyFromField(field = element)
-        ElementKind.METHOD -> propertyFromMethod(method = element)
-        else -> throw IllegalStateException("Property must be a method or field")
-    }
+    private fun createProperty(element: Element): ConfigurationProperty = ConfigurationProperty.fromJavaElement(element, processingEnv)
 
-    private fun createNamespace(element: Element) = when (element.kind) {
-        ElementKind.CLASS -> namespaceFromClass(classElement = element)
-        else -> throw IllegalStateException("Namespace must be a class")
-    }
-
-    private fun namespaceFromClass(classElement: Element): ConfigurationNamespace {
-        return
-    }
-
-
-    private fun getDocComment(element: Element) = DocumentationContent()
-
-    /*return ConfigurationProperty(
-    namespace = NamespaceName()
-    )*/
+    private fun createNamespace(element: Element): ConfigurationNamespace = ConfigurationNamespace.fromJavaElement(element, processingEnv)
 
 }
