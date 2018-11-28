@@ -2,5 +2,6 @@ dependencies {
     compile project(":annotations")
     compile project(":core")
     compile "com.google.auto.service:auto-service:${googleAutoServiceVersion}"
-    compile "org.springframework:spring-core:5.1.2.RELEASE"
+    compile "org.springframework.boot:spring-boot:2.1.0.RELEASE"
+
 }

@@ -3,6 +3,7 @@ package de.sandstorm.configdocgen.core
 import de.sandstorm.configdocgen.annotations.ConfigApi
 import javax.lang.model.element.Element
 import javax.lang.model.element.ElementKind
+import javax.lang.model.element.ExecutableElement
 import javax.lang.model.element.Modifier
 
 fun isConfigApiAnnotationPresent(element: Element) = element.getAnnotation(ConfigApi::class.java) != null
@@ -22,6 +23,14 @@ fun findGetterForField(field: Element) =
             element.kind == ElementKind.METHOD && fieldNameToGetterName(field.simpleName.toString()) == element.simpleName.toString()
         }
 
+fun findSetterForField(field: Element) =
+        field.enclosingElement.enclosedElements.find { element ->
+            element.kind == ElementKind.METHOD &&
+                    fieldNameToSetterName(field.simpleName.toString()) == element.simpleName.toString() &&
+                    (element as ExecutableElement).parameters.size == 1 &&
+                    element.parameters[0].asType() == field.asType()
+        }
+
 fun isNonPrivateGetterPresentForField(field: Element) = checkGetterForField(field, ::isNotPrivate)
 
 fun isConfigApiAnnotationPresentOnGetter(field: Element) = checkGetterForField(field, ::isConfigApiAnnotationPresent)
@@ -35,13 +44,25 @@ fun checkGetterForField(field: Element, predicate: (Element) -> Boolean): Boolea
         predicate(getter)
 }
 
+fun checkSetterForField(field: Element, predicate: (Element) -> Boolean): Boolean {
+    val setter = findSetterForField(field)
+    return if (setter == null)
+        false
+    else
+        predicate(setter)
+}
+
 fun isGetterForFieldPublic(field: Element) = checkGetterForField(field, ::isPublic)
+fun isSetterForFieldPublic(field: Element) = checkSetterForField(field, ::isPublic)
 
 fun isPrivate(element: Element) = element.modifiers.contains(Modifier.PRIVATE)
 fun isNotPrivate(element: Element) = !isPrivate(element)
 fun isPublic(element: Element) = element.modifiers.contains(Modifier.PUBLIC)
 
+fun isField(element: Element) = element.kind == ElementKind.FIELD
 fun fieldNameToGetterName(fieldName: String) =
         "get${fieldName[0].toUpperCase()}${fieldName.substring(1)}"
+fun fieldNameToSetterName(fieldName: String) =
+        "set${fieldName[0].toUpperCase()}${fieldName.substring(1)}"
 
 fun isPrimitiveType(field: Element) = field.asType().kind.isPrimitive
