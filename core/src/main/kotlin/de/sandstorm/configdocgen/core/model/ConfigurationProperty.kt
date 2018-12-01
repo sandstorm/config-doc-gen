@@ -1,8 +1,6 @@
 package de.sandstorm.configdocgen.core.model
 
-import javax.annotation.processing.ProcessingEnvironment
 import javax.lang.model.element.Element
-import javax.lang.model.element.ElementKind
 
 data class ConfigurationProperty(
         val namespace: NamespaceName,
@@ -13,31 +11,24 @@ data class ConfigurationProperty(
         ),
         val documentationContent: DocumentationContent,
         val accessibility: Accessibility,
-        val valueType: ValueType
+        val type: PropertyType
 ) {
     companion object {
 
-        fun fromJavaField(field: Element, processingEnvironment: ProcessingEnvironment): ConfigurationProperty = ConfigurationProperty(
-                namespace = NamespaceName.fromJavaField(field),
+        fun fromJavaField(field: Element, namespace: NamespaceName, documentationContent: DocumentationContent): ConfigurationProperty = ConfigurationProperty(
+                namespace = namespace,
                 name = PropertyName.fromJavaField(field),
                 accessibility = Accessibility.fromJavaField(field),
-                valueType = ValueType.fromJavaField(field),
-                documentationContent = DocumentationContent.fromJavaElement(field, processingEnvironment)
+                type = PropertyType.fromJavaField(field),
+                documentationContent = documentationContent
         )
 
-        fun fromJavaMethod(method: Element, processingEnvironment: ProcessingEnvironment): ConfigurationProperty = ConfigurationProperty(
-                namespace = NamespaceName.fromJavaMethod(method),
+        fun fromJavaMethod(method: Element, namespace: NamespaceName, documentationContent: DocumentationContent): ConfigurationProperty = ConfigurationProperty(
+                namespace = namespace,
                 name = PropertyName.fromJavaMethod(method),
                 accessibility = Accessibility.fromJavaMethod(method),
-                valueType = ValueType.fromJavaMethod(method),
-                documentationContent = DocumentationContent.fromJavaElement(method, processingEnvironment)
+                type = PropertyType.fromJavaMethod(method),
+                documentationContent = documentationContent
         )
-
-        fun fromJavaElement(element: Element, processingEnvironment: ProcessingEnvironment): ConfigurationProperty = when (element.kind) {
-            ElementKind.FIELD -> ConfigurationProperty.fromJavaField(element, processingEnvironment)
-            ElementKind.METHOD -> ConfigurationProperty.fromJavaMethod(element, processingEnvironment)
-            else -> throw IllegalStateException("Property must be a method or field")
-        }
-
     }
 }

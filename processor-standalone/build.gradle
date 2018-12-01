@@ -1,10 +1,9 @@
 apply from: "../base-kotlin.gradle"
+apply from: "../base-apt-test.gradle"
 
 dependencies {
     compile project(":core")
     compile "com.google.auto.service:auto-service:${googleAutoServiceVersion}"
 
-    testCompile 'com.google.guava:guava:27.0-jre'
-    testCompile 'com.google.truth:truth:0.42'
-    testCompile 'com.google.testing.compile:compile-testing:0.15'
+    testCompile project(':core').sourceSets.test.output
 }

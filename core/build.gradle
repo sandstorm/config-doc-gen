@@ -1,4 +1,5 @@
 apply from: "../base-kotlin.gradle"
+apply from: "../base-apt-test.gradle"
 
 dependencies {
     compile project(":annotations")

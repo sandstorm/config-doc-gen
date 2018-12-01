@@ -1,0 +1,31 @@
+{
+  "namespaces": [
+    {
+      "name": "de.sandstorm.testSource.nestedPojos",
+      "type": {
+        "typeName": "testSource.NestedPojos"
+      },
+      "documentationContent": " This is the namespace that contains the nested one.\n"
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedPojos.nestedPojo",
+      "type": {
+        "typeName": "testSource.NestedPojos.NestedPojo"
+      },
+      "documentationContent": " This is a nested config namespace by POJO.\n"
+    }
+  ],
+  "properties": [
+    {
+      "namespace": "de.sandstorm.testSource.nestedPojos.nestedPojo",
+      "name": "nestedStringConfig",
+      "qualifiedName": "de.sandstorm.testSource.nestedPojos.nestedPojo.nestedStringConfig",
+      "documentationContent": " This is a nested String configuration.\n",
+      "accessibility": "API",
+      "type": {
+        "typeName": "java.lang.String",
+        "required": false
+      }
+    }
+  ]
+}

@@ -1,9 +1,6 @@
 package de.sandstorm.configdocgen.core.model
 
-import de.sandstorm.configdocgen.core.isConfigApiAnnotationPresent
-import de.sandstorm.configdocgen.core.isConfigApiAnnotationPresentOnGetter
-import de.sandstorm.configdocgen.core.isGetterForFieldPublic
-import de.sandstorm.configdocgen.core.isPublic
+import de.sandstorm.configdocgen.core.*
 import javax.lang.model.element.Element
 
 enum class Accessibility {
@@ -18,6 +15,8 @@ enum class Accessibility {
             isGetterForFieldPublic(field) -> API
             else -> IMPLEMENTATION
         }
+
+        fun fromJavaGetterOrField(field: Element) = findGetterForField(field)?.let(::fromJavaMethod) ?: fromJavaField(field)
 
         fun fromJavaMethod(method: Element) = when {
             isConfigApiAnnotationPresent(method) -> API

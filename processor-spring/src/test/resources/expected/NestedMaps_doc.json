@@ -1,0 +1,164 @@
+{
+  "namespaces": [
+    {
+      "name": "de.sandstorm.testSource.nestedMaps",
+      "type": {
+        "typeName": "testSource.NestedMaps"
+      },
+      "documentationContent": " Nested maps test.\n"
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueStringMapConfig",
+      "type": {
+        "typeName": "java.util.Map<java.lang.String,java.lang.String>"
+      },
+      "documentationContent": " A key-value namespace.\n"
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueStringMapConfig.<KEY>",
+      "type": {
+        "typeName": "java.lang.String"
+      },
+      "documentationContent": ""
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueBooleanMapConfig",
+      "type": {
+        "typeName": "java.util.Map<java.lang.String,java.lang.Boolean>"
+      },
+      "documentationContent": " A key-value primitive namespace.\n"
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueBooleanMapConfig.<KEY>",
+      "type": {
+        "typeName": "java.lang.Boolean"
+      },
+      "documentationContent": ""
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueCharMapConfig",
+      "type": {
+        "typeName": "java.util.Map<java.lang.String,java.lang.Character>"
+      },
+      "documentationContent": " A key-value primitive namespace.\n"
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueCharMapConfig.<KEY>",
+      "type": {
+        "typeName": "java.lang.Character"
+      },
+      "documentationContent": ""
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueByteMapConfig",
+      "type": {
+        "typeName": "java.util.Map<java.lang.String,java.lang.Byte>"
+      },
+      "documentationContent": " A key-value primitive namespace.\n"
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueByteMapConfig.<KEY>",
+      "type": {
+        "typeName": "java.lang.Byte"
+      },
+      "documentationContent": ""
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueShortMapConfig",
+      "type": {
+        "typeName": "java.util.Map<java.lang.String,java.lang.Short>"
+      },
+      "documentationContent": " A key-value primitive namespace.\n"
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueShortMapConfig.<KEY>",
+      "type": {
+        "typeName": "java.lang.Short"
+      },
+      "documentationContent": ""
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueIntegerMapConfig",
+      "type": {
+        "typeName": "java.util.Map<java.lang.String,java.lang.Integer>"
+      },
+      "documentationContent": " A key-value primitive namespace.\n"
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueIntegerMapConfig.<KEY>",
+      "type": {
+        "typeName": "java.lang.Integer"
+      },
+      "documentationContent": ""
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueLongMapConfig",
+      "type": {
+        "typeName": "java.util.Map<java.lang.String,java.lang.Long>"
+      },
+      "documentationContent": " A key-value primitive namespace.\n"
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueLongMapConfig.<KEY>",
+      "type": {
+        "typeName": "java.lang.Long"
+      },
+      "documentationContent": ""
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueFloatMapConfig",
+      "type": {
+        "typeName": "java.util.Map<java.lang.String,java.lang.Float>"
+      },
+      "documentationContent": " A key-value primitive namespace.\n"
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueFloatMapConfig.<KEY>",
+      "type": {
+        "typeName": "java.lang.Float"
+      },
+      "documentationContent": ""
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueDoubleMapConfig",
+      "type": {
+        "typeName": "java.util.Map<java.lang.String,java.lang.Double>"
+      },
+      "documentationContent": " A key-value primitive namespace.\n"
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.keyValueDoubleMapConfig.<KEY>",
+      "type": {
+        "typeName": "java.lang.Double"
+      },
+      "documentationContent": ""
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.nestedMapConfig",
+      "type": {
+        "typeName": "java.util.Map<java.lang.String,testSource.NestedMaps.TestNestedMapValuePojo>"
+      },
+      "documentationContent": " This is a map of configurations. The key will be recognised as wildcard.\n"
+    },
+    {
+      "name": "de.sandstorm.testSource.nestedMaps.nestedMapConfig.<KEY>",
+      "type": {
+        "typeName": "testSource.NestedMaps.TestNestedMapValuePojo"
+      },
+      "documentationContent": " Nested value POJO.\n"
+    }
+  ],
+  "properties": [
+    {
+      "namespace": "de.sandstorm.testSource.nestedMaps.nestedMapConfig.<KEY>",
+      "name": "nestedMapStringConfig",
+      "qualifiedName": "de.sandstorm.testSource.nestedMaps.nestedMapConfig.<KEY>.nestedMapStringConfig",
+      "documentationContent": " This is a nested String configuration.\n",
+      "accessibility": "API",
+      "type": {
+        "typeName": "java.lang.String",
+        "required": false
+      }
+    }
+  ]
+}

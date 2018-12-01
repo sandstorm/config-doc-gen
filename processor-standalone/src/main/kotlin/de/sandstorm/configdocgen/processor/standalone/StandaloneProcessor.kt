@@ -7,12 +7,14 @@ import de.sandstorm.configdocgen.core.AbstractConfigurationDocumentationProcesso
 import de.sandstorm.configdocgen.core.DocumentationModelWriter
 import de.sandstorm.configdocgen.core.model.ConfigurationNamespace
 import de.sandstorm.configdocgen.core.model.ConfigurationProperty
+import de.sandstorm.configdocgen.core.model.NamespaceName
 import javax.annotation.processing.Processor
 import javax.annotation.processing.RoundEnvironment
 import javax.annotation.processing.SupportedAnnotationTypes
 import javax.annotation.processing.SupportedSourceVersion
 import javax.lang.model.SourceVersion
 import javax.lang.model.element.Element
+import javax.lang.model.element.ElementKind
 import javax.lang.model.element.TypeElement
 
 
@@ -39,14 +41,26 @@ class StandaloneProcessor(
             }
         }
 
-        val properties: List<ConfigurationProperty> = propertiesElements.map(::createProperty)
-        val namespaces = namespaceClasses.map(::createNamespace)
+        val builder = ConfigurationDocBuilder()
 
-        return writeModel(namespaces, properties)
+        namespaceClasses.forEach { element ->
+            builder.namespace(createNamespace(element))
+        }
+
+        propertiesElements.forEach { propertiesElement ->
+            builder.property(createProperty(propertiesElement))
+        }
+
+        return writeModel(builder)
     }
 
-    private fun createProperty(element: Element): ConfigurationProperty = ConfigurationProperty.fromJavaElement(element, processingEnv)
+    private fun createProperty(element: Element): ConfigurationProperty = when (element.kind) {
+        ElementKind.FIELD -> ConfigurationProperty.fromJavaField(element, NamespaceName.fromJavaClass(element.enclosingElement), getDocumentationFromJavaElement(element))
+        ElementKind.METHOD -> ConfigurationProperty.fromJavaMethod(element, NamespaceName.fromJavaClass(element.enclosingElement), getDocumentationFromJavaElement(element))
+        else -> throw IllegalStateException("Property must be a method or field")
+    }
 
-    private fun createNamespace(element: Element): ConfigurationNamespace = ConfigurationNamespace.fromJavaElement(element, processingEnv)
+    private fun createNamespace(element: Element): ConfigurationNamespace =
+            ConfigurationNamespace.fromJavaElement(element, getDocumentationFromJavaElement(element))
 
 }

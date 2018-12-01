@@ -5,11 +5,13 @@ import de.sandstorm.configdocgen.core.model.ConfigurationDoc
 import javax.annotation.processing.Filer
 import javax.tools.StandardLocation
 
-class JsonDocumentationModelWriter : DocumentationModelWriter {
+class JsonDocumentationModelWriter(
+        private val outputFileName: String
+) : DocumentationModelWriter {
     override fun write(model: ConfigurationDoc, filer: Filer): Unit = filer.createResource(
             StandardLocation.CLASS_OUTPUT,
             "",
-            "config-doc.json"
+            outputFileName
     ).openOutputStream().use { out ->
         jacksonObjectMapper().writeValue(out, model)
     }
