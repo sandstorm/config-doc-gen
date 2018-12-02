@@ -49,12 +49,16 @@ class SpringProcessor(writer: DocumentationModelWriter = JsonDocumentationModelW
 
     private fun namespaceFromClass(clazz: Element) = ConfigurationNamespace(
             name = namespaceNameFromSpringAnnotation(clazz),
-            type = NamespaceType.fromJavaElement(clazz),
-            documentationContent = getDocumentationFromJavaElement(clazz)
+            type = NamespaceType.fromJavaElement(clazz, getDocumentationFromJavaElement(clazz)),
+            documentationContent = DocumentationContent.rootNamespace()
     )
 
-    private fun nestedNamespaceFromField(namespace: ConfigurationNamespace, field: Element): ConfigurationNamespace =
-            namespace.nestedNamespace(field, getDocumentationFromJavaElement(field))
+    private fun nestedNamespaceFromField(namespace: ConfigurationNamespace, field: Element, typeDocumentationContent: DocumentationContent = getDocumentationFromJavaElement(processingEnv.typeUtils.asElement(field.asType()))): ConfigurationNamespace =
+            namespace.nestedNamespace(
+                    field,
+                    getDocumentationFromJavaElement(field),
+                    typeDocumentationContent
+            )
 
     private fun namespaceNameFromSpringAnnotation(clazz: Element): NamespaceName {
         val annotation = clazz.getAnnotation(ConfigurationProperties::class.java)
@@ -86,8 +90,13 @@ class SpringProcessor(writer: DocumentationModelWriter = JsonDocumentationModelW
                                     isPrimitiveConfigType(mapValueType) -> {
                                         // the wildcard namespace has no properties for primitive map value types
                                         builder.namespace(
-                                                builder.namespace(nestedNamespaceFromField(namespace, field))
-                                                        .nestedNamespaceWithKeyWildcard(mapValueType, DocumentationContent.empty()))
+                                                builder.namespace(nestedNamespaceFromField(namespace, field, DocumentationContent.map(field)))
+                                                        .nestedNamespaceWithKeyWildcard(
+                                                                mapValueType,
+                                                                DocumentationContent.mapKey(mapKeyType),
+                                                                DocumentationContent.primitive(mapValueType)
+                                                        )
+                                        )
                                     }
                                     isUnsupportedMapValueType(mapValueType) -> {
                                         processingEnv.messager.printMessage(Diagnostic.Kind.WARNING, buildUnsupportedMapValueTypeWarningMessage(mapKeyType.asType().toString(), field.simpleName.toString()), field)
@@ -98,8 +107,12 @@ class SpringProcessor(writer: DocumentationModelWriter = JsonDocumentationModelW
                                                 builder,
                                                 mapValueType,
                                                 builder.namespace(
-                                                        builder.namespace(nestedNamespaceFromField(namespace, field))
-                                                                .nestedNamespaceWithKeyWildcard(mapValueType, getDocumentationFromJavaElement(mapValueType)))
+                                                        builder.namespace(nestedNamespaceFromField(namespace, field, DocumentationContent.map(field)))
+                                                                .nestedNamespaceWithKeyWildcard(
+                                                                        mapValueType,
+                                                                        DocumentationContent.mapKey(mapKeyType),
+                                                                        getDocumentationFromJavaElement(mapValueType)
+                                                                ))
                                         )
                                     }
                                 }

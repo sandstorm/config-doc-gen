@@ -3,9 +3,10 @@
     {
       "name": "de.sandstorm.testSource.primitives",
       "type": {
-        "typeName": "testSource.Primitives"
+        "typeName": "testSource.Primitives",
+        "documentationContent": " This class contains all java primitives and there boxed types.\n A String is considered as a \"configuration primitive\".\n"
       },
-      "documentationContent": " This class contains all java primitives and there boxed types.\n A String is considered as a \"configuration primitive\".\n"
+      "documentationContent": "[ROOT-NAMESPACE]"
     }
   ],
   "properties": [

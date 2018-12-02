@@ -11,9 +11,11 @@ import javax.lang.model.element.ElementKind
 import javax.tools.Diagnostic
 
 abstract class AbstractConfigurationDocumentationProcessor(
-        private val writer: DocumentationModelWriter,
-        private var written: Boolean = false
+        private val writer: DocumentationModelWriter
 ) : AbstractProcessor() {
+
+    private var written: Boolean = false
+    private val alreadyNoDocWarnedElements: MutableSet<Element> = mutableSetOf()
 
     /**
      * Write the annotation processing result with the given writer strategy.
@@ -62,7 +64,14 @@ abstract class AbstractConfigurationDocumentationProcessor(
 
     private fun warnMissingDocumentation(element: Element) {
         // TODO mayme configure to throw a ERROR instead of a warning
-        processingEnv.messager.printMessage(Diagnostic.Kind.WARNING, buildNoJavadocWarningMessage(element.kind, element.toString()), element)
+        if (!alreadyNoDocWarnedElements.contains(element)) {
+            processingEnv.messager.printMessage(
+                    Diagnostic.Kind.WARNING,
+                    buildNoJavadocWarningMessage(element),
+                    element
+            )
+        }
+        alreadyNoDocWarnedElements += element
     }
 
     inner class ConfigurationDocBuilder {
@@ -86,7 +95,16 @@ abstract class AbstractConfigurationDocumentationProcessor(
     }
 
     companion object {
-        fun buildNoJavadocWarningMessage(kind: ElementKind, element: String) = "No javadoc comment found on ${kind.name.toLowerCase()}: $element"
+        fun buildNoJavadocWarningMessage(element: Element): String {
+            return when (element.kind) {
+                ElementKind.FIELD -> buildNoJavadocForFieldWarningMessage(element.toString(), element.enclosingElement.toString())
+                ElementKind.CLASS -> buildNoJavadocForClassWarningMessage(element.toString())
+                else -> buildNoJavadocForElementWarningMessage(element.toString())
+            }
+        }
+        fun buildNoJavadocForElementWarningMessage(element: String) = "No javadoc comment found on $element"
+        fun buildNoJavadocForFieldWarningMessage(field: String, clazz: String) = buildNoJavadocForElementWarningMessage("field: $clazz#$field")
+        fun buildNoJavadocForClassWarningMessage(clazz: String) = buildNoJavadocForElementWarningMessage("class: $clazz")
         fun buildUnsupportedMapKeyTypeWarningMessage(keyType: String, element: String) = "Unsupported map key type '$keyType' on element: $element"
         fun buildUnsupportedMapValueTypeWarningMessage(valueType: String, element: String) = "Unsupported map value type '$valueType' on element: $element"
     }

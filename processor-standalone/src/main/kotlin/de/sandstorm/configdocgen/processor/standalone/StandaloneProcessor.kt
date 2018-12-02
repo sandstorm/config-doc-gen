@@ -60,6 +60,6 @@ class StandaloneProcessor(writer: DocumentationModelWriter = JsonDocumentationMo
     }
 
     private fun createNamespace(element: Element): ConfigurationNamespace =
-            ConfigurationNamespace.fromJavaElement(element, getDocumentationFromJavaElement(element))
+            ConfigurationNamespace.fromRootJavaElement(element, getDocumentationFromJavaElement(element))
 
 }

@@ -3,9 +3,10 @@
     {
       "name": "de.sandstorm.testSource.TestConfiguration",
       "type": {
-        "typeName": "de.sandstorm.testSource.TestConfiguration"
+        "typeName": "de.sandstorm.testSource.TestConfiguration",
+        "documentationContent": " This is a POJO configuration class. Used in unit tests...\n The class documentation should be used as source for\n the configuration namespace.\n"
       },
-      "documentationContent": " This is a POJO configuration class. Used in unit tests...\n The class documentation should be used as source for\n the configuration namespace.\n"
+      "documentationContent": "[ROOT-NAMESPACE]"
     }
   ],
   "properties": [
@@ -46,7 +47,7 @@
       "namespace": "de.sandstorm.testSource.TestConfiguration",
       "name": "propertyWithoutDocShouldProduceACompilerWarning",
       "qualifiedName": "de.sandstorm.testSource.TestConfiguration.propertyWithoutDocShouldProduceACompilerWarning",
-      "documentationContent": "",
+      "documentationContent": "!!![NO-DOCUMENTATION]!!!",
       "accessibility": "IMPLEMENTATION",
       "type": {
         "typeName": "java.lang.String",

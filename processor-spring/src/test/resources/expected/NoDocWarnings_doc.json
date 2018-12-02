@@ -1,0 +1,90 @@
+{
+  "namespaces": [
+    {
+      "name": "de.sandstorm.testSource.noDocWarnings",
+      "type": {
+        "typeName": "testSource.NoDocWarnings",
+        "documentationContent": "!!![NO-DOCUMENTATION]!!!"
+      },
+      "documentationContent": "[ROOT-NAMESPACE]"
+    },
+    {
+      "name": "de.sandstorm.testSource.noDocWarnings.nestedPojo",
+      "type": {
+        "typeName": "testSource.NoDocWarnings.NestedPojoWithoutDoc",
+        "documentationContent": "!!![NO-DOCUMENTATION]!!!"
+      },
+      "documentationContent": "!!![NO-DOCUMENTATION]!!!"
+    },
+    {
+      "name": "de.sandstorm.testSource.noDocWarnings.nestedPojoInOwnClass",
+      "type": {
+        "typeName": "testSource.NestedPojoInOwnClass",
+        "documentationContent": "!!![NO-DOCUMENTATION]!!!"
+      },
+      "documentationContent": "!!![NO-DOCUMENTATION]!!!"
+    },
+    {
+      "name": "de.sandstorm.testSource.noDocWarnings.nestedPojoMap",
+      "type": {
+        "typeName": "java.util.Map<java.lang.String,testSource.NoDocWarnings.NestedPojoWithoutDoc>",
+        "documentationContent": "[MAP]: java.util.Map<java.lang.String,testSource.NoDocWarnings.NestedPojoWithoutDoc>"
+      },
+      "documentationContent": "!!![NO-DOCUMENTATION]!!!"
+    },
+    {
+      "name": "de.sandstorm.testSource.noDocWarnings.nestedPojoMap.<KEY>",
+      "type": {
+        "typeName": "testSource.NoDocWarnings.NestedPojoWithoutDoc",
+        "documentationContent": "!!![NO-DOCUMENTATION]!!!"
+      },
+      "documentationContent": "[MAP-KEY]: java.lang.String"
+    }
+  ],
+  "properties": [
+    {
+      "namespace": "de.sandstorm.testSource.noDocWarnings",
+      "name": "stringWithoutDoc",
+      "qualifiedName": "de.sandstorm.testSource.noDocWarnings.stringWithoutDoc",
+      "documentationContent": "!!![NO-DOCUMENTATION]!!!",
+      "accessibility": "API",
+      "type": {
+        "typeName": "java.lang.String",
+        "required": false
+      }
+    },
+    {
+      "namespace": "de.sandstorm.testSource.noDocWarnings.nestedPojo",
+      "name": "nestedIntWithoutDoc",
+      "qualifiedName": "de.sandstorm.testSource.noDocWarnings.nestedPojo.nestedIntWithoutDoc",
+      "documentationContent": "!!![NO-DOCUMENTATION]!!!",
+      "accessibility": "API",
+      "type": {
+        "typeName": "int",
+        "required": true
+      }
+    },
+    {
+      "namespace": "de.sandstorm.testSource.noDocWarnings.nestedPojoInOwnClass",
+      "name": "nestedProp",
+      "qualifiedName": "de.sandstorm.testSource.noDocWarnings.nestedPojoInOwnClass.nestedProp",
+      "documentationContent": "!!![NO-DOCUMENTATION]!!!",
+      "accessibility": "API",
+      "type": {
+        "typeName": "java.lang.String",
+        "required": false
+      }
+    },
+    {
+      "namespace": "de.sandstorm.testSource.noDocWarnings.nestedPojoMap.<KEY>",
+      "name": "nestedIntWithoutDoc",
+      "qualifiedName": "de.sandstorm.testSource.noDocWarnings.nestedPojoMap.<KEY>.nestedIntWithoutDoc",
+      "documentationContent": "!!![NO-DOCUMENTATION]!!!",
+      "accessibility": "API",
+      "type": {
+        "typeName": "int",
+        "required": true
+      }
+    }
+  ]
+}

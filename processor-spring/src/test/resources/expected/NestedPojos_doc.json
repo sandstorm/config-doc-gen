@@ -3,14 +3,16 @@
     {
       "name": "de.sandstorm.testSource.nestedPojos",
       "type": {
-        "typeName": "testSource.NestedPojos"
+        "typeName": "testSource.NestedPojos",
+        "documentationContent": " This is the namespace that contains the nested one.\n"
       },
-      "documentationContent": " This is the namespace that contains the nested one.\n"
+      "documentationContent": "[ROOT-NAMESPACE]"
     },
     {
       "name": "de.sandstorm.testSource.nestedPojos.nestedPojo",
       "type": {
-        "typeName": "testSource.NestedPojos.NestedPojo"
+        "typeName": "testSource.NestedPojos.NestedPojo",
+        "documentationContent": " Nested value POJO.\n"
       },
       "documentationContent": " This is a nested config namespace by POJO.\n"
     }
