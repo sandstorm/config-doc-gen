@@ -8,11 +8,10 @@ import com.google.testing.compile.CompileTester
 import com.google.testing.compile.JavaFileObjects
 import com.google.testing.compile.JavaSourceSubjectFactory
 import de.sandstorm.configdocgen.core.AbstractConfigurationDocumentationProcessor
+import de.sandstorm.configdocgen.core.DEFAULT_OUTPUT_FILE_NAME
 import java.io.IOException
 import javax.lang.model.element.ElementKind
 import javax.tools.StandardLocation
-
-const val OUTPUT_FILE_NAME = "config-doc.json"
 
 open class ConfigurationDocTest(
         private val processor: AbstractConfigurationDocumentationProcessor
@@ -76,7 +75,7 @@ open class ConfigurationDocTest(
                 withWarningCount.and()
                         .generatesFileNamed(StandardLocation.CLASS_OUTPUT,
                                 "",
-                                OUTPUT_FILE_NAME)
+                                DEFAULT_OUTPUT_FILE_NAME)
                         .withContents(readTestTarget(sourceFileName))
             }
         }

@@ -1,12 +1,10 @@
 package de.sandstorm.configdocgen.processor.spring
 
-import de.sandstorm.configdocgen.core.JsonDocumentationModelWriter
 import de.sandstorm.configdocgen.core.test.ConfigurationDocTest
-import de.sandstorm.configdocgen.core.test.OUTPUT_FILE_NAME
 import org.junit.jupiter.api.Test
 
 class SpringProcessorTest : ConfigurationDocTest(
-        SpringProcessor(JsonDocumentationModelWriter(OUTPUT_FILE_NAME))
+        SpringProcessor()
 ) {
 
     @Test

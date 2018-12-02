@@ -5,6 +5,7 @@ import de.sandstorm.configdocgen.annotations.ConfigNamespace
 import de.sandstorm.configdocgen.annotations.ConfigProperty
 import de.sandstorm.configdocgen.core.AbstractConfigurationDocumentationProcessor
 import de.sandstorm.configdocgen.core.DocumentationModelWriter
+import de.sandstorm.configdocgen.core.JsonDocumentationModelWriter
 import de.sandstorm.configdocgen.core.model.ConfigurationNamespace
 import de.sandstorm.configdocgen.core.model.ConfigurationProperty
 import de.sandstorm.configdocgen.core.model.NamespaceName
@@ -25,9 +26,7 @@ import javax.lang.model.element.TypeElement
 )
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 @AutoService(Processor::class)
-class StandaloneProcessor(
-        writer: DocumentationModelWriter
-) : AbstractConfigurationDocumentationProcessor(writer) {
+class StandaloneProcessor(writer: DocumentationModelWriter = JsonDocumentationModelWriter()) : AbstractConfigurationDocumentationProcessor(writer) {
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment?): Boolean {
         var namespaceClasses: Set<Element> = emptySet()

@@ -1,10 +1,8 @@
 package de.sandstorm.configdocgen.processor.spring
 
-import com.google.auto.service.AutoService
 import de.sandstorm.configdocgen.core.*
 import de.sandstorm.configdocgen.core.model.*
 import org.springframework.boot.context.properties.ConfigurationProperties
-import javax.annotation.processing.Processor
 import javax.annotation.processing.RoundEnvironment
 import javax.annotation.processing.SupportedAnnotationTypes
 import javax.annotation.processing.SupportedSourceVersion
@@ -26,10 +24,7 @@ import javax.tools.Diagnostic
         "org.springframework.boot.context.properties.ConfigurationProperties"
 )
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-@AutoService(Processor::class)
-class SpringProcessor(
-        writer: DocumentationModelWriter
-) : AbstractConfigurationDocumentationProcessor(writer) {
+class SpringProcessor(writer: DocumentationModelWriter = JsonDocumentationModelWriter()) : AbstractConfigurationDocumentationProcessor(writer) {
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment?): Boolean {
         var configurationPropertiesClasses: Set<Element> = emptySet()

@@ -29,4 +29,10 @@ subprojects {
 version "0.1"
 group "de.sandstorm.configdocgen"
 
+task aptJar(type: Jar, dependsOn: clean) {
+    baseName = 'processor-spring'
+    from project(':core').sourceSets.main.output
+    from project(':annotations').sourceSets.main.output
+    from project(':processor-spring').sourceSets.main.output
+}
 
