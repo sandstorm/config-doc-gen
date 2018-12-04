@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue
 import javax.lang.model.element.Element
 
 const val KEY_WILDCARD: String = "<KEY>"
+const val INDEX_WILDCARD: String = "<INDEX>"
 
 data class NamespaceName(
         @get:JsonValue val name: String
@@ -25,5 +26,6 @@ data class NamespaceName(
         fun keyWildcard() = NamespaceName(KEY_WILDCARD)
 
         fun fromJavaMethod(method: Element) = NamespaceName(method.enclosingElement.toString())
+        fun indexWildcard(): NamespaceName = NamespaceName(INDEX_WILDCARD)
     }
 }

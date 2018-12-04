@@ -36,6 +36,17 @@ class SpringProcessorTest : ConfigurationDocTest(
     }
 
     @Test
+    fun test_nestedCollectionsConfiguration_successfulWithWarnings() {
+        testSession("NestedCollections")
+                .successfulCompilation()
+                .warnings()
+                .withUnsupportedCollectionValueTypeWarning("java.lang.Object", "objectProp", 75, 32)
+                .and()
+                .totalCount(1)
+                .assertOutput()
+    }
+
+    @Test
     fun test_noDocWarningsConfiguration_successfulWithWarnings() {
         testSession("NoDocWarnings")
                 .successfulCompilation()

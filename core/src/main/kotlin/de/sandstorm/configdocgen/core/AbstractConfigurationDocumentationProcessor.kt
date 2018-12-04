@@ -107,6 +107,7 @@ abstract class AbstractConfigurationDocumentationProcessor(
         fun buildNoJavadocForClassWarningMessage(clazz: String) = buildNoJavadocForElementWarningMessage("class: $clazz")
         fun buildUnsupportedMapKeyTypeWarningMessage(keyType: String, element: String) = "Unsupported map key type '$keyType' on element: $element"
         fun buildUnsupportedMapValueTypeWarningMessage(valueType: String, element: String) = "Unsupported map value type '$valueType' on element: $element"
+        fun buildUnsupportedCollectionValueTypeWarningMessage(valueType: String, element: String) = "Unsupported collection value type '$valueType' on element: $element"
     }
 
 }

@@ -15,6 +15,12 @@ data class ConfigurationNamespace(
             documentationContent = elementDocumentationContent
     )
 
+    fun nestedNamespaceWithIndexWildcard(element: Element, elementDocumentationContent: DocumentationContent, typeDocumentationContent: DocumentationContent): ConfigurationNamespace = ConfigurationNamespace(
+            name = name.nestedNamespaceName(NamespaceName.indexWildcard()),
+            type = NamespaceType.fromJavaElement(element, typeDocumentationContent),
+            documentationContent = elementDocumentationContent
+    )
+
     fun nestedNamespace(field: Element, elementDocumentationContent: DocumentationContent, typeDocumentationContent: DocumentationContent): ConfigurationNamespace = ConfigurationNamespace(
             name = name.nestedNamespaceName(NamespaceName.fromJavaFieldName(field)),
             type = NamespaceType.fromJavaElement(field, typeDocumentationContent),

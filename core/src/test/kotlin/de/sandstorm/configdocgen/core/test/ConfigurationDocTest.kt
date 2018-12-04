@@ -53,6 +53,9 @@ open class ConfigurationDocTest(
                 fun withUnsupportedMapValueTypeWarning(valueType: String, element: String, line: Long, column: Long): TestSession.Warnings.SourceFile =
                         withWarningInFile(AbstractConfigurationDocumentationProcessor.buildUnsupportedMapValueTypeWarningMessage(valueType, element), line, column)
 
+                fun withUnsupportedCollectionValueTypeWarning(keyType: String, element: String, line: Long, column: Long): TestSession.Warnings.SourceFile =
+                        withWarningInFile(AbstractConfigurationDocumentationProcessor.buildUnsupportedCollectionValueTypeWarningMessage(keyType, element), line, column)
+
                 fun and() = this@Warnings
 
                 private fun withWarningInFile(warningMessage: String, line: Long, column: Long): SourceFile {

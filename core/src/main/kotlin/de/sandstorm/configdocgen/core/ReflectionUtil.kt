@@ -7,6 +7,7 @@ import javax.lang.model.element.ExecutableElement
 import javax.lang.model.element.Modifier
 import javax.lang.model.type.DeclaredType
 import javax.lang.model.type.TypeMirror
+import javax.lang.model.util.Types
 
 fun isConfigApiAnnotationPresent(element: Element) = element.getAnnotation(ConfigApi::class.java) != null
 fun isNonNullAnnotationPresent(element: Element) = element.annotationMirrors
@@ -57,7 +58,7 @@ fun isPrimitiveConfigType(field: Element) = when {
     else -> false
 }
 
-fun isUnsupportedMapValueType(field: Element) = field.asType().toString().let { typeName ->
+fun isUnsupportedGenericType(field: Element) = field.asType().toString().let { typeName ->
     when {
         // whitelist
         listOf(
@@ -73,11 +74,19 @@ fun isUnsupportedMapValueType(field: Element) = field.asType().toString().let { 
 }
 
 fun isMapType(field: Element) = field.asType().toString().matches(Regex("java\\.util\\.Map<.*?,.*?>"))
+fun isCollectionType(field: Element, typeUtil: Types) = anySupertypeMatches(field.asType(), typeUtil) { it -> it.matches(Regex("java\\.util\\.Collection<.*?>")) }
+fun anySupertypeMatches(type: TypeMirror, typeUtil: Types, superTypeMatcher: (String) -> Boolean): Boolean = when {
+    superTypeMatcher(type.toString()) -> true
+    type.toString() == "java.lang.Object" -> false
+    else -> typeUtil.directSupertypes(type).any { anySupertypeMatches(it, typeUtil, superTypeMatcher) }
+}
+
 fun isBooleanType(field: Element) = field.asType().toString() == "boolean"
 fun isStringType(field: Element) = field.asType().toString() == "java.lang.String"
 
 fun getMapKeyTypeParameter(mapField: Element): TypeMirror = (mapField.asType() as DeclaredType).typeArguments[0]
 fun getMapValueTypeParameter(mapField: Element): TypeMirror = (mapField.asType() as DeclaredType).typeArguments[1]
+fun getCollectionTypeParameter(collectionField: Element): TypeMirror = (collectionField.asType() as DeclaredType).typeArguments[0]
 
 fun isConfigApiAnnotationPresentOnGetter(field: Element) = checkGetterForField(field, ::isConfigApiAnnotationPresent)
 fun isNonNullAnnotationPresentOnGetter(field: Element) = checkGetterForField(field, ::isNonNullAnnotationPresent)

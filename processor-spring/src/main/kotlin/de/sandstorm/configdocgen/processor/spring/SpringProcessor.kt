@@ -62,7 +62,7 @@ class SpringProcessor(writer: DocumentationModelWriter = JsonDocumentationModelW
 
     private fun namespaceNameFromSpringAnnotation(clazz: Element): NamespaceName {
         val annotation = clazz.getAnnotation(ConfigurationProperties::class.java)
-        return NamespaceName(annotation.prefix)
+        return NamespaceName(annotation.value.takeUnless(String::isEmpty) ?: annotation.prefix)
     }
 
     private fun propertiesFromClass(builder: ConfigurationDocBuilder, clazz: Element, namespace: ConfigurationNamespace) {
@@ -75,6 +75,39 @@ class SpringProcessor(writer: DocumentationModelWriter = JsonDocumentationModelW
                         isPrimitiveConfigType(field) -> {
                             if (isSetterForFieldPublic(field)) {
                                 builder.property(propertyFromPrimitiveField(namespace, field))
+                            }
+                        }
+                        isCollectionType(field, processingEnv.typeUtils) -> {
+                            val listElementType = processingEnv.typeUtils.asElement(getCollectionTypeParameter(field))
+                            when {
+                                isPrimitiveConfigType(listElementType) -> {
+                                    // the wildcard namespace has no properties for primitive map value types
+                                    builder.namespace(
+                                            builder.namespace(nestedNamespaceFromField(namespace, field, DocumentationContent.collection(field, processingEnv.typeUtils)))
+                                                    .nestedNamespaceWithIndexWildcard(
+                                                            listElementType,
+                                                            DocumentationContent.collectionIndex(),
+                                                            DocumentationContent.primitive(listElementType)
+                                                    )
+                                    )
+                                }
+                                isUnsupportedGenericType(listElementType) -> {
+                                    processingEnv.messager.printMessage(Diagnostic.Kind.WARNING, buildUnsupportedCollectionValueTypeWarningMessage(listElementType.asType().toString(), field.simpleName.toString()), field)
+                                }
+                                else -> {
+                                    // POJO -> find all configuration properties in the map value type class
+                                    propertiesFromClass(
+                                            builder,
+                                            listElementType,
+                                            builder.namespace(
+                                                    builder.namespace(nestedNamespaceFromField(namespace, field, DocumentationContent.collection(field, processingEnv.typeUtils)))
+                                                            .nestedNamespaceWithIndexWildcard(
+                                                                    listElementType,
+                                                                    DocumentationContent.collectionIndex(),
+                                                                    getDocumentationFromJavaElement(listElementType)
+                                                            ))
+                                    )
+                                }
                             }
                         }
                         // TODO list / set types
@@ -98,7 +131,7 @@ class SpringProcessor(writer: DocumentationModelWriter = JsonDocumentationModelW
                                                         )
                                         )
                                     }
-                                    isUnsupportedMapValueType(mapValueType) -> {
+                                    isUnsupportedGenericType(mapValueType) -> {
                                         processingEnv.messager.printMessage(Diagnostic.Kind.WARNING, buildUnsupportedMapValueTypeWarningMessage(mapKeyType.asType().toString(), field.simpleName.toString()), field)
                                     }
                                     else -> {
