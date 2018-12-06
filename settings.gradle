@@ -2,7 +2,6 @@ rootProject.name = 'config-doc-gen'
 
 include ':annotations'
 include ':core'
-include ':example-standalone'
 include ':processor-spring'
 include ':processor-standalone'
 
