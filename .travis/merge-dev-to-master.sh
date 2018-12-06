@@ -42,4 +42,5 @@ git merge --ff-only "$SOURCE_BRANCH"
 
 echo "Pushing to $GITHUB_REPO"
 # Redirect to /dev/null to avoid secret leakage
-git push "https://$GITHUB_SECRET_TOKEN@github.com/$GITHUB_REPO" $MERGE_BRANCH > /dev/null 2>&1
+git push "https://$GITHUB_SECRET_TOKEN@github.com/$GITHUB_REPO" $MERGE_BRANCH
+#git push "https://$GITHUB_SECRET_TOKEN@github.com/$GITHUB_REPO" $MERGE_BRANCH > /dev/null 2>&1
