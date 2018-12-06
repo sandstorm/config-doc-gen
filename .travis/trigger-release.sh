@@ -12,7 +12,11 @@ GITHUB_REPOSITORY_NAME=config-doc-gen
 
 TRAVIS_PERSONAL_TOKEN=$(travis token)
 
-:${TRAVIS_PERSONAL_TOKEN:?"TRAVIS_PERSONAL_TOKEN needs to be set to access the Travis API to trigger the build"}
+if [ -z "$TRAVIS_PERSONAL_TOKEN" ];
+then
+    echo "TRAVIS_PERSONAL_TOKEN needs to be set to access the Travis API to trigger the build"
+    exit 2
+fi
 
 body='
 {
