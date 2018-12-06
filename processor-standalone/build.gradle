@@ -1,5 +1,8 @@
+project.description = "Configuration Documentation Generator - standalone processor module"
+
 apply from: "../base-kotlin.gradle"
 apply from: "../base-apt-test.gradle"
+apply from: '../base-maven-artifact.gradle'
 
 dependencies {
     compile project(":core")

@@ -1,0 +1,3 @@
+project.description = "Configuration Documentation Generator - annotation module"
+
+apply from: '../base-maven-artifact.gradle'

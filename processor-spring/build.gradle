@@ -1,7 +1,10 @@
+project.description = "Configuration Documentation Generator - spring processor module"
+
 plugins {
     id "com.github.johnrengelman.shadow" version "4.0.3"
 }
 
+apply from: '../base-maven-artifact.gradle'
 apply from: "../base-apt-test.gradle"
 
 dependencies {
