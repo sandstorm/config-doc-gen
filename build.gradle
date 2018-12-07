@@ -28,10 +28,6 @@ subprojects {
     apply from: "../base-kotlin.gradle"
 }
 
-allprojects {
-    version "0.1-SNAPSHOT"
-    group "de.sandstorm.configdocgen"
-}
 task springAptJar(type: Jar, dependsOn: clean) {
     baseName = 'processor-spring'
     from project(':core').sourceSets.main.output
