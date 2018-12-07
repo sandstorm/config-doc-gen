@@ -10,8 +10,8 @@ env:
     - secure: "c2X24bWZCyukwWFMYh9conQl+fZUO50sGc6MLJOX6LZqrN4pEpf/irb1wVol5qYP6Sc4MKq0LdAA+nOyHIp9CAA7H91McvYiS518Ufqs3PhBSV8MfCz/Mn5d/lo+YeK0wted5+5VMoYrt29mMVqjHWBj6j9i94oNziTFxqQGaFc9F16pwfueBJ3lpkvkxEQ4gxRPT5zwYE/IPxQi+00Aio6JDfBv391zV4Q5o7vXsUjAy9Av21nOTChDHF4VFKAmpSbfi0QNUdEk/hlKNHXcTC7Li/TIPZErnUBjPFh08/hhbXhEWvsNJ+IjiS8Vw5HOVPmVI9GdoH1TtIzpSzZR3DMS/pdhwvgVm+cpoL7KgrBoyQJkBB4Gr8RZOftRBqz/V1t3kLDkw5ffWLvqqNensw2L8zHzXslfN/pfh++mYvq4MGaeIvHuS5Ll8/6s+sph5kxXs0qvQmKkUs+kjU8Kd3gl3R6R1Q8ZJWZHNBzkO6kiFGlMCkDlNOtLFHq3R+Xp1saSwmvl5lLGlYkRMHdt3K+p2/p0E9Yq/z/ZAjKfnL1gJY3gkl1L7+ttdIILN2YtyYC4quD1dhgbtyezB9E/hB7dFqnHD9tNPhN8XhGs1BtbhninwOFLtI+Pv4TDKrV1KTJCKuKuVBj9yCWTKzlsyfD3bhz98guqXSqyKVMT5WI="
     - # GPG_PASSPHRASE
     - secure: "NI08g5cQ93AnSA59l5DExPXYShR/h33VHrPnGHKirNWEOntsaGOMAajyBD8KDiwVdQaeob/xQX8oURecy6bioOLAjzfdtn+YEgbu/YnaUwxpxu9PbBkVzXnUg2pp+FTKvO5si2VIZe4bEaE9lLgpUcHFOxstSK0+uUHEwSen/AzTykyMLa00EXmCNCP0oj1NhzryqQ3jb7jAxHmujH2rsZegfSd3L9Y2rGGfpnYJcR6HFwH+rg8PeiP/Xa4CYISDulNNEELj5T3lrgbNXdO9itBhbfoLPDKDRq+Xvd6WWa9u77mDE0EfJFUYMWhWlsPVmJUb2qZRJugeXVIIizqYcr1Ji1MPu/BprKsTwNA81VdoxDYCYYcunSObpk6Z+381pQU4H7SL4UN7s6J+2o+N9AI6D27vS7TNMtUE/4H25gocAv5p/W3ebEtxkINQY4dW64TY2qFT8bt2eHKErh+jC+8p3X75gEk21O4oiZHObFeSeesSIanL8MnmJy6nhliHhZAQLkdg4cJitGWv/l8/CIEgbnkdGQdTqXOaTzAQ7ZRsDzV7sNAk55h2PVX6BW42HDDFArlKotfUi4+wd4gOigImU5+3ntivPWAkglCdXfHJMofy49J5Rmiq/pcZXq5kXjWM5TU+NilXgyfDKsewi8eoSEmA+AbWOs90HNzfApM="
-    - GPG_KEY_LOCATION=".travis/secret.gpg"
-    - ENCRYPTED_GPG_KEY_LOCATION=".travis/secret.gpg.enc"
+    - GPG_KEY_LOCATION="/home/travis/build/sandstorm/config-doc-gen/.travis/secret.gpg"
+    - ENCRYPTED_GPG_KEY_LOCATION="/home/travis/build/sandstorm/config-doc-gen/.travis/secret.gpg.enc"
 branches:
   only:
   - master
