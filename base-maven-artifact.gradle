@@ -1,5 +1,5 @@
 apply plugin: 'java'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 ext {
@@ -22,44 +22,45 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
     from sourceSets.main.allSource
 }
-artifacts {
-    archives javadocJar, sourcesJar
-}
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment {
-                MavenDeployment deployment -> signing.signPom(deployment)
-            }
-            repository(url: maven2_url) {
-                authentication(userName: System.getenv('SONATYPE_USERNAME'), password: System.getenv('SONATYPE_PASSWORD'))
-            }
-            snapshotRepository(url: snapshot_url) {
-                authentication(userName: System.getenv('SONATYPE_USERNAME'), password: System.getenv('SONATYPE_PASSWORD'))
-            }
-            pom.project {
-                name project_name
-                packaging 'jar'
-                description project_description
-                url project_url
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            pom {
+                name = project_name
+                packaging = 'jar'
+                description = project_description
+                url = project_url
                 scm {
-                    connection project_scm
-                    developerConnection project_scm
-                    url project_url
+                    connection = project_scm
+                    developerConnection = project_scm
+                    url = project_url
                 }
                 licenses {
                     license {
-                        name project_license_slug
-                        url project_license_url
+                        name = project_license_slug
+                        url = project_license_url
                     }
                 }
                 developers {
                     developer {
-                        id project_developer
-                        name project_developer
+                        id = project_developer
+                        name = project_developer
                     }
                 }
+            }
+        }
+    }
+    repositories {
+        maven {
+            // change URLs to point to your repos, e.g. http://my.org/repo
+            url = version.endsWith('SNAPSHOT') ? snapshot_url : maven2_url
+            credentials {
+                username = System.getenv('SONATYPE_USERNAME')
+                password = System.getenv('SONATYPE_PASSWORD')
             }
         }
     }
@@ -78,7 +79,7 @@ gradle.taskGraph.whenReady { taskGraph ->
         }
     }
 }
+
 signing {
-    sign configurations.archives
+    sign publishing.publications.mavenJava
 }
-build.dependsOn.remove(signArchives)
