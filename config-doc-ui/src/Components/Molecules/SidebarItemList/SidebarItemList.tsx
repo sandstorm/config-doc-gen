@@ -1,23 +1,24 @@
 import * as React from 'react';
-import {PickDefaultProps} from '../../../../types/defaultProps';
-import './_SidebarPropertyList.scss';
-import {Property} from "../../../Domain/Property";
+import './_SidebarItemList.scss';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {iconForAccessibility, noPropertiesIcon} from "../../../icons";
+import {iconForItem, noPropertiesIcon} from "../../../icons";
+import {UiItem, UiItemType} from "../../../Domain/Ui/UiItem";
 
 //
 // Props
 //
 interface SidebarPropertyListProps {
-    readonly properties: ReadonlyArray<Property>;
+    readonly items: ReadonlyArray<UiItem>;
     //readonly showQualifiedName: boolean;
     //readonly onClickItem: (itemName: string) => void
 }
 
-type DefaultProps = PickDefaultProps<SidebarPropertyListProps, 'properties'>;
+type DefaultProps = Readonly<Required<{
+    items: ReadonlyArray<UiItem>;
+}>>;
 
 const defaultProps: DefaultProps = {
-    properties: [],
+    items: [],
 };
 
 //
@@ -31,7 +32,7 @@ const initialTemplateState: SidebarPropertyListState = {};
 //
 // Class
 //
-export default class SidebarPropertyList extends React.PureComponent<SidebarPropertyListProps, SidebarPropertyListState> {
+export default class SidebarItemList extends React.PureComponent<SidebarPropertyListProps, SidebarPropertyListState> {
     public static readonly defaultProps = defaultProps;
 
     public constructor(props: SidebarPropertyListProps) {
@@ -41,9 +42,9 @@ export default class SidebarPropertyList extends React.PureComponent<SidebarProp
 
     public render(): JSX.Element {
         return (
-            <div className="property-list">
+            <div className="sidebar-item-list">
                 {
-                    this.props.properties.length > 0 ?
+                    this.props.items.length > 0 ?
                         this.renderList() : this.renderEmptyNotification()
                 }
 
@@ -54,19 +55,27 @@ export default class SidebarPropertyList extends React.PureComponent<SidebarProp
     private renderList(): JSX.Element {
         return (
             <ul>
-                {this.props.properties.map(property =>
-                    <li key={property.qualifiedName} onClick={() => /*onClickItem(property.qualifiedName)*/ ""}>
-                        <FontAwesomeIcon icon={iconForAccessibility(property.accessibility)}/>
-                        {true ? property.qualifiedName : property.name}
+                {this.props.items.map(item =>
+                    <li
+                        className={"sidebar-item-list--" + this.buildItemClassPrefix(item.type)}
+                        key={item.identifier}
+                        onClick={() => /*onClickItem(property.qualifiedName)*/ ""}
+                    >
+                        <FontAwesomeIcon icon={iconForItem(item.type)}/>
+                        {item.label}
                     </li>
                 )}
             </ul>
         );
     }
 
+    private buildItemClassPrefix(type: UiItemType): string {
+        return UiItemType[type].toLowerCase();
+    }
+
     private renderEmptyNotification(): JSX.Element {
         return (
-            <div className="property-list--empty">
+            <div className="sidebar-item-list--empty">
                 <FontAwesomeIcon icon={noPropertiesIcon}/>
                 No Properties!
             </div>

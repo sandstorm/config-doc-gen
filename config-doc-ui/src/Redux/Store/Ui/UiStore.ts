@@ -3,20 +3,20 @@ import {createSelector} from 'reselect';
 
 import {ApplicationState} from '..';
 import {Accessibility} from "../../../Domain/Accessibility";
-import {Property} from "../../../Domain/Property";
-import {Namespace} from "../../../Domain/Namespace";
+import {UiItem} from "../../../Domain/Ui/UiItem";
 
 //
 // State
 //
+
 export interface UiState {
     readonly sidebar: UiSidebarState;
-    readonly selectedItem: Property | Namespace | null;
 }
 
 export interface UiSidebarState {
     readonly filter: UiSidebarFilter;
     readonly viewMode: UiSidebarViewMode;
+    readonly selectedItem: UiItem | null;
 }
 
 export interface UiSidebarFilter {
@@ -25,6 +25,7 @@ export interface UiSidebarFilter {
 }
 
 export enum UiSidebarViewMode {
+    DEFAULT,
     FLAT,
     GROUPED,
     TREE,
@@ -36,9 +37,9 @@ const initialState: UiState = {
             nameFilter: "",
             accessibilityFilter: []
         },
-        viewMode: UiSidebarViewMode.FLAT
+        viewMode: UiSidebarViewMode.FLAT,
+        selectedItem: null
     },
-    selectedItem: null
 };
 
 //
@@ -81,14 +82,14 @@ const sidebarViewModeSelector = createSelector(
     sidebar => sidebar.viewMode
 );
 const selectedItemSelector = createSelector(
-    uiSelector,
-    ui => ui.selectedItem
+    sidebarSelector,
+    sidebar => sidebar.selectedItem
 );
 
 export const selectors = {
     sidebar: sidebarSelector,
     sidebarViewMode: sidebarViewModeSelector,
-    selectedItem: selectedItemSelector,
+    sidebarSelectedItem: selectedItemSelector,
 };
 
 //

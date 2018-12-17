@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {PickDefaultProps} from '../../../../types/defaultProps';
 import {findIconDefinition, IconDefinition} from '@fortawesome/fontawesome-svg-core'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import './_App.scss';
+import AppSidebar from "../AppSidebar/AppSidebar";
 
 const appIcon: IconDefinition = findIconDefinition({prefix: 'fas', iconName: 'info'});
 //
@@ -10,12 +10,17 @@ const appIcon: IconDefinition = findIconDefinition({prefix: 'fas', iconName: 'in
 //
 interface AppProps {
     readonly configDocAppName: string;
+    readonly sidebar: JSX.Element;
 }
 
-type DefaultProps = PickDefaultProps<AppProps, 'configDocAppName'>;
+type DefaultProps = Readonly<Required<{
+    configDocAppName: string,
+    sidebar: JSX.Element
+}>>;
 
 const defaultProps: DefaultProps = {
     configDocAppName: "some configurable app",
+    sidebar: <AppSidebar/>,
 };
 
 //
@@ -47,7 +52,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
                     Header - App: {this.props.configDocAppName}
                 </header>
                 <div className="sidebar-container">
-
+                    {[this.props.sidebar]}
                 </div>
             </div>
         )

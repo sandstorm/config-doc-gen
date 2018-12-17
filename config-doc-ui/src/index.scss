@@ -2,5 +2,6 @@
 @import "./Styles/_Variables.scss";
 
 // Components
-@import "./Components/Organisms/App/_App.scss";
-@import "./Components/Atoms/Template/_Template.scss";
+@import "./Components/Molecules/SidebarItemList/SidebarItemList";
+@import "./Components/Organisms/App/App";
+@import "./Components/Organisms/AppSidebar/AppSidebar";
