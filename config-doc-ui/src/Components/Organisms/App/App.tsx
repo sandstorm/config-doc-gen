@@ -1,0 +1,55 @@
+import * as React from 'react';
+import {PickDefaultProps} from '../../../../types/defaultProps';
+import {findIconDefinition, IconDefinition} from '@fortawesome/fontawesome-svg-core'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import './_App.scss';
+
+const appIcon: IconDefinition = findIconDefinition({prefix: 'fas', iconName: 'info'});
+//
+// Props
+//
+interface AppProps {
+    readonly configDocAppName: string;
+}
+
+type DefaultProps = PickDefaultProps<AppProps, 'configDocAppName'>;
+
+const defaultProps: DefaultProps = {
+    configDocAppName: "some configurable app",
+};
+
+//
+// State
+//
+interface AppState {
+}
+
+const initialAppState: AppState = {};
+
+//
+// Class
+//
+export default class App extends React.PureComponent<AppProps, AppState> {
+    public static readonly defaultProps = defaultProps;
+
+    public constructor(props: AppProps) {
+        super(props);
+        this.state = initialAppState;
+    }
+
+    public render(): JSX.Element {
+        return (
+            <div className="app">
+                <header className="app--header">
+                    <div className="app--header--icon">
+                        <FontAwesomeIcon icon={appIcon}/>
+                    </div>
+                    Header - App: {this.props.configDocAppName}
+                </header>
+                <div className="sidebar-container">
+
+                </div>
+            </div>
+        )
+    }
+}
