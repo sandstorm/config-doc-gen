@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 
 import App from './Components/Organisms/App';
 import './index.scss';
+import './font-awesome';
 import configureStore from './Redux/configureStore';
 
 const store = configureStore();

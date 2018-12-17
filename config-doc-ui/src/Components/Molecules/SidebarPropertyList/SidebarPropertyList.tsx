@@ -1,15 +1,9 @@
 import * as React from 'react';
 import {PickDefaultProps} from '../../../../types/defaultProps';
-import {findIconDefinition, IconDefinition} from '@fortawesome/fontawesome-svg-core'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import './_SidebarPropertyList.scss';
 import {Property} from "../../../Domain/Property";
-import {Accessibility} from "../../../Domain/Accessibility";
-
-const apiPropertyIcon: IconDefinition = findIconDefinition({prefix: 'fas', iconName: 'clipboard-check'})
-const implementationPropertyIcon: IconDefinition = findIconDefinition({prefix: 'fas', iconName: 'exclamation-circle'})
-const unknownPropertyIcon: IconDefinition = findIconDefinition({prefix: 'fas', iconName: 'question'})
-const noPropertiesIcon: IconDefinition = findIconDefinition({prefix: 'fas', iconName: 'radiation'})
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {iconForAccessibility, noPropertiesIcon} from "../../../icons";
 
 //
 // Props
@@ -62,7 +56,7 @@ export default class SidebarPropertyList extends React.PureComponent<SidebarProp
             <ul>
                 {this.props.properties.map(property =>
                     <li key={property.qualifiedName} onClick={() => /*onClickItem(property.qualifiedName)*/ ""}>
-                        <FontAwesomeIcon icon={SidebarPropertyList.iconForAccessibility(property.accessibility)}/>
+                        <FontAwesomeIcon icon={iconForAccessibility(property.accessibility)}/>
                         {true ? property.qualifiedName : property.name}
                     </li>
                 )}
@@ -77,17 +71,6 @@ export default class SidebarPropertyList extends React.PureComponent<SidebarProp
                 No Properties!
             </div>
         );
-    }
-
-    private static iconForAccessibility(accessibility: Accessibility): IconDefinition {
-        switch (accessibility) {
-            case Accessibility.API:
-                return apiPropertyIcon;
-            case Accessibility.IMPLEMENTATION:
-                return implementationPropertyIcon;
-            default:
-                return unknownPropertyIcon;
-        }
     }
 
 }
