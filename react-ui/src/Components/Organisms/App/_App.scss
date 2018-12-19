@@ -1,0 +1,43 @@
+.app {
+    height: 100%;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-areas: 
+        "header"
+        "sidebar"
+        "main"
+        "footer";
+}
+
+@media (min-width: 700px) {
+    .app {
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas: 
+            "header header"
+            "sidebar main"
+            "footer footer"
+    }
+}
+
+.app--header {
+    grid-area: header;
+}
+
+.app--sidebar {
+    grid-area: sidebar;
+}
+
+.app--main-content {
+    grid-area: main;
+}
+
+.app--main-footer {
+    grid-area: footer;
+}
+
+.app-footer {
+    @include mainBox;
+
+    padding: 10px 5px;
+}

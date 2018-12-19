@@ -1,0 +1,26 @@
+.app-sidebar {
+    @include mainBox;
+    height: 100%;
+
+    padding-right: 5px;
+}    
+
+.app-sidebar--header {
+    padding-top: 10px;
+    padding-left: 3px;
+}
+
+.app-sidebar--view-mode {
+    margin-top: 10px;
+    border-bottom: 1px solid $color_secondary;
+
+    .tab  {
+        cursor: pointer;
+        display: inline-block;
+        padding: 3px 5px;
+
+        &.current {
+            background-color: $color_secondaryBackground;
+        }
+    }
+}

@@ -1,0 +1,15 @@
+// Variables, Mixins, etc.
+@import "./Styles/Variables";
+@import "./Styles/Mixins";
+
+// Components
+@import "./Components/Atoms/UiItemView/UiItemView";
+@import "./Components/Molecules/SidebarItemList/SidebarItemList";
+@import "./Components/Organisms/App/App";
+@import "./Components/Organisms/AppHeader/AppHeader";
+@import "./Components/Organisms/AppSidebar/AppSidebar";
+@import "./Components/Organisms/AppSidebarDefaultView/AppSidebarDefaultView";
+
+html, body, div#root {
+    height: 98%;
+}

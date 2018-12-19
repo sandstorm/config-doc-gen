@@ -1,0 +1,50 @@
+.app-header {
+    @include mainBox;
+
+    padding: 10px 0;
+
+    display: grid;
+    grid-gap: 5px;
+    grid-template-areas: 
+        "icon"
+        "title"
+        "selectedItem"
+        "filters";
+}
+
+@media (min-width: 300px) {
+    .app-header {
+        grid-template-columns: 1fr 8fr;
+        grid-template-areas: 
+            "icon title       "
+            "icon selectedItem"
+            "icon filters     "
+    }
+}
+
+
+.app-header--icon {
+    grid-area: icon;
+
+    font-size: 6rem;
+    text-align: center;
+}
+
+.app-header--title {
+    grid-area: title;
+
+    font-size: 2rem;
+}
+
+.app-header--selected-item {
+    grid-area: selectedItem;
+
+    .ui-item-view {
+        display: inline-block;
+        margin-left: 5px;
+    }
+}
+
+.app-header--filters {
+    grid-area: filters;
+}
