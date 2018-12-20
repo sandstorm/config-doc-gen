@@ -1,13 +1,16 @@
-import {combineReducers} from 'redux';
-
 import * as Data from './Data';
 import * as Ui from './Ui';
 
-export interface IApplicationState {
-    readonly Data: Data.IDataState;
-    readonly Ui: Ui.IUiState;
-}
+import { connectRouter } from 'connected-react-router'
+import { combineReducers } from 'redux'
 
+
+export interface IApplicationState {
+    readonly data: Data.IDataState;
+    readonly ui: Ui.IUiState;
+    readonly router: any;
+  }
+  
 export const actions = {
     Data: Data.actions,
     Ui: Ui.actions,
@@ -18,7 +21,8 @@ export const selectors = {
     Ui: Ui.selectors,
 };
 
-export const rootReducer = combineReducers({
-    Data: Data.reducer,
-    Ui: Ui.reducer,
+export const reducers = (history: any) => combineReducers({
+    data: Data.reducer,
+    router: connectRouter(history),
+    ui: Ui.reducer,
 });

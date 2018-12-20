@@ -1,8 +1,12 @@
-import {IconDefinition} from '@fortawesome/fontawesome-svg-core'
-import {fasIcon} from "./font-awesome";
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
+import { fasIcon } from "./font-awesome";
 
-import {UiItemType} from "./Domain/Ui/UiItem";
-import {UiSidebarViewMode} from "./Redux/Store/Ui/UiStore";
+import { Accessibility } from './Domain/Accessibility';
+import Namespace from './Domain/Namespace';
+import Property from './Domain/Property';
+import { UiItemType } from "./Domain/Ui/UiItem";
+import { UiSidebarViewMode } from "./Redux/Store/Ui/UiStore";
+
 
 export const appIcon: IconDefinition = fasIcon('info');
 export const namespaceIcon: IconDefinition = fasIcon('cube');
@@ -16,6 +20,21 @@ export const sidebarViewModeDefaultIcon: IconDefinition = fasIcon('file-alt');
 export const sidebarViewModeTreeIcon: IconDefinition = fasIcon('tree');
 export const sidebarViewModeGroupedIcon: IconDefinition = fasIcon('sitemap');
 export const sidebarViewModeFlatIcon: IconDefinition = fasIcon('stream');
+
+export function iconForNamespace(namespace: Namespace) {
+    return namespaceIcon;
+}
+
+export function iconForProperty(property: Property) {
+    switch (property.accessibility) {
+        case Accessibility.API:
+            return apiPropertyIcon;
+        case Accessibility.IMPLEMENTATION:
+            return implementationPropertyIcon;
+        default:
+            return unknownIcon;
+    }
+}
 
 export function iconForItem(type: UiItemType) {
     switch (type) {

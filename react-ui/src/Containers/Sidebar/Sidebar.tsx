@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 
-import {actions, IApplicationState, selectors} from '../../Redux/Store';
+import {actions, selectors} from '../../Redux/Store';
 
 import AppSidebar from "../../Components/Organisms/AppSidebar/AppSidebar";
+import { IApplicationState } from '../../Redux/Store';
 import SidebarDefaultView from '../SidebarDefaultView';
 
 const mapStateToProps = (state: IApplicationState) => ({
-    selectedItem: selectors.Ui.ConfigDoc.sidebarSelectedItem(state),
     viewMode: selectors.Ui.ConfigDoc.sidebarViewMode(state),
 });
 
@@ -15,7 +15,7 @@ const mapDispatchToProps = {
     onViewModeSelected: actions.Ui.ConfigDoc.selectSidebarViewMode
 }
 
-type SidebarProps = ReturnType<typeof mapStateToProps>;
+type SidebarProps = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 
 class Sidebar extends React.PureComponent<SidebarProps> {
     public render(): JSX.Element {

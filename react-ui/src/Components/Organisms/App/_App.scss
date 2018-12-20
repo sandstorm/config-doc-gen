@@ -1,7 +1,8 @@
 .app {
+    background-color: $color_brand;
     height: 100%;
     display: grid;
-    grid-gap: 20px;
+    grid-gap: 10px;
     grid-template-areas: 
         "header"
         "sidebar"
@@ -30,6 +31,36 @@
 
 .app--main-content {
     grid-area: main;
+}
+
+.app--main-content--inner {
+    @include mainBox;
+
+    height: 100%;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-rows: auto auto;
+    grid-template-areas: 
+        "namespace"
+        "property";
+}
+
+.app--main-content--inner--no-namespace {
+    grid-area: namespace;
+
+}
+
+app--main-content--inner--namespace {
+    grid-area: namespace;
+}
+
+.app--main-content--inner--no-property {
+    grid-area: property;
+
+}
+
+.app--main-content--inner--property {
+    grid-area: property;
 }
 
 .app--main-footer {

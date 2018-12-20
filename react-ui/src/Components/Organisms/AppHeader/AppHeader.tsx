@@ -11,27 +11,33 @@ import UiItemView from '../../Atoms/UiItemView';
 interface IAppHeaderProps {
     readonly configDocAppName: string;
     readonly searchTerm: string;
-    readonly selectedItem: UiItem | null;
+    readonly selectedNamespace: UiItem | null;
+    readonly selectedProperty: UiItem | null;
 
     // actions
+    readonly onAppIconClicked: () => void;
     readonly onSearchTermChanged: (searchTerm: string) => void;
 }
 
 type DefaultProps = Readonly<Required<{
     configDocAppName: string;
     searchTerm: string;
-    selectedItem: UiItem | null;
+    selectedNamespace: UiItem | null;
+    selectedProperty: UiItem | null;
 
+    onAppIconClicked: () => void;
     onSearchTermChanged: (searchTerm: string) => void;
 }>>;
 
 const defaultProps: DefaultProps = {
     configDocAppName: "app name",
     searchTerm: "",
-    selectedItem: null,
+    selectedNamespace: null,
+    selectedProperty: null,
 
     // no ops actions
-    onSearchTermChanged: () => { return; }
+    onAppIconClicked: () => {return},
+    onSearchTermChanged: () => { return },
 };
 
 //
@@ -41,20 +47,30 @@ export default class AppHeader extends React.PureComponent<IAppHeaderProps, any>
     public static readonly defaultProps = defaultProps;
 
     public render() {
+        const appIconClickedHandler = () => {this.props.onAppIconClicked()};
         const searchTermChangedHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
             this.props.onSearchTermChanged(event.currentTarget.value);
         }
         return <header className="app-header">
-            <div className="app-header--icon">
+            <div className="app-header--icon" onClick={appIconClickedHandler}>
                 <FontAwesomeIcon icon={appIcon} />
             </div>
             <div className="app-header--title">
                 Config Doc for: {this.props.configDocAppName}
             </div>
             <div className="app-header--selected-item">
-                {this.props.selectedItem !== null ?
-                    <div>Selected: <UiItemView item={this.props.selectedItem} /></div> :
-                    <span>Select a property or namespace!</span>
+                {this.props.selectedNamespace == null && this.props.selectedProperty == null ?
+                    <span>Select a property or namespace!</span> :
+                    <div>
+                        {this.props.selectedNamespace != null ?
+                            <UiItemView item={this.props.selectedNamespace} />
+                            : ''
+                        }
+                        {this.props.selectedProperty != null ?
+                            <UiItemView item={this.props.selectedProperty} />
+                            : ''                            
+                        }
+                    </div>
                 }
             </div>
             <div className="app-header--filters">

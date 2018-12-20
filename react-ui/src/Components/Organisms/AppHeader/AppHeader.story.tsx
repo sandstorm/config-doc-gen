@@ -7,8 +7,15 @@ import AppHeader from '.';
 
 import { UiItemType } from '../../../Domain/Ui/UiItem';
 
-const item1 = {
-    identifier: "foo.prop1",
+
+const namespace1 = {
+    identifier: "foo.bar.namespace",
+    label: "foo.bar.namespace",
+    type: UiItemType.NAMESPACE
+};
+
+const prop1 = {
+    identifier: "foo.bar.namespace.prop1",
     label: "prop1",
     type: UiItemType.PROPERTY_API
 };
@@ -18,6 +25,6 @@ storiesOf('AppHeader', module)
         <AppHeader onSearchTermChanged={action('search term changed')} />
     ))
     .add('with search term and selected item', () => (
-        <AppHeader searchTerm="some search term" selectedItem={item1} onSearchTermChanged={action('search term changed')} />
+        <AppHeader searchTerm="some search term" selectedNamespace={namespace1} selectedProperty={prop1} onSearchTermChanged={action('search term changed')} />
     ))
 ;

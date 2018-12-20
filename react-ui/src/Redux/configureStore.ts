@@ -1,14 +1,15 @@
-import {createStore, Store} from 'redux';
+import {applyMiddleware, createStore, Store} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
-import {IApplicationState, rootReducer} from './Store';
+import { routerMiddleware } from 'connected-react-router'
 
-export default function configureStore(initialState?: IApplicationState): Store<IApplicationState> {
+import { IApplicationState, reducers } from './Store';
+
+export function configureStore(history: any): Store<IApplicationState> {
   const store = createStore(
-    rootReducer,
-    initialState || {},
+    reducers(history),
     composeWithDevTools(
-      // applyMiddleware(epicMiddleware)
+      applyMiddleware(routerMiddleware(history))
     )
   );
 

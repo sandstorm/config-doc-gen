@@ -51,7 +51,7 @@ export default class SidebarItemList extends React.PureComponent<ISidebarPropert
         {this.props.items.map(item => {
           const clickHandler = () => this.props.onClickItem(item);
           return <li
-            className={"sidebar-item-list--" + this.buildItemClassPrefix(item.type) + (item === this.props.selectedItem ? " selected" : "")}
+            className={"sidebar-item-list--" + this.buildItemClassPrefix(item.type) + (this.props.selectedItem != null && item.identifier === this.props.selectedItem.identifier ? " selected" : "")}
             key={item.identifier}
             onClick={clickHandler}
           >

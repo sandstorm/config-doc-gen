@@ -3,8 +3,6 @@ import * as React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {iconForSidebarViewMode} from "../../../icons";
 
-import {UiItem} from "../../../Domain/Ui/UiItem";
-
 import {allSidebarViewModes, UiSidebarViewMode} from "../../../Redux/Store/Ui/UiStore";
 
 import AppSidebarDefaultView from "../AppSidebarDefaultView/AppSidebarDefaultView";
@@ -13,7 +11,6 @@ import AppSidebarDefaultView from "../AppSidebarDefaultView/AppSidebarDefaultVie
 // Props
 //
 interface IAppSidebarProps {
-    readonly selectedItem: UiItem | null;
     readonly viewMode: UiSidebarViewMode;
 
     // actions
@@ -21,14 +18,12 @@ interface IAppSidebarProps {
 }
 
 type DefaultProps = Readonly<Required<{
-    selectedItem: UiItem | null;
     viewMode: UiSidebarViewMode;
 
     onViewModeSelected: (viewMode: UiSidebarViewMode) => void;
 }>>;
 
 const defaultProps: DefaultProps = {
-    selectedItem: null,
     viewMode: UiSidebarViewMode.DEFAULT,
 
     // no ops actions

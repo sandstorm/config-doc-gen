@@ -43,7 +43,7 @@ export function reducer(state: IConfigDocState = initialState, action: Employees
 //
 // Selectors
 //
-const rawDataSelector = (state: IApplicationState) => state.Data.ConfigDoc.rawApiData;
+const rawDataSelector = (state: IApplicationState) => state.data.ConfigDoc.rawApiData;
 const propertiesSelector = createSelector(rawDataSelector, rawData => rawData.properties);
 const namespacesSelector = createSelector(rawDataSelector, rawData => rawData.namespaces);
 

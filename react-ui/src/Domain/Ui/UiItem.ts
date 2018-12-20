@@ -26,8 +26,8 @@ export function uiItemFromNamespace(namespace: Namespace): UiItem {
 }
 
 export enum UiItemType {
-    PROPERTY_API,
-    PROPERTY_IMPLEMENTATION,
-    NAMESPACE,
-    UNKNOWN,
+    PROPERTY_API = "PROPERTY_API",
+    PROPERTY_IMPLEMENTATION = "PROPERTY_IMPLEMENTATION",
+    NAMESPACE = "NAMESPACE",
+    UNKNOWN = "UNKNOWN",
 }

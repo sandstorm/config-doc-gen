@@ -1,4 +1,4 @@
 export enum Accessibility {
-    API,
-    IMPLEMENTATION
+    API = "API",
+    IMPLEMENTATION = "IMPLEMENTATION"
 }

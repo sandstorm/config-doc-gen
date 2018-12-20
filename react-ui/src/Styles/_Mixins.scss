@@ -12,6 +12,12 @@
     }
 }
 
+@mixin codeBlock {
+    background-color: $color_secondaryBackground;
+    color: $color_primary;
+    font-family: 'Courier New', Courier, monospace;
+}
+
 // for stories only
 .main-box {
     @include mainBox;

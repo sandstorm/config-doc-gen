@@ -10,25 +10,31 @@ import SidebarItemList from "../../Molecules/SidebarItemList/SidebarItemList";
 interface IAppSidebarDefaultViewProps {
     readonly namespaces: ReadonlyArray<UiItem>;
     readonly properties: ReadonlyArray<UiItem>;
-    readonly selectedItem: UiItem | null;
+    readonly selectedNamespace: UiItem | null;
+    readonly selectedProperty: UiItem | null;
 
-    readonly onSelectItem: (item: UiItem) => void;
+    readonly onSelectNamespace: (item: UiItem) => void;
+    readonly onSelectProperty: (item: UiItem) => void;
 }
 
 type DefaultProps = Readonly<Required<{
     namespaces: ReadonlyArray<UiItem>;
     properties: ReadonlyArray<UiItem>;
-    selectedItem: UiItem | null;
+    selectedNamespace: UiItem | null;
+    selectedProperty: UiItem | null;
 
-    onSelectItem: (item: UiItem) => void;
+    onSelectNamespace: (item: UiItem) => void;
+    onSelectProperty: (item: UiItem) => void;
 }>>;
 
 const defaultProps: DefaultProps = {
     namespaces: [],
     properties: [],
-    selectedItem: null,
+    selectedNamespace: null,
+    selectedProperty: null,
 
-    onSelectItem: () => {return}
+    onSelectNamespace: () => {return},
+    onSelectProperty: () => {return},
 };
 
 //
@@ -41,10 +47,10 @@ export default class AppSidebarDefaultView extends React.PureComponent<IAppSideb
         return (
             <div className="sidebar-default-view">
                 <div className="sidebar-default-view--namespaces">
-                    <SidebarItemList items={this.props.namespaces} selectedItem={this.props.selectedItem} onClickItem={this.props.onSelectItem}/>
+                    <SidebarItemList items={this.props.namespaces} selectedItem={this.props.selectedNamespace} onClickItem={this.props.onSelectNamespace}/>
                 </div>
                 <div className="sidebar-default-view--properties">
-                    <SidebarItemList items={this.props.properties} selectedItem={this.props.selectedItem} onClickItem={this.props.onSelectItem}/>
+                    <SidebarItemList items={this.props.properties} selectedItem={this.props.selectedProperty} onClickItem={this.props.onSelectProperty}/>
                 </div>
             </div>
         );

@@ -6,5 +6,5 @@ export default interface Property {
     readonly qualifiedName: string;
     readonly namespace: string;
     readonly accessibility: Accessibility;
-    readonly documentation: string;
+    readonly documentationContent: string;
 }
