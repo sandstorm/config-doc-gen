@@ -11,6 +11,7 @@ import Header from '../Header';
 import Sidebar from '../Sidebar';
 
 const mapStateToProps = (state: IApplicationState) => ({
+    namespaceProperties: selectors.Ui.ConfigDoc.makeFilteredPropertiesByNamespace()(state),
     selectedNamespace: selectors.Ui.ConfigDoc.selectedNamespace(state),
     selectedProperty:  selectors.Ui.ConfigDoc.selectedProperty(state),
 });

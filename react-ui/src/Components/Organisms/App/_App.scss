@@ -33,6 +33,12 @@
     grid-area: main;
 }
 
+.app--main-content--nothing-selected {
+    @include mainBox;
+    
+    height: 100%;
+}
+
 .app--main-content--inner {
     @include mainBox;
 
@@ -45,18 +51,8 @@
         "property";
 }
 
-.app--main-content--inner--no-namespace {
-    grid-area: namespace;
-
-}
-
 app--main-content--inner--namespace {
     grid-area: namespace;
-}
-
-.app--main-content--inner--no-property {
-    grid-area: property;
-
 }
 
 .app--main-content--inner--property {

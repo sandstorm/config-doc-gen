@@ -1,11 +1,11 @@
-import {ActionsUnion, createAction} from '@martin_hotell/rex-tils';
-import {createSelector} from 'reselect';
+import { ActionsUnion, createAction } from '@martin_hotell/rex-tils';
+import { createSelector } from 'reselect';
 
 
 
-import {IApplicationState} from '..';
-import {Accessibility} from "../../../Domain/Accessibility";
-import {uiItemFromNamespace, uiItemFromProperty} from "../../../Domain/Ui/UiItem";
+import { IApplicationState } from '..';
+import { Accessibility } from "../../../Domain/Accessibility";
+import { uiItemFromNamespace, uiItemFromProperty } from "../../../Domain/Ui/UiItem";
 import * as dataStore from "../Data";
 
 
@@ -61,8 +61,8 @@ export enum ActionTypes {
 }
 
 export const actions = {
-    changeSearchTerm: (searchTerm: string) => createAction(ActionTypes.CHANGE_SEARCH_TERM, {searchTerm}),
-    selectSidebarViewMode: (viewMode: UiSidebarViewMode) => createAction(ActionTypes.SELECT_SIDEBAR_VIEW_MODE, {viewMode}),
+    changeSearchTerm: (searchTerm: string) => createAction(ActionTypes.CHANGE_SEARCH_TERM, { searchTerm }),
+    selectSidebarViewMode: (viewMode: UiSidebarViewMode) => createAction(ActionTypes.SELECT_SIDEBAR_VIEW_MODE, { viewMode }),
 };
 
 type UiAction = ActionsUnion<typeof actions>;
@@ -75,15 +75,15 @@ export function reducer(state: IUiState = initialState, action: UiAction): IUiSt
     switch (action.type) {
         case ActionTypes.SELECT_SIDEBAR_VIEW_MODE:
             return {
-                ... state,
+                ...state,
                 sidebar: {
-                    ... sidebar,
+                    ...sidebar,
                     viewMode: action.payload.viewMode
                 }
             }
         case ActionTypes.CHANGE_SEARCH_TERM:
             return {
-                ... state,
+                ...state,
                 searchTerm: action.payload.searchTerm
             }
         default:
@@ -132,16 +132,25 @@ const filteredNamespacesSelector = createSelector(
     dataStore.selectors.ConfigDoc.namespaces,
     (searchTerm, allNamespaces) => allNamespaces.filter(namespace => {
         return filterName(namespace.name, searchTerm);
-    }).map(uiItemFromNamespace)
+    })
+);
+
+const filteredNamespaceUiItemsSelector = createSelector(
+    filteredNamespacesSelector,
+    (namespaces) => namespaces.map(uiItemFromNamespace)
 );
 
 const filteredPropertiesSelector = createSelector(
     searchTermSelector,
     dataStore.selectors.ConfigDoc.properties,
-    sidebarShowQualifiedNamesSelector,
-    (searchTerm, allProperties, showQualifiedNames) => allProperties.filter(property => {
+    (searchTerm, properties) => properties.filter(property => {
         return filterName(property.qualifiedName, searchTerm);
-    }).map(prop => uiItemFromProperty(prop, showQualifiedNames))
+    })
+);
+const filteredPropertyUiItemsSelector = createSelector(
+    filteredPropertiesSelector,
+    sidebarShowQualifiedNamesSelector,
+    (properties, showQualifiedNames) => properties.map(prop => uiItemFromProperty(prop, showQualifiedNames))
 );
 
 function findNamespaceFromRouterPath(routerPath: string) {
@@ -180,6 +189,15 @@ const selectedNamespaceSelector = createSelector(
         return namespaces.find(namespace => namespace.name === namespaceName);
     }
 );
+
+const makeFilteredPropertiesByNamespaceSelector = () => createSelector(
+    filteredPropertiesSelector,
+    selectedNamespaceSelector,
+    (properties, selectedNamespace) => properties
+        .filter(property => selectedNamespace == null || property.namespace === selectedNamespace!.name)
+        .map(prop => uiItemFromProperty(prop, false))
+);
+
 const selectedNamespaceUiItemSelector = createSelector(
     selectedNamespaceSelector,
     selectedNamespace => selectedNamespace ? uiItemFromNamespace(selectedNamespace) : null
@@ -198,13 +216,15 @@ const selectedPropertySelector = createSelector(
 );
 const selectedPropertyUiItemSelector = createSelector(
     selectedPropertySelector,
-    sidebarShowQualifiedNamesSelector,
-    (selectedProperty, showQualifiedNames) => selectedProperty ? uiItemFromProperty(selectedProperty, showQualifiedNames) : null
+    selectedProperty => selectedProperty ? uiItemFromProperty(selectedProperty, false) : null
 )
 
 export const selectors = {
+    filteredNamespaceUiItems: filteredNamespaceUiItemsSelector,
     filteredNamespaces: filteredNamespacesSelector,
     filteredProperties: filteredPropertiesSelector,
+    filteredPropertyUiItems: filteredPropertyUiItemsSelector,
+    makeFilteredPropertiesByNamespace: makeFilteredPropertiesByNamespaceSelector,
     searchTerm: searchTermSelector,
     selectedNamespace: selectedNamespaceSelector,
     selectedNamespaceUiItem: selectedNamespaceUiItemSelector,

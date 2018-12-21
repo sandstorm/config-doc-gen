@@ -71,6 +71,14 @@
 .app--main-content {
   grid-area: main; }
 
+.app--main-content--nothing-selected {
+  background-color: #293133;
+  color: white;
+  box-shadow: 4px 0 2px -2px #373f43;
+  height: 100%; }
+  .app--main-content--nothing-selected a {
+    color: white; }
+
 .app--main-content--inner {
   background-color: #293133;
   color: white;
@@ -83,14 +91,8 @@
   .app--main-content--inner a {
     color: white; }
 
-.app--main-content--inner--no-namespace {
-  grid-area: namespace; }
-
 app--main-content--inner--namespace {
   grid-area: namespace; }
-
-.app--main-content--inner--no-property {
-  grid-area: property; }
 
 .app--main-content--inner--property {
   grid-area: property; }

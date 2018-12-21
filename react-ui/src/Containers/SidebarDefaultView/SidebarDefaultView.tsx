@@ -11,8 +11,8 @@ import { IApplicationState } from '../../Redux/Store';
 import { UiItem } from 'src/Domain/Ui/UiItem';
 
 const mapStateToProps = (state: IApplicationState) => ({
-    namespaces: selectors.Ui.ConfigDoc.filteredNamespaces(state),
-    properties: selectors.Ui.ConfigDoc.filteredProperties(state),
+    namespaces: selectors.Ui.ConfigDoc.filteredNamespaceUiItems(state),
+    properties: selectors.Ui.ConfigDoc.filteredPropertyUiItems(state),
     selectedNamespace: selectors.Ui.ConfigDoc.selectedNamespaceUiItem(state),
     selectedProperty: selectors.Ui.ConfigDoc.selectedPropertyUiItem(state),
 });
