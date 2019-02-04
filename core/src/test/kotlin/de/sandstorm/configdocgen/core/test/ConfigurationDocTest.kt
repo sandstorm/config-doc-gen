@@ -33,7 +33,7 @@ open class ConfigurationDocTest(
         fun successfulCompilation() = Truth.assert_()
             .about(JavaSourcesSubjectFactory.javaSources())
             .that(sourceFileObjects.values)
-            //.withCompilerOptions("-Ade.sandstorm.configdocgen.settingsFile=${File("./src/test/resources/given/$sessionIdentifier/config-doc.yaml").toURI()}")
+            .withCompilerOptions("-Ade.sandstorm.configdocgen.settingsFile=${File("./src/test/resources/given/$sessionIdentifier/config-doc.yaml").toURI()}")
             .processedWith(processor)
             .compilesWithoutError()
             .let(::Warnings)
