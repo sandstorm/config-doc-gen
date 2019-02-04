@@ -1,0 +1,45 @@
+.namespace-doc {
+    display: grid;
+    grid-gap: 0;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 2fr;
+    grid-template-areas: 
+        "icon title"
+        "doc  doc";
+}
+
+.namespace-doc--icon {
+    grid-area: icon;
+    
+    padding-left: 10px;
+    padding-top: 10px;
+
+    font-size: 2.7rem;
+}
+
+.namespace-doc--title {
+    grid-area: title;
+
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.namespace-doc--title--name {
+    font-size: 1.5rem;
+}
+
+.namespace-doc--documentation {
+    grid-area: doc;
+
+    margin-top: 5px;
+    padding: 5px 10px 0 10px;
+
+    border-top: 1px dotted $color_primary;
+}
+
+.namespace-doc--documentation--html {
+    @include codeBlock;
+
+    margin: 10px 0;
+    padding: 10px;
+}

@@ -1,0 +1,36 @@
+@mixin mainBox {
+    @include mainColorScheme;
+    box-shadow: 4px 0 2px -2px $color_secondaryBackground;
+}
+
+@mixin mainColorScheme {
+    background-color: $color_background;
+    color: $color_primary;
+
+    a {
+        color: $color_primary;
+    }
+}
+
+@mixin codeBlock {
+    background-color: $color_secondaryBackground;
+    color: $color_primary;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+// for stories only
+.main-box {
+    @include mainBox;
+}
+
+.main-color-scheme {
+    @include mainColorScheme;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.half-width {
+    width: 50%;
+}

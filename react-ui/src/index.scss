@@ -1,0 +1,20 @@
+// Variables, Mixins, etc.
+@import "./Styles/Variables";
+@import "./Styles/Mixins";
+
+// Components
+@import "./Components/Atoms/UiItemView/UiItemView";
+@import "./Components/Molecules/SidebarItemList/SidebarItemList";
+@import "./Components/Organisms/App/App";
+@import "./Components/Organisms/AppHeader/AppHeader";
+@import "./Components/Organisms/AppSidebar/AppSidebar";
+@import "./Components/Organisms/AppSidebarDefaultView/AppSidebarDefaultView";
+@import "./Components/Organisms/NamespaceDoc/NamespaceDoc";
+@import "./Components/Organisms/PropertyDoc/PropertyDoc";
+
+html, body, div#root {
+    height: 98%;
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-color: $color_brand;
+}

@@ -10,6 +10,7 @@ import com.google.testing.compile.JavaSourcesSubjectFactory
 import de.sandstorm.configdocgen.core.AbstractConfigurationDocumentationProcessor
 import de.sandstorm.configdocgen.core.DEFAULT_OUTPUT_FILE_NAME
 import java.io.BufferedReader
+import java.io.File
 import java.io.IOException
 import java.io.InputStreamReader
 import java.util.stream.Collectors
@@ -18,52 +19,53 @@ import javax.tools.StandardLocation
 
 
 open class ConfigurationDocTest(
-        private val processor: AbstractConfigurationDocumentationProcessor
+    private val processor: AbstractConfigurationDocumentationProcessor
 ) {
 
     protected fun testSession(sessionIdentifier: String): TestSession = TestSession(sessionIdentifier)
 
     protected inner class TestSession(
-            private val sessionIdentifier: String
+        private val sessionIdentifier: String
     ) {
 
         private val sourceFileObjects: Map<String, JavaFileObject> = readAllSourceFiles(sessionIdentifier)
 
         fun successfulCompilation() = Truth.assert_()
-                .about(JavaSourcesSubjectFactory.javaSources())
-                .that(sourceFileObjects.values)
-                .processedWith(processor)
-                .compilesWithoutError()
-                .let(::Warnings)
+            .about(JavaSourcesSubjectFactory.javaSources())
+            .that(sourceFileObjects.values)
+            //.withCompilerOptions("-Ade.sandstorm.configdocgen.settingsFile=${File("./src/test/resources/given/$sessionIdentifier/config-doc.yaml").toURI()}")
+            .processedWith(processor)
+            .compilesWithoutError()
+            .let(::Warnings)
 
         inner class Warnings(
-                private var successfulCompilationClause: CompileTester.SuccessfulCompilationClause
+            private var successfulCompilationClause: CompileTester.SuccessfulCompilationClause
         ) {
 
             inner class SourceFile(
-                    private val sourceFile: JavaFileObject
+                private val sourceFile: JavaFileObject
             ) {
 
                 fun withNoDocWarning(element: String, line: Long, column: Long): TestSession.Warnings.SourceFile =
-                        withWarningInFile(AbstractConfigurationDocumentationProcessor.buildNoJavadocForElementWarningMessage(element), line, column)
+                    withWarningInFile(AbstractConfigurationDocumentationProcessor.buildNoJavadocForElementWarningMessage(element), line, column)
 
                 fun withUnsupportedMapKeyTypeWarning(keyType: String, element: String, line: Long, column: Long): TestSession.Warnings.SourceFile =
-                        withWarningInFile(AbstractConfigurationDocumentationProcessor.buildUnsupportedMapKeyTypeWarningMessage(keyType, element), line, column)
+                    withWarningInFile(AbstractConfigurationDocumentationProcessor.buildUnsupportedMapKeyTypeWarningMessage(keyType, element), line, column)
 
                 fun withUnsupportedMapValueTypeWarning(valueType: String, element: String, line: Long, column: Long): TestSession.Warnings.SourceFile =
-                        withWarningInFile(AbstractConfigurationDocumentationProcessor.buildUnsupportedMapValueTypeWarningMessage(valueType, element), line, column)
+                    withWarningInFile(AbstractConfigurationDocumentationProcessor.buildUnsupportedMapValueTypeWarningMessage(valueType, element), line, column)
 
                 fun withUnsupportedCollectionValueTypeWarning(keyType: String, element: String, line: Long, column: Long): TestSession.Warnings.SourceFile =
-                        withWarningInFile(AbstractConfigurationDocumentationProcessor.buildUnsupportedCollectionValueTypeWarningMessage(keyType, element), line, column)
+                    withWarningInFile(AbstractConfigurationDocumentationProcessor.buildUnsupportedCollectionValueTypeWarningMessage(keyType, element), line, column)
 
                 fun and() = this@Warnings
 
                 private fun withWarningInFile(warningMessage: String, line: Long, column: Long): SourceFile {
                     successfulCompilationClause = successfulCompilationClause.withWarningContaining(warningMessage)
-                            .`in`(sourceFile)
-                            .onLine(line)
-                            .atColumn(column)
-                            .and()
+                        .`in`(sourceFile)
+                        .onLine(line)
+                        .atColumn(column)
+                        .and()
                     return this
                 }
             }
@@ -82,33 +84,35 @@ open class ConfigurationDocTest(
             }
 
             fun totalCount(count: Int) = Content(
-                    successfulCompilationClause
-                            .withWarningCount(count)
+                successfulCompilationClause
+                    .withWarningCount(count)
             )
 
             fun noWarnings() = Content(
-                    successfulCompilationClause
-                            .withWarningCount(0)
+                successfulCompilationClause
+                    .withWarningCount(0)
             )
         }
 
         inner class Content(
-                private val withWarningCount: CompileTester.SuccessfulCompilationClause
+            private val withWarningCount: CompileTester.SuccessfulCompilationClause
         ) {
 
             fun assertOutput() {
                 withWarningCount.and()
-                        .generatesFileNamed(StandardLocation.CLASS_OUTPUT,
-                                "",
-                                DEFAULT_OUTPUT_FILE_NAME)
-                        .withContents(readTestTarget(sessionIdentifier))
+                    .generatesFileNamed(StandardLocation.CLASS_OUTPUT,
+                        "",
+                        DEFAULT_OUTPUT_FILE_NAME)
+                    .withContents(readTestTarget(sessionIdentifier))
             }
         }
     }
 
     companion object {
         private fun readAllSourceFiles(sessionIdentifier: String) = getResourceFiles("/given/$sessionIdentifier")
-                .associateBy({ it }, { JavaFileObjects.forResource("given/$sessionIdentifier/$it") })
+            .associateBy({ it }, {
+                JavaFileObjects.forResource("given/$sessionIdentifier/$it")
+            })
 
         private fun readTestTarget(sessionIdentifier: String): ByteSource {
             val url = ConfigurationDocTest::class.java.getResource("/expected/${sessionIdentifier}_doc.json")
@@ -121,7 +125,7 @@ open class ConfigurationDocTest(
 
         private fun getResourceFiles(path: String): List<String> = ConfigurationDocTest::class.java.getResourceAsStream(path).use { stream ->
             BufferedReader(InputStreamReader(stream)).use { reader ->
-                return reader.lines().collect(Collectors.toList())
+                return reader.lines().filter { it.endsWith(".java") }.collect(Collectors.toList())
             }
         }
 
