@@ -5,22 +5,72 @@ import de.sandstorm.configdocgen.core.model.ConfigurationNamespace
 import de.sandstorm.configdocgen.core.model.ConfigurationProperty
 import de.sandstorm.configdocgen.core.model.DocumentationContent
 import java.io.IOException
+import java.net.URL
 import javax.annotation.processing.AbstractProcessor
 import javax.lang.model.element.Element
 import javax.lang.model.element.ElementKind
 import javax.tools.Diagnostic
+import java.io.File
+import java.lang.IllegalStateException
+import java.nio.file.Files
+import java.nio.file.Paths
 
-abstract class AbstractConfigurationDocumentationProcessor(
-        private val writer: DocumentationModelWriter
-) : AbstractProcessor() {
+const val DEFAULT_SETTINGS_FILENAME = "config-doc.yaml"
+
+abstract class AbstractConfigurationDocumentationProcessor : AbstractProcessor() {
+
+    private val writer: DocumentationModelWriter
+    private val settings: ConfigDocSettings by lazy {
+        ConfigDocSettings.loadFromYaml(
+            getSettingsFileUrl().openStream()
+        )
+    }
 
     private var written: Boolean = false
     private val alreadyNoDocWarnedElements: MutableSet<Element> = mutableSetOf()
+
+
+    init {
+        writer = JsonDocumentationModelWriter()
+    }
+
+    override fun getSupportedOptions(): MutableSet<String> {
+        return mutableSetOf(
+            "de.sandstorm.configdocgen.settingsFile"
+        )
+    }
+
+    private fun getSettingsFileUrl(): URL {
+        val explicitSettingsFileLocation = processingEnv.options["de.sandstorm.configdocgen.settingsFile"]
+        return if (explicitSettingsFileLocation != null) {
+            URL(explicitSettingsFileLocation)
+        } else {
+            findSourcePathAutomatically()
+        }
+    }
+
+    private fun findSourcePathAutomatically(): URL {
+        try {
+            val generationForPath = processingEnv.filer.createSourceFile("PathFor" + javaClass.simpleName)
+            val writer = generationForPath.openWriter()
+            val sourcePath = Paths.get(File(generationForPath.toUri().path).parentFile.path, DEFAULT_SETTINGS_FILENAME)
+            if (!Files.exists(sourcePath)) {
+                processingEnv.messager.printMessage(Diagnostic.Kind.WARNING, "Could not read settings file: $sourcePath")
+            }
+            writer.close()
+            generationForPath.delete()
+            return sourcePath.toUri().toURL()
+        } catch (e: IOException) {
+            processingEnv.messager.printMessage(Diagnostic.Kind.WARNING, "Unable to determine source file path!")
+        }
+        throw IllegalStateException("Unable to determine source file path!")
+    }
 
     /**
      * Write the annotation processing result with the given writer strategy.
      */
     protected fun writeModel(builder: ConfigurationDocBuilder): Boolean {
+        println(settings.foo)
         val model = builder.build()
         if (model.isEmpty()) {
             if (!written) {
@@ -66,9 +116,9 @@ abstract class AbstractConfigurationDocumentationProcessor(
         // TODO mayme configure to throw a ERROR instead of a warning
         if (!alreadyNoDocWarnedElements.contains(element)) {
             processingEnv.messager.printMessage(
-                    Diagnostic.Kind.WARNING,
-                    buildNoJavadocWarningMessage(element),
-                    element
+                Diagnostic.Kind.WARNING,
+                buildNoJavadocWarningMessage(element),
+                element
             )
         }
         alreadyNoDocWarnedElements += element
@@ -102,6 +152,7 @@ abstract class AbstractConfigurationDocumentationProcessor(
                 else -> buildNoJavadocForElementWarningMessage(element.toString())
             }
         }
+
         fun buildNoJavadocForElementWarningMessage(element: String) = "No javadoc comment found on $element"
         fun buildNoJavadocForFieldWarningMessage(field: String, clazz: String) = buildNoJavadocForElementWarningMessage("field: $clazz#$field")
         fun buildNoJavadocForClassWarningMessage(clazz: String) = buildNoJavadocForElementWarningMessage("class: $clazz")

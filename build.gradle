@@ -5,9 +5,9 @@ buildscript {
 }
 
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.2.61"
-    id "org.jetbrains.kotlin.kapt" version "1.2.61"
-    id "org.jetbrains.kotlin.plugin.allopen" version "1.2.61"
+    id "org.jetbrains.kotlin.jvm" version "1.3.20"
+    id "org.jetbrains.kotlin.kapt" version "1.3.20"
+    id "org.jetbrains.kotlin.plugin.allopen" version "1.3.20"
     id "io.codearte.nexus-staging" version "0.12.0"
     id "com.github.johnrengelman.shadow" version "4.0.3"
 }
@@ -33,5 +33,18 @@ task springAptJar(type: Jar, dependsOn: clean) {
     from project(':core').sourceSets.main.output
     from project(':annotations').sourceSets.main.output
     from project(':processor-spring').sourceSets.main.output
+}
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 

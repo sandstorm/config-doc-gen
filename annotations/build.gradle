@@ -1,3 +1,4 @@
 project.description = "Configuration Documentation Generator - annotation module"
 
+apply from: '../base-kotlin.gradle'
 apply from: '../base-maven-artifact.gradle'
