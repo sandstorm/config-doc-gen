@@ -9,9 +9,12 @@ import {ConfigDoc} from "../../../Domain/ConfigDoc";
 //
 export interface IConfigDocState {
     readonly rawApiData: ConfigDoc;
+    readonly moduleName: string;
 }
 
 const initialState: IConfigDocState = {
+    // tslint:disable-next-line:no-string-literal
+    moduleName: window["CONFIG_DOC_MODULE_NAME"],
     // tslint:disable-next-line:no-string-literal
     rawApiData: {... window["CONFIG_DOC_JSON_DATA"]},
 };
@@ -46,8 +49,10 @@ export function reducer(state: IConfigDocState = initialState, action: Employees
 const rawDataSelector = (state: IApplicationState) => state.data.ConfigDoc.rawApiData;
 const propertiesSelector = createSelector(rawDataSelector, rawData => rawData.properties);
 const namespacesSelector = createSelector(rawDataSelector, rawData => rawData.namespaces);
+const moduleNameSelector = (state: IApplicationState) => state.data.ConfigDoc.moduleName;
 
 export const selectors = {
+    moduleName: moduleNameSelector,
     namespaces: namespacesSelector,
     properties: propertiesSelector,
 };

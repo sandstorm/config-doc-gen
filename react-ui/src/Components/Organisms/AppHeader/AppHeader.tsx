@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { UiItem } from "../../../Domain/Ui/UiItem";
+import {UiItem} from "../../../Domain/Ui/UiItem";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { appIcon } from '../../../icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {appIcon} from '../../../icons';
 import UiItemView from '../../Atoms/UiItemView';
 
 //
 // Props
 //
 interface IAppHeaderProps {
-    readonly configDocAppName: string;
+    readonly configDocModuleName: string;
     readonly searchTerm: string;
     readonly selectedNamespace: UiItem | null;
     readonly selectedProperty: UiItem | null;
@@ -20,7 +20,7 @@ interface IAppHeaderProps {
 }
 
 type DefaultProps = Readonly<Required<{
-    configDocAppName: string;
+    configDocModuleName: string;
     searchTerm: string;
     selectedNamespace: UiItem | null;
     selectedProperty: UiItem | null;
@@ -30,7 +30,7 @@ type DefaultProps = Readonly<Required<{
 }>>;
 
 const defaultProps: DefaultProps = {
-    configDocAppName: "app name",
+    configDocModuleName: "module name",
     searchTerm: "",
     selectedNamespace: null,
     selectedProperty: null,
@@ -50,13 +50,13 @@ export default class AppHeader extends React.PureComponent<IAppHeaderProps, any>
         const appIconClickedHandler = () => {this.props.onAppIconClicked()};
         const searchTermChangedHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
             this.props.onSearchTermChanged(event.currentTarget.value);
-        }
+        };
         return <header className="app-header">
             <div className="app-header--icon" onClick={appIconClickedHandler}>
                 <FontAwesomeIcon icon={appIcon} />
             </div>
             <div className="app-header--title">
-                Config Doc for: {this.props.configDocAppName}
+                Config Doc for: {this.props.configDocModuleName}
             </div>
             <div className="app-header--selected-item">
                 {this.props.selectedNamespace == null && this.props.selectedProperty == null ?
@@ -68,7 +68,7 @@ export default class AppHeader extends React.PureComponent<IAppHeaderProps, any>
                         }
                         {this.props.selectedProperty != null ?
                             <UiItemView item={this.props.selectedProperty} />
-                            : ''                            
+                            : ''
                         }
                     </div>
                 }

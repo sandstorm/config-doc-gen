@@ -36,7 +36,7 @@ class ReactUiDocumentationModelWriter(
 }
 
 data class TemplateModel(
-    val configDocAppName: String,
+    val configDocModuleName: String,
     val configDocJsonData: String,
     val reactUiJavascript: String,
     val reactUiStylesheet: String

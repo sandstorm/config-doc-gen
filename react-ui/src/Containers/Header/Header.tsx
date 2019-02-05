@@ -9,6 +9,7 @@ import AppHeader from "../../Components/Organisms/AppHeader/AppHeader";
 import { IApplicationState } from '../../Redux/Store';
 
 const mapStateToProps = (state: IApplicationState) => ({
+    configDocModuleName: selectors.Data.ConfigDoc.moduleName(state),
     searchTerm: selectors.Ui.ConfigDoc.searchTerm(state),
     selectedNamespace: selectors.Ui.ConfigDoc.selectedNamespaceUiItem(state),
     selectedProperty: selectors.Ui.ConfigDoc.selectedPropertyUiItem(state),
