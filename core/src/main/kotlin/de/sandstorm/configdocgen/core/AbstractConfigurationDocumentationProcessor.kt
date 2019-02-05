@@ -5,34 +5,33 @@ import de.sandstorm.configdocgen.core.model.ConfigurationNamespace
 import de.sandstorm.configdocgen.core.model.ConfigurationProperty
 import de.sandstorm.configdocgen.core.model.DocumentationContent
 import java.io.IOException
+import java.io.InputStream
 import java.net.URL
 import javax.annotation.processing.AbstractProcessor
 import javax.lang.model.element.Element
 import javax.lang.model.element.ElementKind
 import javax.tools.Diagnostic
-import java.io.File
-import java.lang.IllegalStateException
-import java.nio.file.Files
-import java.nio.file.Paths
+import javax.tools.StandardLocation
 
 const val DEFAULT_SETTINGS_FILENAME = "config-doc.yaml"
 
 abstract class AbstractConfigurationDocumentationProcessor : AbstractProcessor() {
 
-    private val writer: DocumentationModelWriter
+    private val writer: DocumentationModelWriter by lazy {
+        when (settings.writer.type) {
+            WriterType.JSON -> JsonDocumentationModelWriter()
+            WriterType.REACT_UI -> ReactUiDocumentationModelWriter()
+            WriterType.NONE -> NoOpsDocumentationModelWriter()
+        }
+    }
     private val settings: ConfigDocSettings by lazy {
         ConfigDocSettings.loadFromYaml(
-            getSettingsFileUrl().openStream()
+            getSettingsFile()
         )
     }
 
     private var written: Boolean = false
     private val alreadyNoDocWarnedElements: MutableSet<Element> = mutableSetOf()
-
-
-    init {
-        writer = JsonDocumentationModelWriter()
-    }
 
     override fun getSupportedOptions(): MutableSet<String> {
         return mutableSetOf(
@@ -40,37 +39,22 @@ abstract class AbstractConfigurationDocumentationProcessor : AbstractProcessor()
         )
     }
 
-    private fun getSettingsFileUrl(): URL {
+    private fun getSettingsFile(): InputStream {
         val explicitSettingsFileLocation = processingEnv.options["de.sandstorm.configdocgen.settingsFile"]
         return if (explicitSettingsFileLocation != null) {
-            URL(explicitSettingsFileLocation)
+            processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "Using explicit config doc settings file: $explicitSettingsFileLocation")
+            URL(explicitSettingsFileLocation).openStream()
         } else {
-            findSourcePathAutomatically()
+            processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "Auto-detecting config doc settings file ...")
+            // TODO this is not working with gradle!!!
+            processingEnv.filer.getResource(StandardLocation.SOURCE_PATH, "", DEFAULT_SETTINGS_FILENAME).openInputStream()
         }
-    }
-
-    private fun findSourcePathAutomatically(): URL {
-        try {
-            val generationForPath = processingEnv.filer.createSourceFile("PathFor" + javaClass.simpleName)
-            val writer = generationForPath.openWriter()
-            val sourcePath = Paths.get(File(generationForPath.toUri().path).parentFile.path, DEFAULT_SETTINGS_FILENAME)
-            if (!Files.exists(sourcePath)) {
-                processingEnv.messager.printMessage(Diagnostic.Kind.WARNING, "Could not read settings file: $sourcePath")
-            }
-            writer.close()
-            generationForPath.delete()
-            return sourcePath.toUri().toURL()
-        } catch (e: IOException) {
-            processingEnv.messager.printMessage(Diagnostic.Kind.WARNING, "Unable to determine source file path!")
-        }
-        throw IllegalStateException("Unable to determine source file path!")
     }
 
     /**
      * Write the annotation processing result with the given writer strategy.
      */
     protected fun writeModel(builder: ConfigurationDocBuilder): Boolean {
-        println(settings.foo)
         val model = builder.build()
         if (model.isEmpty()) {
             if (!written) {
@@ -80,7 +64,7 @@ abstract class AbstractConfigurationDocumentationProcessor : AbstractProcessor()
         }
         try {
             // write data with strategy
-            writer.write(model, processingEnv.filer)
+            writer.write(settings.moduleName, model, processingEnv.filer)
             written = true
         } catch (e: IOException) {
             processingEnv.messager.printMessage(Diagnostic.Kind.ERROR, "Failed writing output")
@@ -113,10 +97,9 @@ abstract class AbstractConfigurationDocumentationProcessor : AbstractProcessor()
     }
 
     private fun warnMissingDocumentation(element: Element) {
-        // TODO mayme configure to throw a ERROR instead of a warning
         if (!alreadyNoDocWarnedElements.contains(element)) {
             processingEnv.messager.printMessage(
-                Diagnostic.Kind.WARNING,
+                settings.processor.missingDocCommentDiagnostic,
                 buildNoJavadocWarningMessage(element),
                 element
             )

@@ -1,2 +1,6 @@
-foo: 'hallo welt!'
+moduleName: 'Unit Test Module'
+processor:
+  missingDocCommentDiagnostic: WARNING
+writer:
+  type: JSON
 

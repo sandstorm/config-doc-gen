@@ -10,7 +10,7 @@ const val DEFAULT_OUTPUT_FILE_NAME = "config-doc.json"
 class JsonDocumentationModelWriter(
         private val outputFileName: String = DEFAULT_OUTPUT_FILE_NAME
 ) : DocumentationModelWriter {
-    override fun write(model: ConfigurationDoc, filer: Filer): Unit = filer.createResource(
+    override fun write(moduleName: String, model: ConfigurationDoc, filer: Filer): Unit = filer.createResource(
             StandardLocation.CLASS_OUTPUT,
             "",
             outputFileName

@@ -5,5 +5,5 @@ import javax.annotation.processing.Filer
 
 @FunctionalInterface
 interface DocumentationModelWriter {
-    fun write(model: ConfigurationDoc, filer: Filer)
+    fun write(moduleName: String, model: ConfigurationDoc, filer: Filer)
 }

@@ -4,7 +4,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
     compile "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8"
-    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.8"
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.7"
 
     testCompile "org.junit.jupiter:junit-jupiter-api:$junitVersion"
     testCompile "org.junit.jupiter:junit-jupiter-params:$junitVersion"
