@@ -19,18 +19,24 @@ interface IAppProps {
     readonly namespaceProperties: ReadonlyArray<UiItem>;
     readonly selectedNamespace: Namespace | null;
     readonly selectedProperty: Property | null;
+    readonly processorVersion: string;
+    readonly uiVersion: string;
 }
 
 type DefaultProps = Readonly<Required<{
     namespaceProperties: ReadonlyArray<UiItem>;
     selectedNamespace: Namespace | null;
     selectedProperty: Property | null;
+    processorVersion: string;
+    uiVersion: string;
 }>>;
 
 const defaultProps: DefaultProps = {
     namespaceProperties: [],
+    processorVersion: "processor-version",
     selectedNamespace: null,
     selectedProperty: null,
+    uiVersion: "ui-version",
 };
 
 //
@@ -55,7 +61,15 @@ export default class App extends React.PureComponent<IAppProps, any> {
                     }
                 </div>
                 <div className="app--main-footer">
-                    <div className="app-footer">Footer: <a href="https://sandstorm.de/">Sandstorm</a></div>
+                    <div className="app-footer">
+                        <div className="footer--sponsor-link">
+                            Sponsored by: <a href="https://sandstorm.de/">Sandstorm</a>
+                        </div>
+                        <div className="footer--versions">
+                            <span>Processor Version: {this.props.processorVersion}</span>
+                            <span>UI Version: {this.props.uiVersion}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

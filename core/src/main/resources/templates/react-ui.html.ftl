@@ -7,7 +7,6 @@
     <title>Config Doc - ${configDocModuleName}</title>
     <script type="text/javascript">
         var CONFIG_DOC_JSON_DATA = ${configDocJsonData};
-        var CONFIG_DOC_MODULE_NAME = "${configDocModuleName}";
     </script>
     <style type="text/css">
         ${reactUiStylesheet}

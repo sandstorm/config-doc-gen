@@ -67,4 +67,15 @@ class SpringProcessorTest : ConfigurationDocTest(
                 .assertOutput()
     }
 
+    @Test
+    fun test_missingDocError_failsWithCompilerError() {
+        testSession("MissingDocError")
+            .compilationErrors()
+            .errors("MissingDocError.java")
+            .withNoDocError("class: testSource.MissingDocError", 6, 1)
+            .withNoDocError("field: testSource.MissingDocError#stringConfig", 7, 20)
+            .and()
+            .totalCount(2)
+    }
+
 }

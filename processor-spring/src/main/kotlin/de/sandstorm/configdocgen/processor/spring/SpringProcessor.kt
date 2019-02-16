@@ -23,10 +23,12 @@ import javax.tools.Diagnostic
     "de.sandstorm.configdocgen.annotations.ConfigApi",
     "org.springframework.boot.context.properties.ConfigurationProperties"
 )
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
 class SpringProcessor : AbstractConfigurationDocumentationProcessor() {
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment?): Boolean {
+        processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "Sandstorm ConfigDocGen (version: ${Version.get().version}) for Spring Boot 2.x")
+
         var configurationPropertiesClasses: Set<Element> = emptySet()
         for (annotation in annotations!!) {
             val annotatedElements = roundEnv!!.getElementsAnnotatedWith(annotation)
@@ -110,7 +112,6 @@ class SpringProcessor : AbstractConfigurationDocumentationProcessor() {
                             }
                         }
                     }
-                    // TODO list / set types
                     // Maps are considered as two nested namespaces.
                     // First, the field itself with the field documentation.
                     // Second, the key wildcard with the map value type class documentation.

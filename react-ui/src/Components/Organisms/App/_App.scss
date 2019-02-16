@@ -67,4 +67,32 @@ app--main-content--inner--namespace {
     @include mainBox;
 
     padding: 10px 5px;
+    display: grid;
+    grid-template-areas: 
+        "left"
+        "right"    
+}
+
+@media (min-width: 700px) {
+    .app-footer {
+        grid-template-columns: 1fr auto;
+        grid-template-areas: 
+            "left right"
+    }
+}
+
+.footer--sponsor-link {
+    grid-area: left;
+}
+.footer--versions {
+    grid-area: right;
+
+    font-size: 0.7em;
+    line-height: 1.6em;
+
+    span:nth-child(2) {
+        margin-left: 10px;
+        padding-left: 10px;
+        border-left: 1px dotted $color_primary;
+    }
 }

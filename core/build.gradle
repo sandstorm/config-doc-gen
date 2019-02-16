@@ -1,3 +1,6 @@
+import java.nio.file.Files
+import java.nio.file.Paths
+
 project.description = "Configuration Documentation Generator - core module"
 
 apply from: "../base-kotlin.gradle"
@@ -9,4 +12,13 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.freemarker/freemarker
     compile group: 'org.freemarker', name: 'freemarker', version: '2.3.28'
+}
+
+processResources.doFirst {
+    def versionFile = Paths.get(sourceSets.main.output.resourcesDir.getPath(), "de.sandstorm.configdocgen.core-VERSION.txt")
+    def parentDir = versionFile.getParent()
+    if (!Files.exists(parentDir)) {
+        Files.createDirectories(parentDir)
+    }
+    Files.writeString(versionFile, "Core: ${project.version.toString()}")
 }

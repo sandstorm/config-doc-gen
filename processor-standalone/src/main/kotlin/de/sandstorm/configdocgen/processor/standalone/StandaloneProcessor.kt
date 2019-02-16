@@ -20,7 +20,7 @@ import javax.lang.model.element.TypeElement
     "de.sandstorm.configdocgen.annotations.ConfigProperty",
     "de.sandstorm.configdocgen.annotations.ConfigApi"
 )
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
 class StandaloneProcessor : AbstractConfigurationDocumentationProcessor() {
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment?): Boolean {

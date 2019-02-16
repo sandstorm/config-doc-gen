@@ -1,80 +1,82 @@
 {
-  "namespaces": [
-    {
-      "name": "de.sandstorm.testSource.TestConfiguration",
-      "type": {
-        "typeName": "de.sandstorm.testSource.TestConfiguration",
-        "documentationContent": " This is a POJO configuration class. Used in unit tests...\n The class documentation should be used as source for\n the configuration namespace.\n"
-      },
-      "documentationContent": "[ROOT-NAMESPACE]"
-    }
-  ],
-  "properties": [
-    {
-      "namespace": "de.sandstorm.testSource.TestConfiguration",
-      "name": "configPropertyFromField",
-      "qualifiedName": "de.sandstorm.testSource.TestConfiguration.configPropertyFromField",
-      "documentationContent": " This property is field-annotated.\n The accessibility should be considered \"API\", since this property has a public getter.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "java.lang.String",
-        "required": false
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.TestConfiguration",
-      "name": "internalConfigPropertyFromField",
-      "qualifiedName": "de.sandstorm.testSource.TestConfiguration.internalConfigPropertyFromField",
-      "documentationContent": " This property is also field-annotated.\n The accessibility should be considered \"IMPLEMENTATION\", since this property has no public getter.\n",
-      "accessibility": "IMPLEMENTATION",
-      "type": {
-        "typeName": "java.lang.String",
-        "required": false
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.TestConfiguration",
-      "name": "getFooConfig",
-      "qualifiedName": "de.sandstorm.testSource.TestConfiguration.getFooConfig",
-      "documentationContent": " Foo configuration documentation ...\n\n @return returns a hardcoded string\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "java.lang.String",
-        "required": false
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.TestConfiguration",
-      "name": "propertyWithoutDocShouldProduceACompilerWarning",
-      "qualifiedName": "de.sandstorm.testSource.TestConfiguration.propertyWithoutDocShouldProduceACompilerWarning",
-      "documentationContent": "!!![NO-DOCUMENTATION]!!!",
-      "accessibility": "IMPLEMENTATION",
-      "type": {
-        "typeName": "java.lang.String",
-        "required": false
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.TestConfiguration",
-      "name": "getInternalConfigFromMethod",
-      "qualifiedName": "de.sandstorm.testSource.TestConfiguration.getInternalConfigFromMethod",
-      "documentationContent": " This config property should be considered \"IMPLEMENTATION\", since this method is not public.\n\n @return a hardcoded string\n",
-      "accessibility": "IMPLEMENTATION",
-      "type": {
-        "typeName": "java.lang.String",
-        "required": false
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.TestConfiguration",
-      "name": "getApiConfigFromAnnotatedMethod",
-      "qualifiedName": "de.sandstorm.testSource.TestConfiguration.getApiConfigFromAnnotatedMethod",
-      "documentationContent": " This config property should be considered \"API\", since it is explicitly annotated as @ConfigApi (even if this method is not public).\n\n @return some config value\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "java.lang.String",
-        "required": false
-      }
-    }
-  ]
+    "moduleName": "Unit Test Module",
+    "processorVersion": "replaced",
+    "namespaces": [
+        {
+            "name": "de.sandstorm.testSource.TestConfiguration",
+            "type": {
+                "typeName": "de.sandstorm.testSource.TestConfiguration",
+                "documentationContent": " This is a POJO configuration class. Used in unit tests...\n The class documentation should be used as source for\n the configuration namespace.\n"
+            },
+            "documentationContent": "[ROOT-NAMESPACE]"
+        }
+    ],
+    "properties": [
+        {
+            "namespace": "de.sandstorm.testSource.TestConfiguration",
+            "name": "configPropertyFromField",
+            "qualifiedName": "de.sandstorm.testSource.TestConfiguration.configPropertyFromField",
+            "documentationContent": " This property is field-annotated.\n The accessibility should be considered \"API\", since this property has a public getter.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "java.lang.String",
+                "required": false
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.TestConfiguration",
+            "name": "internalConfigPropertyFromField",
+            "qualifiedName": "de.sandstorm.testSource.TestConfiguration.internalConfigPropertyFromField",
+            "documentationContent": " This property is also field-annotated.\n The accessibility should be considered \"IMPLEMENTATION\", since this property has no public getter.\n",
+            "accessibility": "IMPLEMENTATION",
+            "type": {
+                "typeName": "java.lang.String",
+                "required": false
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.TestConfiguration",
+            "name": "getFooConfig",
+            "qualifiedName": "de.sandstorm.testSource.TestConfiguration.getFooConfig",
+            "documentationContent": " Foo configuration documentation ...\n\n @return returns a hardcoded string\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "java.lang.String",
+                "required": false
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.TestConfiguration",
+            "name": "propertyWithoutDocShouldProduceACompilerWarning",
+            "qualifiedName": "de.sandstorm.testSource.TestConfiguration.propertyWithoutDocShouldProduceACompilerWarning",
+            "documentationContent": "!!![NO-DOCUMENTATION]!!!",
+            "accessibility": "IMPLEMENTATION",
+            "type": {
+                "typeName": "java.lang.String",
+                "required": false
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.TestConfiguration",
+            "name": "getInternalConfigFromMethod",
+            "qualifiedName": "de.sandstorm.testSource.TestConfiguration.getInternalConfigFromMethod",
+            "documentationContent": " This config property should be considered \"IMPLEMENTATION\", since this method is not public.\n\n @return a hardcoded string\n",
+            "accessibility": "IMPLEMENTATION",
+            "type": {
+                "typeName": "java.lang.String",
+                "required": false
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.TestConfiguration",
+            "name": "getApiConfigFromAnnotatedMethod",
+            "qualifiedName": "de.sandstorm.testSource.TestConfiguration.getApiConfigFromAnnotatedMethod",
+            "documentationContent": " This config property should be considered \"API\", since it is explicitly annotated as @ConfigApi (even if this method is not public).\n\n @return some config value\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "java.lang.String",
+                "required": false
+            }
+        }
+    ]
 }

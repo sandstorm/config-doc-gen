@@ -104,9 +104,28 @@ app--main-content--inner--namespace {
   background-color: #293133;
   color: white;
   box-shadow: 4px 0 2px -2px #373f43;
-  padding: 10px 5px; }
+  padding: 10px 5px;
+  display: grid;
+  grid-template-areas: "left" "right"; }
   .app-footer a {
     color: white; }
+
+@media (min-width: 700px) {
+  .app-footer {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "left right"; } }
+
+.footer--sponsor-link {
+  grid-area: left; }
+
+.footer--versions {
+  grid-area: right;
+  font-size: 0.7em;
+  line-height: 1.6em; }
+  .footer--versions span:nth-child(2) {
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 1px dotted white; }
 
 .app-header {
   background-color: #293133;

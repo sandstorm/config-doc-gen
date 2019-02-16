@@ -1,5 +1,8 @@
 package de.sandstorm.configdocgen.core.test
 
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.MapperFeature
+import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.google.common.io.ByteSource
 import com.google.common.io.Resources
@@ -9,6 +12,8 @@ import com.google.testing.compile.JavaFileObjects
 import com.google.testing.compile.JavaSourcesSubjectFactory
 import de.sandstorm.configdocgen.core.AbstractConfigurationDocumentationProcessor
 import de.sandstorm.configdocgen.core.DEFAULT_OUTPUT_FILE_NAME
+import de.sandstorm.configdocgen.core.model.ConfigurationDoc
+import de.sandstorm.configdocgen.core.model.Version
 import java.io.BufferedReader
 import java.io.File
 import java.io.IOException
@@ -30,13 +35,60 @@ open class ConfigurationDocTest(
 
         private val sourceFileObjects: Map<String, JavaFileObject> = readAllSourceFiles(sessionIdentifier)
 
-        fun successfulCompilation() = Truth.assert_()
+        fun successfulCompilation() = compilation()
+            .compilesWithoutError()
+            .let(::Warnings)
+
+        fun compilationErrors() = compilation()
+            .failsToCompile()
+            .let(::Errors)
+
+        private fun compilation() = Truth.assert_()
             .about(JavaSourcesSubjectFactory.javaSources())
             .that(sourceFileObjects.values)
             .withCompilerOptions("-Ade.sandstorm.configdocgen.settingsFile=${File("./src/test/resources/given/$sessionIdentifier/config-doc.yaml").toURI()}")
             .processedWith(processor)
-            .compilesWithoutError()
-            .let(::Warnings)
+
+        inner class Errors(
+            private var unsuccessfulCompilationClause: CompileTester.UnsuccessfulCompilationClause
+        ) {
+            inner class SourceFile(
+                private val sourceFile: JavaFileObject
+            ) {
+
+                fun withNoDocError(element: String, line: Long, column: Long): TestSession.Errors.SourceFile =
+                    withErrorInFile(AbstractConfigurationDocumentationProcessor.buildNoJavadocForElementWarningMessage(element), line, column)
+
+                fun and() = this@Errors
+
+                private fun withErrorInFile(warningMessage: String, line: Long, column: Long): Errors.SourceFile {
+                    unsuccessfulCompilationClause = unsuccessfulCompilationClause.withErrorContaining(warningMessage)
+                        .`in`(sourceFile)
+                        .onLine(line)
+                        .atColumn(column)
+                        .and()
+                    return this
+                }
+            }
+
+            fun errors() = when {
+                sourceFileObjects.size == 1 -> SourceFile(sourceFileObjects.values.first())
+                sourceFileObjects.size > 1 -> throw UnsupportedOperationException("Multiple source files; specify explicitly via 'withWarningInFile'")
+                else -> throw UnsupportedOperationException("No source file given")
+            }
+
+            fun errors(sourceFile: String): Errors.SourceFile = sourceFileObjects[sourceFile].let {
+                when (it) {
+                    null -> throw UnsupportedOperationException("Source file $sourceFile not found")
+                    else -> SourceFile(it)
+                }
+            }
+
+            fun totalCount(count: Int) =
+                unsuccessfulCompilationClause
+                    .withErrorCount(count)
+
+        }
 
         inner class Warnings(
             private var successfulCompilationClause: CompileTester.SuccessfulCompilationClause
@@ -117,7 +169,14 @@ open class ConfigurationDocTest(
         private fun readTestTarget(sessionIdentifier: String): ByteSource {
             val url = ConfigurationDocTest::class.java.getResource("/expected/${sessionIdentifier}_doc.json")
             try {
-                return ByteSource.wrap(jacksonObjectMapper().writeValueAsBytes(jacksonObjectMapper().readTree(Resources.asByteSource(url).read())))
+                val mapper = jacksonObjectMapper()
+                val expectedModel = mapper.readValue(Resources.asByteSource(url).read(), ConfigurationDoc::class.java)
+                return ByteSource.wrap(mapper.writeValueAsBytes(ConfigurationDoc(
+                    moduleName = expectedModel.moduleName,
+                    processorVersion = Version.get(),
+                    namespaces = expectedModel.namespaces,
+                    properties = expectedModel.properties
+                )))
             } catch (ex: IOException) {
                 throw RuntimeException(ex)
             }

@@ -1,0 +1,6 @@
+moduleName: 'Unit Test Module'
+processor:
+  missingDocCommentDiagnostic: ERROR
+writer:
+  type: NONE
+

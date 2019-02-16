@@ -1,201 +1,203 @@
 {
-  "namespaces": [
-    {
-      "name": "de.sandstorm.testSource.primitives",
-      "type": {
-        "typeName": "testSource.Primitives",
-        "documentationContent": " This class contains all java primitives and there boxed types.\n A String is considered as a \"configuration primitive\".\n"
-      },
-      "documentationContent": "[ROOT-NAMESPACE]"
-    }
-  ],
-  "properties": [
-    {
-      "namespace": "de.sandstorm.testSource.primitives",
-      "name": "stringConfig",
-      "qualifiedName": "de.sandstorm.testSource.primitives.stringConfig",
-      "documentationContent": " This is a configuration of type {@link String}.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "java.lang.String",
-        "required": false
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.primitives",
-      "name": "intConfig",
-      "qualifiedName": "de.sandstorm.testSource.primitives.intConfig",
-      "documentationContent": " This is a primitive (int) config.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "int",
-        "required": true
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.primitives",
-      "name": "intObjectConfig",
-      "qualifiedName": "de.sandstorm.testSource.primitives.intObjectConfig",
-      "documentationContent": " This is a boxed primitive (java.lang.Integer) config.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "java.lang.Integer",
-        "required": false
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.primitives",
-      "name": "longConfig",
-      "qualifiedName": "de.sandstorm.testSource.primitives.longConfig",
-      "documentationContent": " This is a primitive (long) config.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "long",
-        "required": true
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.primitives",
-      "name": "longObjectConfig",
-      "qualifiedName": "de.sandstorm.testSource.primitives.longObjectConfig",
-      "documentationContent": " This is a boxed primitive (java.lang.Long) config.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "java.lang.Long",
-        "required": false
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.primitives",
-      "name": "floatConfig",
-      "qualifiedName": "de.sandstorm.testSource.primitives.floatConfig",
-      "documentationContent": " This is a primitive (float) config.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "float",
-        "required": true
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.primitives",
-      "name": "floatObjectConfig",
-      "qualifiedName": "de.sandstorm.testSource.primitives.floatObjectConfig",
-      "documentationContent": " This is a boxed primitive (java.lang.Float) config.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "java.lang.Float",
-        "required": false
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.primitives",
-      "name": "doubleConfig",
-      "qualifiedName": "de.sandstorm.testSource.primitives.doubleConfig",
-      "documentationContent": " This is a primitive (double) config.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "double",
-        "required": true
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.primitives",
-      "name": "doubleObjectConfig",
-      "qualifiedName": "de.sandstorm.testSource.primitives.doubleObjectConfig",
-      "documentationContent": " This is a boxed primitive (java.lang.Double) config.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "java.lang.Double",
-        "required": false
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.primitives",
-      "name": "shortConfig",
-      "qualifiedName": "de.sandstorm.testSource.primitives.shortConfig",
-      "documentationContent": " This is a primitive (short) config.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "short",
-        "required": true
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.primitives",
-      "name": "shortObjectConfig",
-      "qualifiedName": "de.sandstorm.testSource.primitives.shortObjectConfig",
-      "documentationContent": " This is a boxed primitive (java.lang.Short) config.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "java.lang.Short",
-        "required": false
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.primitives",
-      "name": "booleanConfig",
-      "qualifiedName": "de.sandstorm.testSource.primitives.booleanConfig",
-      "documentationContent": " This is a primitive (boolean) config.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "boolean",
-        "required": true
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.primitives",
-      "name": "booleanObjectConfig",
-      "qualifiedName": "de.sandstorm.testSource.primitives.booleanObjectConfig",
-      "documentationContent": " This is a boxed primitive (java.lang.Boolean) config.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "java.lang.Boolean",
-        "required": false
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.primitives",
-      "name": "byteConfig",
-      "qualifiedName": "de.sandstorm.testSource.primitives.byteConfig",
-      "documentationContent": " This is a primitive (byte) config.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "byte",
-        "required": true
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.primitives",
-      "name": "byteObjectConfig",
-      "qualifiedName": "de.sandstorm.testSource.primitives.byteObjectConfig",
-      "documentationContent": " This is a boxed primitive (java.lang.Boolean) config.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "java.lang.Byte",
-        "required": false
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.primitives",
-      "name": "charConfig",
-      "qualifiedName": "de.sandstorm.testSource.primitives.charConfig",
-      "documentationContent": " This is a primitive (char) config.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "char",
-        "required": true
-      }
-    },
-    {
-      "namespace": "de.sandstorm.testSource.primitives",
-      "name": "charObjectConfig",
-      "qualifiedName": "de.sandstorm.testSource.primitives.charObjectConfig",
-      "documentationContent": " This is a boxed primitive (java.lang.Character) config.\n",
-      "accessibility": "API",
-      "type": {
-        "typeName": "java.lang.Character",
-        "required": false
-      }
-    }
-  ]
+    "moduleName": "Unit Test Module",
+    "processorVersion": "replaced",
+    "namespaces": [
+        {
+            "name": "de.sandstorm.testSource.primitives",
+            "type": {
+                "typeName": "testSource.Primitives",
+                "documentationContent": " This class contains all java primitives and there boxed types.\n A String is considered as a \"configuration primitive\".\n"
+            },
+            "documentationContent": "[ROOT-NAMESPACE]"
+        }
+    ],
+    "properties": [
+        {
+            "namespace": "de.sandstorm.testSource.primitives",
+            "name": "stringConfig",
+            "qualifiedName": "de.sandstorm.testSource.primitives.stringConfig",
+            "documentationContent": " This is a configuration of type {@link String}.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "java.lang.String",
+                "required": false
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.primitives",
+            "name": "intConfig",
+            "qualifiedName": "de.sandstorm.testSource.primitives.intConfig",
+            "documentationContent": " This is a primitive (int) config.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "int",
+                "required": true
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.primitives",
+            "name": "intObjectConfig",
+            "qualifiedName": "de.sandstorm.testSource.primitives.intObjectConfig",
+            "documentationContent": " This is a boxed primitive (java.lang.Integer) config.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "java.lang.Integer",
+                "required": false
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.primitives",
+            "name": "longConfig",
+            "qualifiedName": "de.sandstorm.testSource.primitives.longConfig",
+            "documentationContent": " This is a primitive (long) config.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "long",
+                "required": true
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.primitives",
+            "name": "longObjectConfig",
+            "qualifiedName": "de.sandstorm.testSource.primitives.longObjectConfig",
+            "documentationContent": " This is a boxed primitive (java.lang.Long) config.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "java.lang.Long",
+                "required": false
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.primitives",
+            "name": "floatConfig",
+            "qualifiedName": "de.sandstorm.testSource.primitives.floatConfig",
+            "documentationContent": " This is a primitive (float) config.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "float",
+                "required": true
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.primitives",
+            "name": "floatObjectConfig",
+            "qualifiedName": "de.sandstorm.testSource.primitives.floatObjectConfig",
+            "documentationContent": " This is a boxed primitive (java.lang.Float) config.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "java.lang.Float",
+                "required": false
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.primitives",
+            "name": "doubleConfig",
+            "qualifiedName": "de.sandstorm.testSource.primitives.doubleConfig",
+            "documentationContent": " This is a primitive (double) config.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "double",
+                "required": true
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.primitives",
+            "name": "doubleObjectConfig",
+            "qualifiedName": "de.sandstorm.testSource.primitives.doubleObjectConfig",
+            "documentationContent": " This is a boxed primitive (java.lang.Double) config.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "java.lang.Double",
+                "required": false
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.primitives",
+            "name": "shortConfig",
+            "qualifiedName": "de.sandstorm.testSource.primitives.shortConfig",
+            "documentationContent": " This is a primitive (short) config.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "short",
+                "required": true
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.primitives",
+            "name": "shortObjectConfig",
+            "qualifiedName": "de.sandstorm.testSource.primitives.shortObjectConfig",
+            "documentationContent": " This is a boxed primitive (java.lang.Short) config.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "java.lang.Short",
+                "required": false
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.primitives",
+            "name": "booleanConfig",
+            "qualifiedName": "de.sandstorm.testSource.primitives.booleanConfig",
+            "documentationContent": " This is a primitive (boolean) config.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "boolean",
+                "required": true
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.primitives",
+            "name": "booleanObjectConfig",
+            "qualifiedName": "de.sandstorm.testSource.primitives.booleanObjectConfig",
+            "documentationContent": " This is a boxed primitive (java.lang.Boolean) config.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "java.lang.Boolean",
+                "required": false
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.primitives",
+            "name": "byteConfig",
+            "qualifiedName": "de.sandstorm.testSource.primitives.byteConfig",
+            "documentationContent": " This is a primitive (byte) config.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "byte",
+                "required": true
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.primitives",
+            "name": "byteObjectConfig",
+            "qualifiedName": "de.sandstorm.testSource.primitives.byteObjectConfig",
+            "documentationContent": " This is a boxed primitive (java.lang.Boolean) config.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "java.lang.Byte",
+                "required": false
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.primitives",
+            "name": "charConfig",
+            "qualifiedName": "de.sandstorm.testSource.primitives.charConfig",
+            "documentationContent": " This is a primitive (char) config.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "char",
+                "required": true
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.primitives",
+            "name": "charObjectConfig",
+            "qualifiedName": "de.sandstorm.testSource.primitives.charObjectConfig",
+            "documentationContent": " This is a boxed primitive (java.lang.Character) config.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "java.lang.Character",
+                "required": false
+            }
+        }
+    ]
 }

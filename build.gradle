@@ -19,6 +19,9 @@ repositories {
 }
 
 subprojects {
+    sourceCompatibility = 11
+    targetCompatibility = 11
+
     repositories {
         mavenLocal()
         mavenCentral()
@@ -26,6 +29,10 @@ subprojects {
     }
 
     apply from: "../base-kotlin.gradle"
+
+    compileJava {
+        options.compilerArgs += ["--release", "11"]
+    }
 }
 
 task springAptJar(type: Jar, dependsOn: clean) {

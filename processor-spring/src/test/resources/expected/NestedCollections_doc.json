@@ -1,221 +1,223 @@
 {
-  "namespaces": [
-    {
-      "name": "de.sandstorm.testSource.nestedCollections",
-      "type": {
-        "typeName": "testSource.NestedCollections",
-        "documentationContent": " Test for nested list/set types.\n"
-      },
-      "documentationContent": "[ROOT-NAMESPACE]"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.collectionProp",
-      "type": {
-        "typeName": "java.util.Collection<java.lang.String>",
-        "documentationContent": "[COLLECTION]: java.util.Collection<java.lang.String>"
-      },
-      "documentationContent": " Collection example.\n"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.collectionProp.<INDEX>",
-      "type": {
-        "typeName": "java.lang.String",
-        "documentationContent": "[PRIMITIVE]: java.lang.String"
-      },
-      "documentationContent": "[COLLECTION-INDEX]"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.setProp",
-      "type": {
-        "typeName": "java.util.Set<java.lang.String>",
-        "documentationContent": "[COLLECTION]: java.util.Set<java.lang.String>"
-      },
-      "documentationContent": " Set example.\n"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.setProp.<INDEX>",
-      "type": {
-        "typeName": "java.lang.String",
-        "documentationContent": "[PRIMITIVE]: java.lang.String"
-      },
-      "documentationContent": "[COLLECTION-INDEX]"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.listProp",
-      "type": {
-        "typeName": "java.util.List<java.lang.String>",
-        "documentationContent": "[COLLECTION]: java.util.List<java.lang.String>"
-      },
-      "documentationContent": " List example.\n"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.listProp.<INDEX>",
-      "type": {
-        "typeName": "java.lang.String",
-        "documentationContent": "[PRIMITIVE]: java.lang.String"
-      },
-      "documentationContent": "[COLLECTION-INDEX]"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.boolProp",
-      "type": {
-        "typeName": "java.util.List<java.lang.Boolean>",
-        "documentationContent": "[COLLECTION]: java.util.List<java.lang.Boolean>"
-      },
-      "documentationContent": " Boolean primitive list.\n"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.boolProp.<INDEX>",
-      "type": {
-        "typeName": "java.lang.Boolean",
-        "documentationContent": "[PRIMITIVE]: java.lang.Boolean"
-      },
-      "documentationContent": "[COLLECTION-INDEX]"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.charProp",
-      "type": {
-        "typeName": "java.util.List<java.lang.Character>",
-        "documentationContent": "[COLLECTION]: java.util.List<java.lang.Character>"
-      },
-      "documentationContent": " Character primitive list.\n"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.charProp.<INDEX>",
-      "type": {
-        "typeName": "java.lang.Character",
-        "documentationContent": "[PRIMITIVE]: java.lang.Character"
-      },
-      "documentationContent": "[COLLECTION-INDEX]"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.byteProp",
-      "type": {
-        "typeName": "java.util.List<java.lang.Byte>",
-        "documentationContent": "[COLLECTION]: java.util.List<java.lang.Byte>"
-      },
-      "documentationContent": " Byte primitive list.\n"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.byteProp.<INDEX>",
-      "type": {
-        "typeName": "java.lang.Byte",
-        "documentationContent": "[PRIMITIVE]: java.lang.Byte"
-      },
-      "documentationContent": "[COLLECTION-INDEX]"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.shortProp",
-      "type": {
-        "typeName": "java.util.List<java.lang.Short>",
-        "documentationContent": "[COLLECTION]: java.util.List<java.lang.Short>"
-      },
-      "documentationContent": " Short primitive list.\n"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.shortProp.<INDEX>",
-      "type": {
-        "typeName": "java.lang.Short",
-        "documentationContent": "[PRIMITIVE]: java.lang.Short"
-      },
-      "documentationContent": "[COLLECTION-INDEX]"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.intProp",
-      "type": {
-        "typeName": "java.util.List<java.lang.Integer>",
-        "documentationContent": "[COLLECTION]: java.util.List<java.lang.Integer>"
-      },
-      "documentationContent": " Integer primitive list.\n"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.intProp.<INDEX>",
-      "type": {
-        "typeName": "java.lang.Integer",
-        "documentationContent": "[PRIMITIVE]: java.lang.Integer"
-      },
-      "documentationContent": "[COLLECTION-INDEX]"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.longProp",
-      "type": {
-        "typeName": "java.util.List<java.lang.Long>",
-        "documentationContent": "[COLLECTION]: java.util.List<java.lang.Long>"
-      },
-      "documentationContent": " Long primitive list.\n"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.longProp.<INDEX>",
-      "type": {
-        "typeName": "java.lang.Long",
-        "documentationContent": "[PRIMITIVE]: java.lang.Long"
-      },
-      "documentationContent": "[COLLECTION-INDEX]"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.floatProp",
-      "type": {
-        "typeName": "java.util.List<java.lang.Float>",
-        "documentationContent": "[COLLECTION]: java.util.List<java.lang.Float>"
-      },
-      "documentationContent": " Float primitive list.\n"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.floatProp.<INDEX>",
-      "type": {
-        "typeName": "java.lang.Float",
-        "documentationContent": "[PRIMITIVE]: java.lang.Float"
-      },
-      "documentationContent": "[COLLECTION-INDEX]"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.doubleProp",
-      "type": {
-        "typeName": "java.util.List<java.lang.Double>",
-        "documentationContent": "[COLLECTION]: java.util.List<java.lang.Double>"
-      },
-      "documentationContent": " Double primitive list.\n"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.doubleProp.<INDEX>",
-      "type": {
-        "typeName": "java.lang.Double",
-        "documentationContent": "[PRIMITIVE]: java.lang.Double"
-      },
-      "documentationContent": "[COLLECTION-INDEX]"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.pojoProp",
-      "type": {
-        "typeName": "java.util.List<testSource.NestedCollections.InnerPojo>",
-        "documentationContent": "[COLLECTION]: java.util.List<testSource.NestedCollections.InnerPojo>"
-      },
-      "documentationContent": " Nested POJO list.\n"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.pojoProp.<INDEX>",
-      "type": {
-        "typeName": "testSource.NestedCollections.InnerPojo",
-        "documentationContent": " Inner POJO class.\n"
-      },
-      "documentationContent": "[COLLECTION-INDEX]"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.pojoProp.<INDEX>.nestedStringProp",
-      "type": {
-        "typeName": "java.util.List<java.lang.String>",
-        "documentationContent": "[COLLECTION]: java.util.List<java.lang.String>"
-      },
-      "documentationContent": " Nested String list.\n"
-    },
-    {
-      "name": "de.sandstorm.testSource.nestedCollections.pojoProp.<INDEX>.nestedStringProp.<INDEX>",
-      "type": {
-        "typeName": "java.lang.String",
-        "documentationContent": "[PRIMITIVE]: java.lang.String"
-      },
-      "documentationContent": "[COLLECTION-INDEX]"
-    }
-  ],
-  "properties": []
+    "moduleName": "Unit Test Module",
+    "processorVersion": "replaced",
+    "namespaces": [
+        {
+            "name": "de.sandstorm.testSource.nestedCollections",
+            "type": {
+                "typeName": "testSource.NestedCollections",
+                "documentationContent": " Test for nested list/set types.\n"
+            },
+            "documentationContent": "[ROOT-NAMESPACE]"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.collectionProp",
+            "type": {
+                "typeName": "java.util.Collection<java.lang.String>",
+                "documentationContent": "[COLLECTION]: java.util.Collection<java.lang.String>"
+            },
+            "documentationContent": " Collection example.\n"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.collectionProp.<INDEX>",
+            "type": {
+                "typeName": "java.lang.String",
+                "documentationContent": "[PRIMITIVE]: java.lang.String"
+            },
+            "documentationContent": "[COLLECTION-INDEX]"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.setProp",
+            "type": {
+                "typeName": "java.util.Set<java.lang.String>",
+                "documentationContent": "[COLLECTION]: java.util.Set<java.lang.String>"
+            },
+            "documentationContent": " Set example.\n"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.setProp.<INDEX>",
+            "type": {
+                "typeName": "java.lang.String",
+                "documentationContent": "[PRIMITIVE]: java.lang.String"
+            },
+            "documentationContent": "[COLLECTION-INDEX]"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.listProp",
+            "type": {
+                "typeName": "java.util.List<java.lang.String>",
+                "documentationContent": "[COLLECTION]: java.util.List<java.lang.String>"
+            },
+            "documentationContent": " List example.\n"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.listProp.<INDEX>",
+            "type": {
+                "typeName": "java.lang.String",
+                "documentationContent": "[PRIMITIVE]: java.lang.String"
+            },
+            "documentationContent": "[COLLECTION-INDEX]"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.boolProp",
+            "type": {
+                "typeName": "java.util.List<java.lang.Boolean>",
+                "documentationContent": "[COLLECTION]: java.util.List<java.lang.Boolean>"
+            },
+            "documentationContent": " Boolean primitive list.\n"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.boolProp.<INDEX>",
+            "type": {
+                "typeName": "java.lang.Boolean",
+                "documentationContent": "[PRIMITIVE]: java.lang.Boolean"
+            },
+            "documentationContent": "[COLLECTION-INDEX]"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.charProp",
+            "type": {
+                "typeName": "java.util.List<java.lang.Character>",
+                "documentationContent": "[COLLECTION]: java.util.List<java.lang.Character>"
+            },
+            "documentationContent": " Character primitive list.\n"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.charProp.<INDEX>",
+            "type": {
+                "typeName": "java.lang.Character",
+                "documentationContent": "[PRIMITIVE]: java.lang.Character"
+            },
+            "documentationContent": "[COLLECTION-INDEX]"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.byteProp",
+            "type": {
+                "typeName": "java.util.List<java.lang.Byte>",
+                "documentationContent": "[COLLECTION]: java.util.List<java.lang.Byte>"
+            },
+            "documentationContent": " Byte primitive list.\n"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.byteProp.<INDEX>",
+            "type": {
+                "typeName": "java.lang.Byte",
+                "documentationContent": "[PRIMITIVE]: java.lang.Byte"
+            },
+            "documentationContent": "[COLLECTION-INDEX]"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.shortProp",
+            "type": {
+                "typeName": "java.util.List<java.lang.Short>",
+                "documentationContent": "[COLLECTION]: java.util.List<java.lang.Short>"
+            },
+            "documentationContent": " Short primitive list.\n"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.shortProp.<INDEX>",
+            "type": {
+                "typeName": "java.lang.Short",
+                "documentationContent": "[PRIMITIVE]: java.lang.Short"
+            },
+            "documentationContent": "[COLLECTION-INDEX]"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.intProp",
+            "type": {
+                "typeName": "java.util.List<java.lang.Integer>",
+                "documentationContent": "[COLLECTION]: java.util.List<java.lang.Integer>"
+            },
+            "documentationContent": " Integer primitive list.\n"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.intProp.<INDEX>",
+            "type": {
+                "typeName": "java.lang.Integer",
+                "documentationContent": "[PRIMITIVE]: java.lang.Integer"
+            },
+            "documentationContent": "[COLLECTION-INDEX]"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.longProp",
+            "type": {
+                "typeName": "java.util.List<java.lang.Long>",
+                "documentationContent": "[COLLECTION]: java.util.List<java.lang.Long>"
+            },
+            "documentationContent": " Long primitive list.\n"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.longProp.<INDEX>",
+            "type": {
+                "typeName": "java.lang.Long",
+                "documentationContent": "[PRIMITIVE]: java.lang.Long"
+            },
+            "documentationContent": "[COLLECTION-INDEX]"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.floatProp",
+            "type": {
+                "typeName": "java.util.List<java.lang.Float>",
+                "documentationContent": "[COLLECTION]: java.util.List<java.lang.Float>"
+            },
+            "documentationContent": " Float primitive list.\n"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.floatProp.<INDEX>",
+            "type": {
+                "typeName": "java.lang.Float",
+                "documentationContent": "[PRIMITIVE]: java.lang.Float"
+            },
+            "documentationContent": "[COLLECTION-INDEX]"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.doubleProp",
+            "type": {
+                "typeName": "java.util.List<java.lang.Double>",
+                "documentationContent": "[COLLECTION]: java.util.List<java.lang.Double>"
+            },
+            "documentationContent": " Double primitive list.\n"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.doubleProp.<INDEX>",
+            "type": {
+                "typeName": "java.lang.Double",
+                "documentationContent": "[PRIMITIVE]: java.lang.Double"
+            },
+            "documentationContent": "[COLLECTION-INDEX]"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.pojoProp",
+            "type": {
+                "typeName": "java.util.List<testSource.NestedCollections.InnerPojo>",
+                "documentationContent": "[COLLECTION]: java.util.List<testSource.NestedCollections.InnerPojo>"
+            },
+            "documentationContent": " Nested POJO list.\n"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.pojoProp.<INDEX>",
+            "type": {
+                "typeName": "testSource.NestedCollections.InnerPojo",
+                "documentationContent": " Inner POJO class.\n"
+            },
+            "documentationContent": "[COLLECTION-INDEX]"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.pojoProp.<INDEX>.nestedStringProp",
+            "type": {
+                "typeName": "java.util.List<java.lang.String>",
+                "documentationContent": "[COLLECTION]: java.util.List<java.lang.String>"
+            },
+            "documentationContent": " Nested String list.\n"
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedCollections.pojoProp.<INDEX>.nestedStringProp.<INDEX>",
+            "type": {
+                "typeName": "java.lang.String",
+                "documentationContent": "[PRIMITIVE]: java.lang.String"
+            },
+            "documentationContent": "[COLLECTION-INDEX]"
+        }
+    ],
+    "properties": []
 }

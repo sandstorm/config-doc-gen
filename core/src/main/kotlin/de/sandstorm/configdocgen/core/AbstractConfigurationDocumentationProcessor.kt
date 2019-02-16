@@ -1,9 +1,6 @@
 package de.sandstorm.configdocgen.core
 
-import de.sandstorm.configdocgen.core.model.ConfigurationDoc
-import de.sandstorm.configdocgen.core.model.ConfigurationNamespace
-import de.sandstorm.configdocgen.core.model.ConfigurationProperty
-import de.sandstorm.configdocgen.core.model.DocumentationContent
+import de.sandstorm.configdocgen.core.model.*
 import java.io.IOException
 import java.io.InputStream
 import java.net.URL
@@ -64,7 +61,7 @@ abstract class AbstractConfigurationDocumentationProcessor : AbstractProcessor()
         }
         try {
             // write data with strategy
-            writer.write(settings.moduleName, model, processingEnv.filer)
+            writer.write(model, processingEnv.filer)
             written = true
         } catch (e: IOException) {
             processingEnv.messager.printMessage(Diagnostic.Kind.ERROR, "Failed writing output")
@@ -123,7 +120,7 @@ abstract class AbstractConfigurationDocumentationProcessor : AbstractProcessor()
         }
 
         fun build(): ConfigurationDoc {
-            return ConfigurationDoc(namespaces.toList(), properties.toList())
+            return ConfigurationDoc(settings.moduleName, Version.get(), namespaces.toList(), properties.toList())
         }
     }
 
