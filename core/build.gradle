@@ -14,7 +14,7 @@ dependencies {
     compile group: 'org.freemarker', name: 'freemarker', version: '2.3.28'
 }
 
-processResources.doFirst {
+classes.doFirst {
     def versionFile = Paths.get(sourceSets.main.output.resourcesDir.getPath(), "de.sandstorm.configdocgen.core-VERSION.txt")
     def parentDir = versionFile.getParent()
     if (!Files.exists(parentDir)) {

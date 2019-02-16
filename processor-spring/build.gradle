@@ -15,7 +15,7 @@ dependencies {
     testCompileOnly project(':core').sourceSets.test.output
 }
 
-processResources.doFirst {
+classes.doFirst {
     def versionFile = Paths.get(sourceSets.main.output.resourcesDir.getPath(), "de.sandstorm.configdocgen.processor-VERSION.txt")
     def parentDir = versionFile.getParent()
     if (!Files.exists(parentDir)) {
