@@ -9,6 +9,10 @@ dependencies {
     testCompile project(':core').sourceSets.test.output
 }
 
+test {
+    classpath += project(':core').sourceSets.test.output
+}
+
 classes.doFirst {
     writeVersionFile("de.sandstorm.configdocgen.processor", "Standalone Processor")
 }

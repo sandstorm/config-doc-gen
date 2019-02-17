@@ -12,6 +12,10 @@ dependencies {
     testCompileOnly project(':core').sourceSets.test.output
 }
 
+test {
+    classpath += project(':core').sourceSets.test.output
+}
+
 classes.doFirst {
     writeVersionFile("de.sandstorm.configdocgen.processor", "Spring (2.1) Processor")
 }
