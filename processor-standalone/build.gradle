@@ -1,6 +1,3 @@
-import java.nio.file.Files
-import java.nio.file.Paths
-
 project.description = "Configuration Documentation Generator - standalone processor module"
 
 apply from: "../base-kotlin.gradle"
@@ -13,10 +10,5 @@ dependencies {
 }
 
 classes.doFirst {
-    def versionFile = Paths.get(sourceSets.main.output.resourcesDir.getPath(), "de.sandstorm.configdocgen.processor-VERSION.txt")
-    def parentDir = versionFile.getParent()
-    if (!Files.exists(parentDir)) {
-        Files.createDirectories(parentDir)
-    }
-    Files.writeString(versionFile, "${project.version.toString()} (Standalone Version)")
+    writeVersionFile("de.sandstorm.configdocgen.processor", "Standalone Processor")
 }

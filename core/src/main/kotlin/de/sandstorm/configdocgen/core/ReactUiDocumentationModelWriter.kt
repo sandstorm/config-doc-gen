@@ -2,41 +2,32 @@ package de.sandstorm.configdocgen.core
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import de.sandstorm.configdocgen.core.model.ConfigurationDoc
-import de.sandstorm.configdocgen.core.model.Version
 import freemarker.template.Configuration
 import freemarker.template.Template
-import javax.annotation.processing.Filer
-import javax.tools.StandardLocation
-
-const val DEFAULT_REACT_UI_INDEX_FILE_NAME = "config-doc-react-ui.html"
+import java.io.OutputStream
 
 class ReactUiDocumentationModelWriter(
-    private val outputFileName: String = DEFAULT_REACT_UI_INDEX_FILE_NAME
+    val javascript: String = readResourceFile("/react-ui-compiled/main.js"),
+    val stylesheet: String = readResourceFile("/react-ui-compiled/main.css")
 ) : DocumentationModelWriter {
-    override fun write(model: ConfigurationDoc, filer: Filer) {
+    override fun write(model: ConfigurationDoc, outputStream: OutputStream) {
         val freemarkerConfiguration = Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS)
         freemarkerConfiguration.setClassForTemplateLoading(javaClass, "/")
         val template: Template = freemarkerConfiguration.getTemplate("/templates/react-ui.html.ftl")
         val templateModel = TemplateModel(
             jacksonObjectMapper().writeValueAsString(model),
-            readResourceFile("/react-ui-compiled/main.js"),
-            readResourceFile("/react-ui-compiled/main.css")
+            javascript,
+            stylesheet
         )
-        filer.createResource(
-            StandardLocation.CLASS_OUTPUT,
-            "",
-            outputFileName
-        ).openOutputStream().bufferedWriter().use { out ->
+        outputStream.bufferedWriter().use { out ->
             template.process(templateModel, out)
         }
     }
 
-    private fun readableProcessorType() {
-
+    companion object {
+        private fun readResourceFile(path: String) =
+            ReactUiDocumentationModelWriter::class.java.getResourceAsStream(path).bufferedReader().use { it.readText() }
     }
-
-    private fun readResourceFile(path: String) =
-        ReactUiDocumentationModelWriter::class.java.getResourceAsStream(path).bufferedReader().use { it.readText() }
 }
 
 data class TemplateModel(

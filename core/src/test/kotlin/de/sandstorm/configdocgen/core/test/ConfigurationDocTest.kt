@@ -11,7 +11,6 @@ import com.google.testing.compile.CompileTester
 import com.google.testing.compile.JavaFileObjects
 import com.google.testing.compile.JavaSourcesSubjectFactory
 import de.sandstorm.configdocgen.core.AbstractConfigurationDocumentationProcessor
-import de.sandstorm.configdocgen.core.DEFAULT_OUTPUT_FILE_NAME
 import de.sandstorm.configdocgen.core.model.ConfigurationDoc
 import de.sandstorm.configdocgen.core.model.Version
 import java.io.BufferedReader
@@ -150,11 +149,12 @@ open class ConfigurationDocTest(
             private val withWarningCount: CompileTester.SuccessfulCompilationClause
         ) {
 
-            fun assertOutput() {
+            fun assertOutput(fileName: String) {
                 withWarningCount.and()
                     .generatesFileNamed(StandardLocation.CLASS_OUTPUT,
                         "",
-                        DEFAULT_OUTPUT_FILE_NAME)
+                        fileName
+                        )
                     .withContents(readTestTarget(sessionIdentifier))
             }
         }

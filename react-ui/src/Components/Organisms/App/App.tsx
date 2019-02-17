@@ -19,24 +19,21 @@ interface IAppProps {
     readonly namespaceProperties: ReadonlyArray<UiItem>;
     readonly selectedNamespace: Namespace | null;
     readonly selectedProperty: Property | null;
-    readonly processorVersion: string;
-    readonly uiVersion: string;
+    readonly versions: ReadonlyArray<string>;
 }
 
 type DefaultProps = Readonly<Required<{
     namespaceProperties: ReadonlyArray<UiItem>;
     selectedNamespace: Namespace | null;
     selectedProperty: Property | null;
-    processorVersion: string;
-    uiVersion: string;
+    versions: ReadonlyArray<string>;
 }>>;
 
 const defaultProps: DefaultProps = {
     namespaceProperties: [],
-    processorVersion: "processor-version",
     selectedNamespace: null,
     selectedProperty: null,
-    uiVersion: "ui-version",
+    versions: ["processor-version", "core-version", "annotations-version", "ui-version"],
 };
 
 //
@@ -66,8 +63,9 @@ export default class App extends React.PureComponent<IAppProps, any> {
                             Sponsored by: <a href="https://sandstorm.de/">Sandstorm</a>
                         </div>
                         <div className="footer--versions">
-                            <span>Processor Version: {this.props.processorVersion}</span>
-                            <span>UI Version: {this.props.uiVersion}</span>
+                            {this.props.versions.map((version, index) =>
+                                (<span key={"version-" + index}>{version}</span>)
+                            )}
                         </div>
                     </div>
                 </div>

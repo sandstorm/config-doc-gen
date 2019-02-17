@@ -90,9 +90,13 @@ app--main-content--inner--namespace {
     font-size: 0.7em;
     line-height: 1.6em;
 
-    span:nth-child(2) {
+    span {
         margin-left: 10px;
         padding-left: 10px;
         border-left: 1px dotted $color_primary;
+    }
+
+    span:nth-child(1) {
+        border-left: none;
     }
 }

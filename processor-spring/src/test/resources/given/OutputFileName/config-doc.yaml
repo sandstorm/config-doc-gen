@@ -1,0 +1,7 @@
+moduleName: 'Unit Test Module'
+processor:
+  missingDocCommentDiagnostic: WARNING
+writer:
+  type: JSON
+  outputFileName: "test-output.json"
+

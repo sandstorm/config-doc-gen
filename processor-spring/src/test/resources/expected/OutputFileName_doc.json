@@ -1,0 +1,27 @@
+{
+    "moduleName": "Unit Test Module",
+    "processorVersion": "replaced",
+    "namespaces": [
+        {
+            "name": "de.sandstorm.testSource.outputFileName",
+            "type": {
+                "typeName": "testSource.OutputFileName",
+                "documentationContent": " This class contains one property. The output file name is configured via config-doc.yaml.\n"
+            },
+            "documentationContent": "[ROOT-NAMESPACE]"
+        }
+    ],
+    "properties": [
+        {
+            "namespace": "de.sandstorm.testSource.outputFileName",
+            "name": "stringConfig",
+            "qualifiedName": "de.sandstorm.testSource.outputFileName.stringConfig",
+            "documentationContent": " This is a configuration of type {@link String}.\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "java.lang.String",
+                "required": false
+            }
+        }
+    ]
+}

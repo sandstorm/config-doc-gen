@@ -1,5 +1,6 @@
 package de.sandstorm.configdocgen.processor.spring
 
+import de.sandstorm.configdocgen.core.WriterType
 import de.sandstorm.configdocgen.core.test.ConfigurationDocTest
 import org.junit.jupiter.api.Test
 
@@ -12,7 +13,15 @@ class SpringProcessorTest : ConfigurationDocTest(
         testSession("Primitives")
                 .successfulCompilation()
                 .noWarnings()
-                .assertOutput()
+                .assertOutput(WriterType.JSON.defaultOutputFileName)
+    }
+
+    @Test
+    fun test_fileNameConfig_successful() {
+        testSession("OutputFileName")
+                .successfulCompilation()
+                .noWarnings()
+                .assertOutput("test-output.json")
     }
 
     @Test
@@ -20,7 +29,7 @@ class SpringProcessorTest : ConfigurationDocTest(
         testSession("NestedPojos")
                 .successfulCompilation()
                 .noWarnings()
-                .assertOutput()
+                .assertOutput(WriterType.JSON.defaultOutputFileName)
     }
 
     @Test
@@ -32,7 +41,7 @@ class SpringProcessorTest : ConfigurationDocTest(
                 .withUnsupportedMapKeyTypeWarning("java.lang.Object", "objectKeyConfig", 67, 39)
                 .and()
                 .totalCount(2)
-                .assertOutput()
+                .assertOutput(WriterType.JSON.defaultOutputFileName)
     }
 
     @Test
@@ -43,7 +52,7 @@ class SpringProcessorTest : ConfigurationDocTest(
                 .withUnsupportedCollectionValueTypeWarning("java.lang.Object", "objectProp", 75, 32)
                 .and()
                 .totalCount(1)
-                .assertOutput()
+                .assertOutput(WriterType.JSON.defaultOutputFileName)
     }
 
     @Test
@@ -64,7 +73,7 @@ class SpringProcessorTest : ConfigurationDocTest(
                 .withNoDocWarning("field: testSource.NestedPojoInOwnClass#nestedProp", 5, 20)
                 .and()
                 .totalCount(9)
-                .assertOutput()
+                .assertOutput(WriterType.JSON.defaultOutputFileName)
     }
 
     @Test

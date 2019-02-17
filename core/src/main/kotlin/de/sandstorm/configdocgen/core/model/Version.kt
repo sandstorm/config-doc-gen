@@ -1,19 +1,27 @@
 package de.sandstorm.configdocgen.core.model
 
-import com.fasterxml.jackson.annotation.JsonValue
-
 data class Version(
-    @get:JsonValue val version: String
+    val processorVersion: String,
+    val coreVersion: String,
+    val annotationsVersion: String
 ) {
 
     companion object {
         fun get() = Version(
-            Version::class.java.getResourceAsStream("/de.sandstorm.configdocgen.processor-VERSION.txt").use {
-                String(it.readAllBytes())
-            } + " / " + Version::class.java.getResourceAsStream("/de.sandstorm.configdocgen.core-VERSION.txt").use {
-                String(it.readAllBytes())
-            }
+            readVersionFile("de.sandstorm.configdocgen.processor"),
+            readVersionFile("de.sandstorm.configdocgen.core"),
+            readVersionFile("de.sandstorm.configdocgen.annotations")
         )
+
+        private fun readVersionFile(moduleName: String): String {
+            return Version::class.java.getResourceAsStream("/$moduleName-VERSION.txt").use {
+                if (it == null) {
+                    "!!! NO VERSION FILE: $moduleName !!!"
+                } else {
+                    String(it.readAllBytes())
+                }
+            }
+        }
     }
 
 }

@@ -1,11 +1,12 @@
-import {ActionsUnion, createAction} from '@martin_hotell/rex-tils';
-import {createSelector} from 'reselect';
+import { ActionsUnion, createAction } from '@martin_hotell/rex-tils';
+import { createSelector } from 'reselect';
+import { IApplicationState } from '..';
+import { ConfigDoc } from "../../../Domain/ConfigDoc";
 
-import {IApplicationState} from '..';
-import {ConfigDoc} from "../../../Domain/ConfigDoc";
-
+/*
+import git from 'git-rev-sync';
 import packageJson from '../../../../package.json';
-
+*/
 //
 // State
 //
@@ -15,13 +16,14 @@ export interface IConfigDocState {
 }
 
 function readVersionFromPackageJson() {
-    return packageJson.version;
+    // return packageJson.version + " #" + git.short();
+    return "a";
 }
 
 const initialState: IConfigDocState = {
     // tslint:disable-next-line:no-string-literal
     rawApiData: {... window["CONFIG_DOC_JSON_DATA"]},
-    uiVersion: readVersionFromPackageJson(),
+    uiVersion: "UI: " + readVersionFromPackageJson(),
 };
 
 //
@@ -55,15 +57,18 @@ const rawDataSelector = (state: IApplicationState) => state.data.ConfigDoc.rawAp
 const propertiesSelector = createSelector(rawDataSelector, rawData => rawData.properties);
 const namespacesSelector = createSelector(rawDataSelector, rawData => rawData.namespaces);
 const moduleNameSelector = createSelector(rawDataSelector, rawData => rawData.moduleName);
-const processorVersionSelector = createSelector(rawDataSelector, rawData => rawData.processorVersion);
-const uiVersionSelector = (state: IApplicationState) => state.data.ConfigDoc.uiVersion;
+const versionsSelector = (state: IApplicationState) => [
+    state.data.ConfigDoc.rawApiData.version.processorVersion,
+    state.data.ConfigDoc.rawApiData.version.coreVersion,
+    state.data.ConfigDoc.rawApiData.version.annotationsVersion,
+    state.data.ConfigDoc.uiVersion
+];
 
 export const selectors = {
     moduleName: moduleNameSelector,
     namespaces: namespacesSelector,
-    processorVersion: processorVersionSelector,
     properties: propertiesSelector,
-    uiVersion: uiVersionSelector
+    versions: versionsSelector
 };
 
 //

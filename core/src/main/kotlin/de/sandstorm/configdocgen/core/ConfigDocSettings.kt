@@ -27,11 +27,14 @@ data class ProcessorSettings(
 )
 
 data class WriterSettings(
-    val type: WriterType = WriterType.JSON
+    val type: WriterType = WriterType.JSON,
+    val outputFileName: String = type.defaultOutputFileName
 )
 
-enum class WriterType {
-    JSON,
-    REACT_UI,
-    NONE
+enum class WriterType(
+    val defaultOutputFileName: String
+) {
+    JSON("config-doc.json"),
+    REACT_UI("config-doc-react-ui.html"),
+    NONE("")
 }

@@ -12,10 +12,9 @@ import Sidebar from '../Sidebar';
 
 const mapStateToProps = (state: IApplicationState) => ({
     namespaceProperties: selectors.Ui.ConfigDoc.makeFilteredPropertiesByNamespace()(state),
-    processorVersion: selectors.Data.ConfigDoc.processorVersion(state),
     selectedNamespace: selectors.Ui.ConfigDoc.selectedNamespace(state),
     selectedProperty:  selectors.Ui.ConfigDoc.selectedProperty(state),
-    uiVersion: selectors.Data.ConfigDoc.uiVersion(state),
+    versions: selectors.Data.ConfigDoc.versions(state),
 });
 
 type AppContainerProps = ReturnType<typeof mapStateToProps>

@@ -9,6 +9,7 @@
         "@martin_hotell/rex-tils": "^2.1.0",
         "@storybook/addon-info": "^4.1.2",
         "@storybook/react": "^4.1.2",
+        "@types/git-rev-sync": "^1.12.0",
         "@types/history": "^4.7.2",
         "@types/react-redux": "^6.0.11",
         "@types/react-router": "^4.4.3",

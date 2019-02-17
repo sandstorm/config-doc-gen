@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
-    <title>Config Doc - ${configDocModuleName}</title>
+    <title>Config Doc (powered by Sandstorm)</title>
     <script type="text/javascript">
         var CONFIG_DOC_JSON_DATA = ${configDocJsonData};
     </script>

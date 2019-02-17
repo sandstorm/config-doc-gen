@@ -12,7 +12,7 @@ import { configureStore } from './Redux/configureStore';
 import AppContainer from './Containers/AppContainer';
 
 import './font-awesome';
-import './index.css'; 
+import './index.css';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createBrowserHistory();
