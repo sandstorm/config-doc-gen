@@ -33,6 +33,15 @@ class SpringProcessorTest : ConfigurationDocTest(
     }
 
     @Test
+    fun test_LombokAnnotations_successful() {
+        testSession("LombokAnnotations")
+                .successfulCompilation()
+                .withWarning("No processor claimed any of these annotations: /lombok.Setter,/lombok.Data,/lombok.Getter")
+                .totalCount(1)
+                .assertOutput(WriterType.JSON.defaultOutputFileName)
+    }
+
+    @Test
     fun test_nestedMapsConfiguration_successfulWithWarnings() {
         testSession("NestedMaps")
                 .successfulCompilation()

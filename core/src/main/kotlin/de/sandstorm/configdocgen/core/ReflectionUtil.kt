@@ -11,49 +11,49 @@ import javax.lang.model.util.Types
 
 fun isConfigApiAnnotationPresent(element: Element) = element.getAnnotation(ConfigApi::class.java) != null
 fun isNonNullAnnotationPresent(element: Element) = element.annotationMirrors
-        .map { it.annotationType.asElement().toString() }
-        .any {
-            listOf(
-                    "lombok.NonNull",
-                    "org.springframework.lang.NonNull",
-                    "javax.validation.constraints.NotNull",
-                    "javax.annotation.Nonnull"
-            ).contains(it)
-        }
+    .map { it.annotationType.asElement().toString() }
+    .any {
+        listOf(
+            "lombok.NonNull",
+            "org.springframework.lang.NonNull",
+            "javax.validation.constraints.NotNull",
+            "javax.annotation.Nonnull"
+        ).contains(it)
+    }
 
 fun findGetterForField(field: Element) =
-        field.enclosingElement.enclosedElements.find { element ->
-            element.kind == ElementKind.METHOD &&
-                    field.simpleName.toString().let(
-                            if (isBooleanType(field))
-                                ::fieldNameToBooleanGetterName
-                            else
-                                ::fieldNameToGetterName
-                    ) == element.simpleName.toString()
-        }
+    field.enclosingElement.enclosedElements.find { element ->
+        element.kind == ElementKind.METHOD &&
+            field.simpleName.toString().let(
+                if (isBooleanType(field))
+                    ::fieldNameToBooleanGetterName
+                else
+                    ::fieldNameToGetterName
+            ) == element.simpleName.toString()
+    }
 
 fun findSetterForField(field: Element) =
-        field.enclosingElement.enclosedElements.find { element ->
-            element.kind == ElementKind.METHOD &&
-                    fieldNameToSetterName(field.simpleName.toString()) == element.simpleName.toString() &&
-                    (element as ExecutableElement).parameters.size == 1 &&
-                    element.parameters[0].asType() == field.asType()
-        }
+    field.enclosingElement.enclosedElements.find { element ->
+        element.kind == ElementKind.METHOD &&
+            fieldNameToSetterName(field.simpleName.toString()) == element.simpleName.toString() &&
+            (element as ExecutableElement).parameters.size == 1 &&
+            element.parameters[0].asType() == field.asType()
+    }
 
 fun isNonPrivateGetterPresentForField(field: Element) = checkGetterForField(field, ::isNotPrivate)
 
 fun isPrimitiveConfigType(field: Element) = when {
     field.asType().kind.isPrimitive -> true
     listOf(
-            "java.lang.String",
-            "java.lang.Byte",
-            "java.lang.Short",
-            "java.lang.Integer",
-            "java.lang.Long",
-            "java.lang.Float",
-            "java.lang.Double",
-            "java.lang.Character",
-            "java.lang.Boolean"
+        "java.lang.String",
+        "java.lang.Byte",
+        "java.lang.Short",
+        "java.lang.Integer",
+        "java.lang.Long",
+        "java.lang.Float",
+        "java.lang.Double",
+        "java.lang.Character",
+        "java.lang.Boolean"
     ).contains(field.asType().toString()) -> true
     else -> false
 }
@@ -62,11 +62,11 @@ fun isUnsupportedGenericType(field: Element) = field.asType().toString().let { t
     when {
         // whitelist
         listOf(
-                "java.util.Date"
+            "java.util.Date"
         ).contains(typeName) -> false
         // blacklist
         listOf(
-                "java.lang.Object"
+            "java.lang.Object"
         ).contains(typeName) -> true
         typeName.startsWith("java.util.") -> true
         else -> false
@@ -107,8 +107,20 @@ fun checkSetterForField(field: Element, predicate: (Element) -> Boolean): Boolea
         predicate(setter)
 }
 
-fun isGetterForFieldPublic(field: Element) = checkGetterForField(field, ::isPublic)
-fun isSetterForFieldPublic(field: Element) = checkSetterForField(field, ::isPublic)
+fun isGetterForFieldPublic(field: Element) = checkGetterForField(field, ::isPublic) || hasLombokGetter(field)
+fun isSetterForFieldPublic(field: Element) = checkSetterForField(field, ::isPublic) || hasLombokSetter(field)
+
+private fun hasLombokSetter(field: Element) = field.annotationMirrors.any {
+    it.toString() == "@lombok.Setter"
+} || hasEnclosingLombokDataClass(field)
+
+private fun hasLombokGetter(field: Element) = field.annotationMirrors.any {
+    it.toString() == "@lombok.Getter"
+} || hasEnclosingLombokDataClass(field)
+
+private fun hasEnclosingLombokDataClass(field: Element) = field.enclosingElement.annotationMirrors.any {
+    it.toString() == "@lombok.Data"
+}
 
 fun isPrivate(element: Element) = element.modifiers.contains(Modifier.PRIVATE)
 fun isNotPrivate(element: Element) = !isPrivate(element)
@@ -116,12 +128,12 @@ fun isPublic(element: Element) = element.modifiers.contains(Modifier.PUBLIC)
 
 fun isField(element: Element) = element.kind == ElementKind.FIELD
 fun fieldNameToGetterName(fieldName: String) =
-        "get${fieldName[0].toUpperCase()}${fieldName.substring(1)}"
+    "get${fieldName[0].toUpperCase()}${fieldName.substring(1)}"
 
 fun fieldNameToBooleanGetterName(fieldName: String) =
-        "is${fieldName[0].toUpperCase()}${fieldName.substring(1)}"
+    "is${fieldName[0].toUpperCase()}${fieldName.substring(1)}"
 
 fun fieldNameToSetterName(fieldName: String) =
-        "set${fieldName[0].toUpperCase()}${fieldName.substring(1)}"
+    "set${fieldName[0].toUpperCase()}${fieldName.substring(1)}"
 
 fun isPrimitiveType(field: Element) = field.asType().kind.isPrimitive

@@ -1,8 +1,5 @@
 package de.sandstorm.configdocgen.core.test
 
-import com.fasterxml.jackson.core.type.TypeReference
-import com.fasterxml.jackson.databind.MapperFeature
-import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.google.common.io.ByteSource
 import com.google.common.io.Resources
@@ -121,6 +118,12 @@ open class ConfigurationDocTest(
                 }
             }
 
+            fun withWarning(message: String): TestSession.Warnings {
+                successfulCompilationClause = successfulCompilationClause.withWarningContaining(message)
+                    .and()
+                return this
+            }
+
             fun warnings() = when {
                 sourceFileObjects.size == 1 -> SourceFile(sourceFileObjects.values.first())
                 sourceFileObjects.size > 1 -> throw UnsupportedOperationException("Multiple source files; specify explicitly via 'withWarningInFile'")
@@ -154,7 +157,7 @@ open class ConfigurationDocTest(
                     .generatesFileNamed(StandardLocation.CLASS_OUTPUT,
                         "",
                         fileName
-                        )
+                    )
                     .withContents(readTestTarget(sessionIdentifier))
             }
         }

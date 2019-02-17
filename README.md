@@ -11,6 +11,7 @@ For now, there is support for Spring Boot and Standalone.
 - interactive React UI for configuration documentation browsing
 - other configurable output format (JSON, NONE)
 - easily usable with build tools (e.g. gradle)
+- supports Lombok
 
 The releases are available on the maven central repository.
 ```

@@ -1,0 +1,72 @@
+{
+    "moduleName": "Unit Test Module",
+    "version": {
+        "processorVersion": "Spring (2.1) Processor: 0.9.0-RC1-SNAPSHOT #90bef8e",
+        "coreVersion": "Core: 0.9.0-RC1-SNAPSHOT #90bef8e",
+        "annotationsVersion": "Annotations: 0.9.0-RC1-SNAPSHOT #90bef8e"
+    },
+    "namespaces": [
+        {
+            "name": "de.sandstorm.testSource.lombokAnnotations",
+            "type": {
+                "typeName": "testSource.LombokAnnotations",
+                "documentationContent": " Test for nested list/set types together with properties.\n"
+            },
+            "documentationContent": "[ROOT-NAMESPACE]"
+        },
+        {
+            "name": "de.sandstorm.testSource.lombokAnnotations.innerPojo",
+            "type": {
+                "typeName": "testSource.LombokAnnotations.InnerPojo",
+                "documentationContent": " Inner Pojo namespace type.\n"
+            },
+            "documentationContent": " Inner pojo namespace.\n"
+        }
+    ],
+    "properties": [
+        {
+            "namespace": "de.sandstorm.testSource.lombokAnnotations",
+            "name": "stringProp",
+            "qualifiedName": "de.sandstorm.testSource.lombokAnnotations.stringProp",
+            "documentationContent": " String -> no getter (IMPLEMENTATION)\n",
+            "accessibility": "IMPLEMENTATION",
+            "type": {
+                "typeName": "java.lang.String",
+                "required": false
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.lombokAnnotations",
+            "name": "apiIntegerProp",
+            "qualifiedName": "de.sandstorm.testSource.lombokAnnotations.apiIntegerProp",
+            "documentationContent": " Integer -> public getter (API)\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "java.lang.Integer",
+                "required": false
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.lombokAnnotations.innerPojo",
+            "name": "innerPropLong",
+            "qualifiedName": "de.sandstorm.testSource.lombokAnnotations.innerPojo.innerPropLong",
+            "documentationContent": " inner long\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "long",
+                "required": true
+            }
+        },
+        {
+            "namespace": "de.sandstorm.testSource.lombokAnnotations.innerPojo",
+            "name": "innerPropString",
+            "qualifiedName": "de.sandstorm.testSource.lombokAnnotations.innerPojo.innerPropString",
+            "documentationContent": " inner String\n",
+            "accessibility": "API",
+            "type": {
+                "typeName": "java.lang.String",
+                "required": false
+            }
+        }
+    ]
+}
