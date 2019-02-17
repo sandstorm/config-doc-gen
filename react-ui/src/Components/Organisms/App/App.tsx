@@ -20,6 +20,7 @@ interface IAppProps {
     readonly selectedNamespace: Namespace | null;
     readonly selectedProperty: Property | null;
     readonly versions: ReadonlyArray<string>;
+    readonly showSpringHowTo: boolean;
 }
 
 type DefaultProps = Readonly<Required<{
@@ -27,12 +28,14 @@ type DefaultProps = Readonly<Required<{
     selectedNamespace: Namespace | null;
     selectedProperty: Property | null;
     versions: ReadonlyArray<string>;
+    showSpringHowTo: boolean;
 }>>;
 
 const defaultProps: DefaultProps = {
     namespaceProperties: [],
     selectedNamespace: null,
     selectedProperty: null,
+    showSpringHowTo: true,
     versions: ["processor-version", "core-version", "annotations-version", "ui-version"],
 };
 
@@ -89,7 +92,7 @@ export default class App extends React.PureComponent<IAppProps, any> {
                     ''
                 }
                 {this.props.selectedProperty !== null ?
-                    <div className="app--main-content--inner--property"><PropertyDoc property={this.props.selectedProperty} /></div> :
+                    <div className="app--main-content--inner--property"><PropertyDoc property={this.props.selectedProperty} showSpringHowTo={this.props.showSpringHowTo} /></div> :
                     <div className="app--main-content--inner--property-list">
                         <label>All Namespace Properties</label>
                         <ul>

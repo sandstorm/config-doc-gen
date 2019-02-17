@@ -1,6 +1,9 @@
 {
     "moduleName": "Unit Test Module",
     "moduleVersion": "Unit Test Module Version",
+    "howToFeatures": [
+        "SPRING"
+    ],
     "generatorVersion": {
         "processorVersion": "replaced",
         "coreVersion": "replaced",

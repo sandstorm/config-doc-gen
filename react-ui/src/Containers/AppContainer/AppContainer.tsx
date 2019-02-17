@@ -14,6 +14,7 @@ const mapStateToProps = (state: IApplicationState) => ({
     namespaceProperties: selectors.Ui.ConfigDoc.makeFilteredPropertiesByNamespace()(state),
     selectedNamespace: selectors.Ui.ConfigDoc.selectedNamespace(state),
     selectedProperty:  selectors.Ui.ConfigDoc.selectedProperty(state),
+    showSpringHowTo: selectors.Data.ConfigDoc.showSpringHowTo(state),
     versions: selectors.Data.ConfigDoc.versions(state),
 });
 

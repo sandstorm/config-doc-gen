@@ -14,6 +14,8 @@ const val DEFAULT_SETTINGS_FILENAME = "config-doc.yaml"
 
 abstract class AbstractConfigurationDocumentationProcessor : AbstractProcessor() {
 
+    protected abstract fun getHowToFeatures(): Set<HowToFeature>
+
     private val writer: DocumentationModelWriter by lazy {
         when (settings.writer.type) {
             WriterType.JSON -> JsonDocumentationModelWriter()
@@ -130,7 +132,14 @@ abstract class AbstractConfigurationDocumentationProcessor : AbstractProcessor()
         }
 
         fun build(): ConfigurationDoc {
-            return ConfigurationDoc(settings.moduleName, getModuleVersion(), Version.get(), namespaces.toList(), properties.toList())
+            return ConfigurationDoc(
+                settings.moduleName,
+                getModuleVersion(),
+                getHowToFeatures(),
+                Version.get(),
+                namespaces.toList(),
+                properties.toList()
+            )
         }
     }
 
@@ -138,6 +147,7 @@ abstract class AbstractConfigurationDocumentationProcessor : AbstractProcessor()
         processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "Sandstorm ConfigDocGen: $processorDescription")
         processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "Config Doc Versions: ${Version.get().processorVersion} | ${Version.get().coreVersion} | ${Version.get().annotationsVersion}")
         processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "Module version: ${getModuleVersion()}")
+        processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "How to features: ${getHowToFeatures()}")
     }
 
     companion object {

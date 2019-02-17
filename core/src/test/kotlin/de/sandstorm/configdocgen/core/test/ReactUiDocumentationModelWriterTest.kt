@@ -19,6 +19,7 @@ class ReactUiDocumentationModelWriterTest {
         ).write(ConfigurationDoc(
             "Test Module",
             "Module Version",
+            emptySet(),
             Version("Processor Version", "Core Version", "Annotations Version"),
             properties = emptyList(),
             namespaces = emptyList()
@@ -33,6 +34,7 @@ class ReactUiDocumentationModelWriterTest {
         ReactUiDocumentationModelWriter().write(ConfigurationDoc(
             "Test Module",
             "Module Version",
+            emptySet(),
             Version("Processor Version", "Core Version", "Annotations Version"),
             properties = emptyList(),
             namespaces = emptyList()
@@ -62,7 +64,7 @@ class ReactUiDocumentationModelWriterTest {
     <meta name="theme-color" content="#000000">
     <title>Config Doc (powered by Sandstorm)</title>
     <script type="text/javascript">
-        var CONFIG_DOC_JSON_DATA = {"moduleName":"Test Module","moduleVersion":"Module Version","generatorVersion":{"processorVersion":"Processor Version","coreVersion":"Core Version","annotationsVersion":"Annotations Version"},"namespaces":[],"properties":[]};
+        var CONFIG_DOC_JSON_DATA = {"moduleName":"Test Module","moduleVersion":"Module Version","howToFeatures":[],"generatorVersion":{"processorVersion":"Processor Version","coreVersion":"Core Version","annotationsVersion":"Annotations Version"},"namespaces":[],"properties":[]};
     </script>
     <style type="text/css">""".trimIndent()) + "\\s*?$stylesheet\\s*?" + Pattern.quote("""</style>
 </head>

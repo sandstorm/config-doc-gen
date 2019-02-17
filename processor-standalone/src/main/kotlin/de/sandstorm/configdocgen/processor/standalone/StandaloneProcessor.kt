@@ -5,6 +5,7 @@ import de.sandstorm.configdocgen.annotations.ConfigProperty
 import de.sandstorm.configdocgen.core.AbstractConfigurationDocumentationProcessor
 import de.sandstorm.configdocgen.core.model.ConfigurationNamespace
 import de.sandstorm.configdocgen.core.model.ConfigurationProperty
+import de.sandstorm.configdocgen.core.model.HowToFeature
 import de.sandstorm.configdocgen.core.model.NamespaceName
 import javax.annotation.processing.RoundEnvironment
 import javax.annotation.processing.SupportedAnnotationTypes
@@ -22,6 +23,7 @@ import javax.lang.model.element.TypeElement
 )
 @SupportedSourceVersion(SourceVersion.RELEASE_11)
 class StandaloneProcessor : AbstractConfigurationDocumentationProcessor() {
+    override fun getHowToFeatures(): Set<HowToFeature> = emptySet()
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment?): Boolean {
         printInfo("Standalone Processor")

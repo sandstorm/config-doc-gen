@@ -1,6 +1,9 @@
 {
     "moduleName": "Unit Test Module",
     "moduleVersion": "Unit Test Module Version",
+    "howToFeatures": [
+        "SPRING"
+    ],
     "generatorVersion": {
         "processorVersion": "Spring (2.1) Processor: 0.9.0-RC1-SNAPSHOT #90bef8e",
         "coreVersion": "Core: 0.9.0-RC1-SNAPSHOT #90bef8e",

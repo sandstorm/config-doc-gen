@@ -178,6 +178,7 @@ open class ConfigurationDocTest(
                 return ByteSource.wrap(mapper.writeValueAsBytes(ConfigurationDoc(
                     moduleName = expectedModel.moduleName,
                     moduleVersion = "Unit Test Module Version",
+                    howToFeatures = expectedModel.howToFeatures,
                     generatorVersion = Version.get(),
                     namespaces = expectedModel.namespaces,
                     properties = expectedModel.properties

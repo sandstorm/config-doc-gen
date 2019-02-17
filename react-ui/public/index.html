@@ -24,6 +24,7 @@
     var CONFIG_DOC_JSON_DATA = {
       "moduleName": "Template Module Name",
       "moduleVersion": "Template Module Version",
+      "howToFeatures": ["SPRING"],
       "generatorVersion": {
         "processorVersion": "Processor Version Template",
         "coreVersion": "Core Version Template",
@@ -45,7 +46,15 @@
             "documentationContent": " Nested value POJO.\n"
           },
           "documentationContent": " This is a nested config namespace by POJO.\n"
-        }
+        },
+        {
+            "name": "de.sandstorm.testSource.nestedMaps.keyValueStringMapConfig.<KEY>.nested.<INDEX>.listItem",
+            "type": {
+                "typeName": "java.util.Map<java.lang.String,java.lang.String>",
+                "documentationContent": "[MAP]: java.util.Map<java.lang.String,java.lang.String>"
+            },
+            "documentationContent": " A key-value namespace.\n"
+        },
       ],
       "properties": [
         {
@@ -57,6 +66,17 @@
           "type": {
             "typeName": "java.lang.String",
             "required": false
+          }
+        },
+        {
+          "namespace": "de.sandstorm.testSource.nestedMaps.keyValueStringMapConfig.<KEY>.nested.<INDEX>.listItem",
+          "name": "nestedCollectionsConfig",
+          "qualifiedName": "de.sandstorm.testSource.nestedMaps.keyValueStringMapConfig.<KEY>.nested.<INDEX>.listItem.nestedCollectionsConfig",
+          "documentationContent": " This is a nested String configuration.\n",
+          "accessibility": "API",
+          "type": {
+            "typeName": "int",
+            "required": true
           }
         }
       ]

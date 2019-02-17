@@ -1,4 +1,5 @@
 import {Accessibility} from "./Accessibility";
+import PropertyType from './PropertyType';
 
 // tslint:disable-next-line:interface-name
 export default interface Property {
@@ -7,4 +8,5 @@ export default interface Property {
     readonly namespace: string;
     readonly accessibility: Accessibility;
     readonly documentationContent: string;
+    readonly type: PropertyType;
 }

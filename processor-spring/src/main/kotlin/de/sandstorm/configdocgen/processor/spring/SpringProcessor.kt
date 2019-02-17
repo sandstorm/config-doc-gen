@@ -26,6 +26,8 @@ import javax.tools.Diagnostic
 @SupportedSourceVersion(SourceVersion.RELEASE_11)
 class SpringProcessor : AbstractConfigurationDocumentationProcessor() {
 
+    override fun getHowToFeatures(): Set<HowToFeature> = setOf(HowToFeature.SPRING)
+
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment?): Boolean {
         printInfo("Processor for Spring Boot 2.1")
         var configurationPropertiesClasses: Set<Element> = emptySet()

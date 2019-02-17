@@ -2,6 +2,7 @@ import { ActionsUnion, createAction } from '@martin_hotell/rex-tils';
 import { createSelector } from 'reselect';
 import { IApplicationState } from '..';
 import { ConfigDoc } from "../../../Domain/ConfigDoc";
+import { HowToFeature } from '../../../Domain/HowToFeature';
 
 import packageJson from '../../../../package.json';
 import version from '../../../VERSION.json';
@@ -55,6 +56,8 @@ const propertiesSelector = createSelector(rawDataSelector, rawData => rawData.pr
 const namespacesSelector = createSelector(rawDataSelector, rawData => rawData.namespaces);
 const moduleNameSelector = createSelector(rawDataSelector, rawData => rawData.moduleName);
 const moduleVersionSelector = createSelector(rawDataSelector, rawData => rawData.moduleVersion);
+const showSpringHowToSelector = createSelector(rawDataSelector, rawData => rawData.howToFeatures.some((it) => it === HowToFeature.SPRING));
+
 const versionsSelector = (state: IApplicationState) => [
     state.data.ConfigDoc.rawApiData.generatorVersion.processorVersion,
     state.data.ConfigDoc.rawApiData.generatorVersion.coreVersion,
@@ -67,6 +70,7 @@ export const selectors = {
     moduleVersion: moduleVersionSelector,
     namespaces: namespacesSelector,
     properties: propertiesSelector,
+    showSpringHowTo: showSpringHowToSelector,
     versions: versionsSelector
 };
 

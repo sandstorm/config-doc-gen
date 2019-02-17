@@ -232,7 +232,7 @@ app--main-content--inner--namespace {
   grid-gap: 0;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 2fr;
-  grid-template-areas: "icon title" "doc  doc"; }
+  grid-template-areas: "icon   title" "doc    doc" "how-to how-to"; }
 
 .property-doc--icon {
   grid-area: icon;
@@ -260,6 +260,21 @@ app--main-content--inner--namespace {
   font-family: 'Courier New', Courier, monospace;
   margin: 10px 0;
   padding: 10px; }
+
+.property-doc--how-to-configure {
+  grid-area: how-to;
+  padding-left: 10px;
+  padding-top: 10px; }
+
+.how-to-configure--yaml {
+  background-color: #373f43;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 10px 0;
+  margin: 0 0 10px 0; }
+  .how-to-configure--yaml pre {
+    white-space: pre-wrap;
+    margin: 0; }
 
 html, body, div#root {
   height: 98%;

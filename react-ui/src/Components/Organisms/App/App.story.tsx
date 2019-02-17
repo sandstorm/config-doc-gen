@@ -15,6 +15,10 @@ const property1 = {
     name: "fooPropertyStory",
     namespace: "foo.bar.namespace",
     qualifiedName: "foo.bar.namespace.fooPropertyStory",
+    type: {
+      required: true,
+      typeName: "int"
+    }
 };
 
 
