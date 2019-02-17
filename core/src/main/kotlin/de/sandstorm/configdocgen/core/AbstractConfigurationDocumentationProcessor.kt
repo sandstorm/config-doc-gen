@@ -131,6 +131,11 @@ abstract class AbstractConfigurationDocumentationProcessor : AbstractProcessor()
         }
     }
 
+    protected fun printInfo(processorDescription: String) {
+        processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "Sandstorm ConfigDocGen: $processorDescription")
+        processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "Versions: ${Version.get().processorVersion} | ${Version.get().coreVersion} | ${Version.get().annotationsVersion}")
+    }
+
     companion object {
         fun buildNoJavadocWarningMessage(element: Element): String {
             return when (element.kind) {

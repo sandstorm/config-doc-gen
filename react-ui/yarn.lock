@@ -1274,11 +1274,6 @@
     "@svgr/plugin-svgo" "^4.0.3"
     loader-utils "^1.1.0"
 
-"@types/git-rev-sync@^1.12.0":
-  version "1.12.0"
-  resolved "https://registry.yarnpkg.com/@types/git-rev-sync/-/git-rev-sync-1.12.0.tgz#b2281e3a370a0da2a13dfd19524d063e7022d2c5"
-  integrity sha512-JiYuezujtbA9dcyQKp8BdzEB3V4/9B9/CSyZrxP+S07xXXCBPEFScyXQPhz3Li+Ai9SV1DJE1hxRNU9nAxxtjQ==
-
 "@types/history@*", "@types/history@^4.7.2":
   version "4.7.2"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.2.tgz#0e670ea254d559241b6eeb3894f8754991e73220"

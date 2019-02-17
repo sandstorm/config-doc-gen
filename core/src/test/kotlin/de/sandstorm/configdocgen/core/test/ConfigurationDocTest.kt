@@ -173,7 +173,7 @@ open class ConfigurationDocTest(
                 val expectedModel = mapper.readValue(Resources.asByteSource(url).read(), ConfigurationDoc::class.java)
                 return ByteSource.wrap(mapper.writeValueAsBytes(ConfigurationDoc(
                     moduleName = expectedModel.moduleName,
-                    processorVersion = Version.get(),
+                    version = Version.get(),
                     namespaces = expectedModel.namespaces,
                     properties = expectedModel.properties
                 )))

@@ -2,7 +2,7 @@
 
 echo "running command: $COMMAND"
 
-
+echo "{\"version\":\"$(git rev-parse --short HEAD)\"}" > ../../react-ui/src/VERSION.json
 
 docker run -it --rm \
     -p 3000:3000 \

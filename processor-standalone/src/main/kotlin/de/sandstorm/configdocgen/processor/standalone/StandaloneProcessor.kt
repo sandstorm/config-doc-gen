@@ -24,6 +24,7 @@ import javax.lang.model.element.TypeElement
 class StandaloneProcessor : AbstractConfigurationDocumentationProcessor() {
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment?): Boolean {
+        printInfo("Standalone Processor")
         var namespaceClasses: Set<Element> = emptySet()
         var propertiesElements: Set<Element> = emptySet()
         for (annotation in annotations!!) {

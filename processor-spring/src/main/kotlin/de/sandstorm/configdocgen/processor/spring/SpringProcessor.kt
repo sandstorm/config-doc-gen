@@ -27,8 +27,7 @@ import javax.tools.Diagnostic
 class SpringProcessor : AbstractConfigurationDocumentationProcessor() {
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment?): Boolean {
-        processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "Sandstorm ConfigDocGen (version: ${Version.get().version}) for Spring Boot 2.x")
-
+        printInfo("Processor for Spring Boot 2.1")
         var configurationPropertiesClasses: Set<Element> = emptySet()
         for (annotation in annotations!!) {
             val annotatedElements = roundEnv!!.getElementsAnnotatedWith(annotation)

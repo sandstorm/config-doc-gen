@@ -3,10 +3,8 @@ import { createSelector } from 'reselect';
 import { IApplicationState } from '..';
 import { ConfigDoc } from "../../../Domain/ConfigDoc";
 
-/*
-import git from 'git-rev-sync';
 import packageJson from '../../../../package.json';
-*/
+import version from '../../../VERSION.json';
 //
 // State
 //
@@ -16,8 +14,7 @@ export interface IConfigDocState {
 }
 
 function readVersionFromPackageJson() {
-    // return packageJson.version + " #" + git.short();
-    return "a";
+    return packageJson.version + " #" + version.version;
 }
 
 const initialState: IConfigDocState = {

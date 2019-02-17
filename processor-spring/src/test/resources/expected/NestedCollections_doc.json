@@ -1,6 +1,10 @@
 {
     "moduleName": "Unit Test Module",
-    "processorVersion": "replaced",
+    "version": {
+        "processorVersion": "replaced",
+        "coreVersion": "replaced",
+        "annotationsVersion": "replaced"
+    },
     "namespaces": [
         {
             "name": "de.sandstorm.testSource.nestedCollections",
