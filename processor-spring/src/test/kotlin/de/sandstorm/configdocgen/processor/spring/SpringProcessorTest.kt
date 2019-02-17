@@ -4,9 +4,7 @@ import de.sandstorm.configdocgen.core.WriterType
 import de.sandstorm.configdocgen.core.test.ConfigurationDocTest
 import org.junit.jupiter.api.Test
 
-class SpringProcessorTest : ConfigurationDocTest(
-        SpringProcessor()
-) {
+class SpringProcessorTest : ConfigurationDocTest(SpringProcessor()) {
 
     @Test
     fun test_primitivesAndBoxedTypesConfiguration_successful() {

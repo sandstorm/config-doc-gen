@@ -136,14 +136,14 @@ app--main-content--inner--namespace {
   padding: 10px 0;
   display: grid;
   grid-gap: 5px;
-  grid-template-areas: "icon" "title" "selectedItem" "filters"; }
+  grid-template-areas: "icon" "title" "selectedItem" "filters" "module-version"; }
   .app-header a {
     color: white; }
 
 @media (min-width: 300px) {
   .app-header {
-    grid-template-columns: 1fr 8fr;
-    grid-template-areas: "icon title       " "icon selectedItem" "icon filters     "; } }
+    grid-template-columns: 1fr 8fr auto;
+    grid-template-areas: "icon title        title" "icon selectedItem selectedItem" "icon filters      module-version"; } }
 
 .app-header--icon {
   grid-area: icon;
@@ -163,6 +163,12 @@ app--main-content--inner--namespace {
 
 .app-header--filters {
   grid-area: filters; }
+
+.app-header--module-version {
+  grid-area: module-version;
+  padding-right: 10px;
+  font-size: 0.7em;
+  line-height: 1.6em; }
 
 .app-sidebar {
   background-color: #293133;

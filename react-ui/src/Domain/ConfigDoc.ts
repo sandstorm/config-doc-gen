@@ -5,7 +5,8 @@ import Version from './Version';
 // tslint:disable-next-line:interface-name
 export interface ConfigDoc {
     readonly moduleName: string;
-    readonly version: Version;
+    readonly moduleVersion: string;
+    readonly generatorVersion: Version;
     readonly namespaces: ReadonlyArray<Namespace>;
     readonly properties: ReadonlyArray<Property>;
 }

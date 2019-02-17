@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 
 data class ConfigurationDoc(
     val moduleName: String,
-    val version: Version,
+    val moduleVersion: String,
+    val generatorVersion: Version,
     val namespaces: List<ConfigurationNamespace>,
     val properties: List<ConfigurationProperty>
 ) {

@@ -1,6 +1,7 @@
 {
     "moduleName": "Unit Test Module",
-    "version": {
+    "moduleVersion": "Unit Test Module Version",
+    "generatorVersion": {
         "processorVersion": "replaced",
         "coreVersion": "replaced",
         "annotationsVersion": "replaced"

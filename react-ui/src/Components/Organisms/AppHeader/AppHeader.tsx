@@ -10,6 +10,7 @@ import UiItemView from '../../Atoms/UiItemView';
 //
 interface IAppHeaderProps {
     readonly configDocModuleName: string;
+    readonly configDocModuleVersion: string;
     readonly searchTerm: string;
     readonly selectedNamespace: UiItem | null;
     readonly selectedProperty: UiItem | null;
@@ -21,6 +22,7 @@ interface IAppHeaderProps {
 
 type DefaultProps = Readonly<Required<{
     configDocModuleName: string;
+    configDocModuleVersion: string;
     searchTerm: string;
     selectedNamespace: UiItem | null;
     selectedProperty: UiItem | null;
@@ -31,6 +33,7 @@ type DefaultProps = Readonly<Required<{
 
 const defaultProps: DefaultProps = {
     configDocModuleName: "module name",
+    configDocModuleVersion: "module version",
     searchTerm: "",
     selectedNamespace: null,
     selectedProperty: null,
@@ -75,6 +78,9 @@ export default class AppHeader extends React.PureComponent<IAppHeaderProps, any>
             </div>
             <div className="app-header--filters">
                 <input title="search" onChange={searchTermChangedHandler} placeholder="search ..." />
+            </div>
+            <div className="app-header--module-version">
+                Module version: {this.props.configDocModuleVersion}
             </div>
         </header>;
     }

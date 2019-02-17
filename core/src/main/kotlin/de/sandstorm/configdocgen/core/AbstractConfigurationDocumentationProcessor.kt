@@ -32,9 +32,12 @@ abstract class AbstractConfigurationDocumentationProcessor : AbstractProcessor()
 
     override fun getSupportedOptions(): MutableSet<String> {
         return mutableSetOf(
-            "de.sandstorm.configdocgen.settingsFile"
+            "de.sandstorm.configdocgen.settingsFile",
+            "de.sandstorm.configdocgen.moduleVersion"
         )
     }
+
+    protected fun getModuleVersion() = processingEnv.options["de.sandstorm.configdocgen.moduleVersion"] ?: "No module version set!!!"
 
     private fun getSettingsFile(): InputStream {
         val explicitSettingsFileLocation = processingEnv.options["de.sandstorm.configdocgen.settingsFile"]
@@ -127,13 +130,14 @@ abstract class AbstractConfigurationDocumentationProcessor : AbstractProcessor()
         }
 
         fun build(): ConfigurationDoc {
-            return ConfigurationDoc(settings.moduleName, Version.get(), namespaces.toList(), properties.toList())
+            return ConfigurationDoc(settings.moduleName, getModuleVersion(), Version.get(), namespaces.toList(), properties.toList())
         }
     }
 
     protected fun printInfo(processorDescription: String) {
         processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "Sandstorm ConfigDocGen: $processorDescription")
-        processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "Versions: ${Version.get().processorVersion} | ${Version.get().coreVersion} | ${Version.get().annotationsVersion}")
+        processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "Config Doc Versions: ${Version.get().processorVersion} | ${Version.get().coreVersion} | ${Version.get().annotationsVersion}")
+        processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "Module version: ${getModuleVersion()}")
     }
 
     companion object {

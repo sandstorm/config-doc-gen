@@ -74,6 +74,24 @@ writer:
 It may be a good idea to set the `processor.missingDocCommentDiagnostic` to `ERROR`. 
 This enforces the developers to comment the applications public API.
 
+### Module Version
+ConfigDocGen can compile your application / module version into its output. Set the value via argument `de.sandstorm.configdocgen.moduleVersion`.
+Example: `-Ade.sandstorm.configdocgen.moduleVersion=org.app.module--master-#commitID`
+
+Example of writing the project name / version and git info with gradle:
+```
+compileJava {
+    options.compilerArgs += ["-Ade.sandstorm.configdocgen.moduleVersion=${getModuleVersionForConfigDoc()}"]
+}
+
+def getModuleVersionForConfigDoc() {
+    return project.name + "-" +
+        project.version + "-" +
+        "git rev-parse --abbrev-ref HEAD".execute().text.replaceAll("\n", "") + "-" +
+        "#" + "git rev-parse --short HEAD".execute().text
+}
+```
+
 ## Standalone
 Generate configuration documentation using custom annotations in your code.
 

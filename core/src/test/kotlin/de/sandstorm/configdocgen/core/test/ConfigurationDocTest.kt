@@ -43,6 +43,7 @@ open class ConfigurationDocTest(
             .about(JavaSourcesSubjectFactory.javaSources())
             .that(sourceFileObjects.values)
             .withCompilerOptions("-Ade.sandstorm.configdocgen.settingsFile=${File("./src/test/resources/given/$sessionIdentifier/config-doc.yaml").toURI()}")
+            .withCompilerOptions("-Ade.sandstorm.configdocgen.moduleVersion=Unit Test Module Version")
             .processedWith(processor)
 
         inner class Errors(
@@ -176,7 +177,8 @@ open class ConfigurationDocTest(
                 val expectedModel = mapper.readValue(Resources.asByteSource(url).read(), ConfigurationDoc::class.java)
                 return ByteSource.wrap(mapper.writeValueAsBytes(ConfigurationDoc(
                     moduleName = expectedModel.moduleName,
-                    version = Version.get(),
+                    moduleVersion = "Unit Test Module Version",
+                    generatorVersion = Version.get(),
                     namespaces = expectedModel.namespaces,
                     properties = expectedModel.properties
                 )))

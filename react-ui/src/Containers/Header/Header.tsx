@@ -10,6 +10,7 @@ import { IApplicationState } from '../../Redux/Store';
 
 const mapStateToProps = (state: IApplicationState) => ({
     configDocModuleName: selectors.Data.ConfigDoc.moduleName(state),
+    configDocModuleVersion: selectors.Data.ConfigDoc.moduleVersion(state),
     searchTerm: selectors.Ui.ConfigDoc.searchTerm(state),
     selectedNamespace: selectors.Ui.ConfigDoc.selectedNamespaceUiItem(state),
     selectedProperty: selectors.Ui.ConfigDoc.selectedPropertyUiItem(state),

@@ -54,15 +54,17 @@ const rawDataSelector = (state: IApplicationState) => state.data.ConfigDoc.rawAp
 const propertiesSelector = createSelector(rawDataSelector, rawData => rawData.properties);
 const namespacesSelector = createSelector(rawDataSelector, rawData => rawData.namespaces);
 const moduleNameSelector = createSelector(rawDataSelector, rawData => rawData.moduleName);
+const moduleVersionSelector = createSelector(rawDataSelector, rawData => rawData.moduleVersion);
 const versionsSelector = (state: IApplicationState) => [
-    state.data.ConfigDoc.rawApiData.version.processorVersion,
-    state.data.ConfigDoc.rawApiData.version.coreVersion,
-    state.data.ConfigDoc.rawApiData.version.annotationsVersion,
+    state.data.ConfigDoc.rawApiData.generatorVersion.processorVersion,
+    state.data.ConfigDoc.rawApiData.generatorVersion.coreVersion,
+    state.data.ConfigDoc.rawApiData.generatorVersion.annotationsVersion,
     state.data.ConfigDoc.uiVersion
 ];
 
 export const selectors = {
     moduleName: moduleNameSelector,
+    moduleVersion: moduleVersionSelector,
     namespaces: namespacesSelector,
     properties: propertiesSelector,
     versions: versionsSelector

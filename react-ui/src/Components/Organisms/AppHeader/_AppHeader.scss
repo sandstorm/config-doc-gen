@@ -9,16 +9,17 @@
         "icon"
         "title"
         "selectedItem"
-        "filters";
+        "filters"
+        "module-version";
 }
 
 @media (min-width: 300px) {
     .app-header {
-        grid-template-columns: 1fr 8fr;
+        grid-template-columns: 1fr 8fr auto;
         grid-template-areas: 
-            "icon title       "
-            "icon selectedItem"
-            "icon filters     "
+            "icon title        title"
+            "icon selectedItem selectedItem"
+            "icon filters      module-version"
     }
 }
 
@@ -48,4 +49,12 @@
 
 .app-header--filters {
     grid-area: filters;
+}
+
+.app-header--module-version {
+    grid-area: module-version;
+
+    padding-right: 10px;
+    font-size: 0.7em;
+    line-height: 1.6em;
 }
