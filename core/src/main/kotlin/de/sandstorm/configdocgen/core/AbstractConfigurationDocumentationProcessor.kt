@@ -144,6 +144,9 @@ abstract class AbstractConfigurationDocumentationProcessor : AbstractProcessor()
     }
 
     protected fun printInfo(processorDescription: String) {
+        if (written) {
+            return
+        }
         processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "Sandstorm ConfigDocGen: $processorDescription")
         processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "Config Doc Versions: ${Version.get().processorVersion} | ${Version.get().coreVersion} | ${Version.get().annotationsVersion}")
         processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, "Module version: ${getModuleVersion()}")

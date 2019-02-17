@@ -24,7 +24,7 @@ Snapshot releases or local maven repositories:
 ```
 repositories {
     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-    mavenLocal()
+    // mavenLocal()
 }
 ```
 
@@ -118,12 +118,13 @@ You may update the configDocVersion or set it via gradle properties.
 # local dev
 
 Requirements:
+- git
 - a running Docker deamon
 - JDK 11
 
 Run tests:
 ```
-./gradlew junitPlatformTest
+./gradlew clean test
 ```
 
 ## React UI (using docker):
