@@ -36,15 +36,10 @@ subprojects {
 
 }
 
-task springAptJar(type: Jar, dependsOn: clean) {
-    baseName = 'processor-spring'
-    from project(':core').sourceSets.main.output
-    from project(':annotations').sourceSets.main.output
-    from project(':processor-spring').sourceSets.main.output
-}
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
+
 compileKotlin {
     kotlinOptions {
         jvmTarget = "1.8"
