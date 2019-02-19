@@ -1,3 +1,6 @@
+import java.nio.file.Files
+import java.nio.file.Paths
+
 buildscript {
     dependencies {
         classpath "org.junit.platform:junit-platform-gradle-plugin:1.0.0"
@@ -52,6 +55,26 @@ compileTestKotlin {
 }
 
 nexusStaging {
+    stagingProfileId = 'desandstormconfigdocgen-' + getGitCommitId()
+
     username = System.getenv('SONATYPE_USERNAME')
     password = System.getenv('SONATYPE_PASSWORD')
+}
+
+def getGitCommitId() {
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--short', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
+ext.writeVersionFile = { String module, String versionPrefix ->
+    def versionFile = Paths.get(sourceSets.main.output.resourcesDir.getPath(), "$module-VERSION.txt")
+    def parentDir = versionFile.getParent()
+    if (!Files.exists(parentDir)) {
+        Files.createDirectories(parentDir)
+    }
+    Files.writeString(versionFile, "$versionPrefix: ${project.version.toString()} #${getGitCommitId()}")
 }
