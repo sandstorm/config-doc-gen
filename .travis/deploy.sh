@@ -3,7 +3,7 @@
 if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ];
 then
     echo "Sign and Upload Archives"
-    ./gradlew publish
+    ./gradlew publishToNexus
     if [ "$MANUAL_RELEASE_TRIGGERED" = "true" ];
     then
         echo "Promote repository"
