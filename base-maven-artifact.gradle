@@ -1,6 +1,6 @@
 apply plugin: 'java'
-apply plugin: 'maven-publish'
 apply plugin: 'signing'
+apply plugin: "de.marcphilipp.nexus-publish"
 
 ext {
     maven2_url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
