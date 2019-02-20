@@ -70,9 +70,9 @@ publishing {
 
 gradle.taskGraph.whenReady { taskGraph ->
     if (taskGraph.allTasks.any { it instanceof Sign }) {
-        allprojects { if (!ext."signing.keyId") { ext."signing.keyId" = System.getenv('GPG_KEY_ID') } }
-        allprojects { if (!ext."signing.secretKeyRingFile") { ext."signing.secretKeyRingFile" = System.getenv('GPG_KEY_LOCATION') } }
-        allprojects { if (!ext."signing.password") { ext."signing.password" = System.getenv('GPG_PASSPHRASE') } }
+        allprojects { if (!project.hasProperty("signing.keyId")) { ext."signing.keyId" = System.getenv('GPG_KEY_ID') } }
+        allprojects { if (!project.hasProperty("signing.secretKeyRingFile")) { ext."signing.secretKeyRingFile" = System.getenv('GPG_KEY_LOCATION') } }
+        allprojects { if (!project.hasProperty("signing.password")) { ext."signing.password" = System.getenv('GPG_PASSPHRASE') } }
     }
     // Do not sign archives by default (a local build without gpg keyring should succeed)
     if (taskGraph.allTasks.any { it.name == 'build' || it.name == 'assemble' || it.name == 'publishToMavenLocal' }) {
@@ -92,5 +92,6 @@ nexusPublishing {
     username = rootProject.nexusStaging.username
     password = rootProject.nexusStaging.password
 
-    serverUrl = uri(version.endsWith('SNAPSHOT') ? snapshot_url : maven2_url)
+    serverUrl = uri('https://oss.sonatype.org/service/local/')
+    snapshotRepositoryUrl = uri('https://oss.sonatype.org/content/repositories/snapshots/')
 }

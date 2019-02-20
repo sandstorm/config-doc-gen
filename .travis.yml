@@ -28,3 +28,5 @@ script:
   - .travis/merge-dev-to-master-gate.sh
   - .travis/deploy-gate.sh
   - .travis/tag-master-gate.sh
+sudo: false
+dist: trusty
