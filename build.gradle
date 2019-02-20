@@ -58,6 +58,9 @@ compileTestKotlin {
 nexusStaging {
     username = project.hasProperty("sonatypeUsername") ? project.getProperties().get("sonatypeUsername") : System.getenv('SONATYPE_USERNAME')
     password = project.hasProperty("sonatypePassword") ? project.getProperties().get("sonatypePassword") : System.getenv('SONATYPE_PASSWORD')
+
+    numberOfRetries = 50
+    delayBetweenRetriesInMillis = 5000
 }
 
 def getGitCommitId() {
