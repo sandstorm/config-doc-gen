@@ -22,6 +22,10 @@ repositories {
     maven { url "https://jcenter.bintray.com" }
 }
 
+allprojects {
+    ext.gitCommitId = getGitCommitId()
+}
+
 subprojects {
     sourceCompatibility = 11
     targetCompatibility = 11
@@ -59,8 +63,10 @@ nexusStaging {
     username = project.hasProperty("sonatypeUsername") ? project.getProperties().get("sonatypeUsername") : System.getenv('SONATYPE_USERNAME')
     password = project.hasProperty("sonatypePassword") ? project.getProperties().get("sonatypePassword") : System.getenv('SONATYPE_PASSWORD')
 
-    numberOfRetries = 50
-    delayBetweenRetriesInMillis = 5000
+    packageGroup = project.group
+
+    numberOfRetries = 100
+    delayBetweenRetriesInMillis = 1000
 }
 
 def getGitCommitId() {
@@ -78,5 +84,5 @@ ext.writeVersionFile = { String module, String versionPrefix ->
     if (!Files.exists(parentDir)) {
         Files.createDirectories(parentDir)
     }
-    Files.writeString(versionFile, "$versionPrefix: ${project.version.toString()} #${getGitCommitId()}")
+    Files.writeString(versionFile, "$versionPrefix: ${project.version.toString()} #${project.ext.gitCommitId}")
 }
